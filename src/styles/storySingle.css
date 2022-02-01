@@ -1,0 +1,230 @@
+.mediaViewInfo {
+  --web-view-name: Story – Single Page;
+  --web-view-id: Story__Single_Page;
+  --web-scale-to-fit: true;
+  --web-scale-to-fit-type: width;
+  --web-scale-on-resize: true;
+  --web-enable-deep-linking: true;
+}
+:root {
+  --web-view-ids: Story__Single_Page;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+}
+#Story__Single_Page {
+  position: absolute;
+  width: 1920px;
+  height: 1345px;
+  background-color: rgba(255, 255, 255, 1);
+  overflow: hidden;
+  --web-view-name: Story – Single Page;
+  --web-view-id: Story__Single_Page;
+  --web-scale-to-fit: true;
+  --web-scale-to-fit-type: width;
+  --web-scale-on-resize: true;
+  --web-enable-deep-linking: true;
+}
+#Path_17 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Path_17 {
+  overflow: visible;
+  position: absolute;
+  width: 393.535px;
+  height: 1144.861px;
+  left: 1530.074px;
+  top: 0px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+#Path_15 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Path_15 {
+  overflow: visible;
+  position: absolute;
+  width: 856.648px;
+  height: 956.923px;
+  left: -5.566px;
+  top: 0px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+#NavBar {
+  position: absolute;
+  width: 1920px;
+  height: 128px;
+  left: 0px;
+  top: 0px;
+  overflow: visible;
+}
+#Rectangle_1 {
+  opacity: 0;
+  fill: rgba(255, 255, 255, 1);
+}
+.Rectangle_1 {
+  position: absolute;
+  overflow: visible;
+  width: 1920px;
+  height: 128px;
+  left: 0px;
+  top: 0px;
+}
+#Rectangle_2 {
+  opacity: 0;
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_2 {
+  position: absolute;
+  overflow: visible;
+  width: 1208px;
+  height: 80px;
+  left: 408px;
+  top: 26px;
+}
+#amueso-v2 {
+  opacity: 0;
+  position: absolute;
+  width: 170px;
+  height: 64px;
+  left: 80px;
+  top: 33px;
+  overflow: visible;
+}
+#profile-user {
+  opacity: 0;
+  position: absolute;
+  width: 48px;
+  height: 47.998px;
+  left: 1792px;
+  top: 41px;
+  overflow: visible;
+}
+#Path_4 {
+  fill: rgba(118, 118, 118, 1);
+}
+.Path_4 {
+  overflow: visible;
+  position: absolute;
+  width: 48px;
+  height: 47.998px;
+  left: 0px;
+  top: 0px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+#Rectangle_99 {
+  opacity: 0;
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_99 {
+  position: absolute;
+  overflow: visible;
+  width: 48px;
+  height: 48px;
+  left: 1728px;
+  top: 41px;
+}
+#Rectangle_100 {
+  opacity: 0;
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_100 {
+  position: absolute;
+  overflow: visible;
+  width: 48px;
+  height: 48px;
+  left: 1664px;
+  top: 41px;
+}
+#Browse {
+  opacity: 0;
+  left: 266px;
+  top: 51px;
+  position: absolute;
+  overflow: visible;
+  width: 95px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(56, 56, 56, 1);
+}
+#Story_-_Two_Pages {
+  position: absolute;
+  width: 880px;
+  height: 1024.045px;
+  left: 520px;
+  top: 192px;
+  overflow: visible;
+}
+#Rectangle_128 {
+  fill: rgba(255, 255, 255, 1);
+}
+.Rectangle_128 {
+  filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.161));
+  position: absolute;
+  overflow: visible;
+  width: 952px;
+  height: 1096.045px;
+  left: 0px;
+  top: 0px;
+}
+#More_Icon {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  left: 1803px;
+  top: 32px;
+  overflow: visible;
+}
+#Ellipse_9 {
+  opacity: 0;
+  filter: blur(30px);
+  fill: rgba(255, 255, 255, 1);
+}
+.Ellipse_9 {
+  position: absolute;
+  overflow: visible;
+  width: 64px;
+  height: 64px;
+  left: 0px;
+  top: 0px;
+}
+#Mask_Group_5 {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  left: 16px;
+  top: 16px;
+  overflow: visible;
+}
+#Mr_D_and_his_Wangler {
+  left: 80px;
+  top: 38px;
+  position: absolute;
+  overflow: visible;
+  width: 569px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  color: rgba(56, 56, 56, 1);
+}
+#Path_16 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Path_16 {
+  overflow: visible;
+  position: absolute;
+  width: 751.678px;
+  height: 179.967px;
+  left: -5.566px;
+  top: 1169.751px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}

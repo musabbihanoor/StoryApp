@@ -1,0 +1,981 @@
+.mediaViewInfo {
+  --web-view-name: Sign up;
+  --web-view-id: Sign_up;
+  --web-scale-to-fit: true;
+  --web-scale-to-fit-type: width;
+  --web-scale-on-resize: true;
+  --web-enable-deep-linking: true;
+}
+:root {
+  --web-view-ids: Sign_up;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+}
+#Sign_up {
+  position: absolute;
+  width: 1920px;
+  height: 2320px;
+  background-color: rgba(255, 255, 255, 1);
+  overflow: hidden;
+  --web-view-name: Sign up;
+  --web-view-id: Sign_up;
+  --web-scale-to-fit: true;
+  --web-scale-to-fit-type: width;
+  --web-scale-on-resize: true;
+  --web-enable-deep-linking: true;
+}
+#profile-user {
+  position: absolute;
+  width: 48px;
+  height: 47.998px;
+  left: 1792px;
+  top: 25px;
+  overflow: visible;
+}
+#Path_4 {
+  fill: rgba(118, 118, 118, 1);
+}
+.Path_4 {
+  overflow: visible;
+  position: absolute;
+  width: 48px;
+  height: 47.998px;
+  left: 0px;
+  top: 0px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+#Help {
+  left: 1702px;
+  top: 34px;
+  position: absolute;
+  overflow: visible;
+  width: 59px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(118, 118, 118, 1);
+}
+#About_us {
+  left: 1558px;
+  top: 34px;
+  position: absolute;
+  overflow: visible;
+  width: 113px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(118, 118, 118, 1);
+}
+#Rectangle_14 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_14 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 104px;
+  top: 475px;
+}
+#Rectangle_17 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_17 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 320px;
+  top: 525px;
+}
+#Rectangle_26 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_26 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1184px;
+  top: 562px;
+}
+#Rectangle_29 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_29 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1400px;
+  top: 484px;
+}
+#Rectangle_32 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_32 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1616px;
+  top: 415px;
+}
+#Rectangle_21 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_21 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 536px;
+  top: 630px;
+}
+#Rectangle_22 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_22 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 752px;
+  top: 584px;
+}
+#Rectangle_24 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_24 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 968px;
+  top: 662px;
+}
+#Rectangle_13 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_13 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 104px;
+  top: 747px;
+}
+#Rectangle_16 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_16 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 320px;
+  top: 797px;
+}
+#Rectangle_46 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_46 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 320px;
+  top: 1069px;
+}
+#Rectangle_27 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_27 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1184px;
+  top: 834px;
+}
+#Rectangle_45 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_45 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1184px;
+  top: 1097px;
+}
+#Rectangle_30 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_30 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1400px;
+  top: 756px;
+}
+#Rectangle_33 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_33 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1616px;
+  top: 687px;
+}
+#Rectangle_19 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_19 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 536px;
+  top: 902px;
+}
+#Rectangle_23 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_23 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 752px;
+  top: 856px;
+}
+#Rectangle_25 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_25 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 968px;
+  top: 934px;
+}
+#Rectangle_12 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_12 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 104px;
+  top: 1019px;
+}
+#Rectangle_31 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_31 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1400px;
+  top: 1028px;
+}
+#Rectangle_34 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_34 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1616px;
+  top: 959px;
+}
+#Welcome_to_the_world_of_storie {
+  left: 193px;
+  top: 189px;
+  position: absolute;
+  overflow: visible;
+  width: 954px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 56px;
+  color: rgba(56, 56, 56, 1);
+}
+#People_stories_and_more_-_all_ {
+  left: 193px;
+  top: 265px;
+  position: absolute;
+  overflow: visible;
+  width: 509px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  color: rgba(118, 118, 118, 1);
+}
+#Group_5 {
+  position: absolute;
+  width: 267px;
+  height: 77px;
+  left: 193px;
+  top: 342px;
+  overflow: visible;
+  padding: 24px 64px 24px 64px;
+}
+#Rectangle_39 {
+  fill: rgba(255, 255, 255, 1);
+  stroke: rgba(23, 208, 158, 1);
+  stroke-width: 2px;
+  stroke-linejoin: miter;
+  stroke-linecap: butt;
+  stroke-miterlimit: 4;
+  shape-rendering: auto;
+}
+.Rectangle_39 {
+  position: absolute;
+  overflow: visible;
+  width: 267px;
+  height: 77px;
+  left: 0px;
+  top: 0px;
+}
+#Get_started {
+  left: 64px;
+  top: 24px;
+  position: absolute;
+  overflow: visible;
+  width: 140px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(23, 208, 158, 1);
+}
+#Rectangle_8 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_8 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: -112px;
+  top: 406px;
+}
+#Rectangle_35 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_35 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1832px;
+  top: 452px;
+}
+#Rectangle_9 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_9 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: -112px;
+  top: 678px;
+}
+#Rectangle_36 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_36 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1832px;
+  top: 724px;
+}
+#Rectangle_10 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_10 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: -112px;
+  top: 950px;
+}
+#Rectangle_37 {
+  fill: rgba(245, 245, 245, 1);
+}
+.Rectangle_37 {
+  position: absolute;
+  overflow: visible;
+  width: 200px;
+  height: 256px;
+  left: 1832px;
+  top: 996px;
+}
+#Rectangle_38 {
+  fill: rgba(255, 255, 255, 1);
+}
+.Rectangle_38 {
+  position: absolute;
+  overflow: visible;
+  width: 1920px;
+  height: 1240px;
+  left: 0px;
+  top: 1080px;
+}
+#Mask_Group_4 {
+  position: absolute;
+  width: 1755px;
+  height: 512px;
+  left: 80px;
+  top: 1285px;
+  overflow: visible;
+}
+#Your_words_are_worth_sharing {
+  left: 144px;
+  top: 1333px;
+  position: absolute;
+  overflow: visible;
+  width: 634px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 56px;
+  color: rgba(255, 255, 255, 1);
+}
+#Introducing_contributions_-_no {
+  left: 144px;
+  top: 1487px;
+  position: absolute;
+  overflow: visible;
+  width: 718px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 32px;
+  color: rgba(255, 255, 255, 1);
+}
+#Rectangle_62 {
+  fill: rgba(255, 255, 255, 1);
+}
+.Rectangle_62 {
+  position: absolute;
+  overflow: visible;
+  width: 367px;
+  height: 80px;
+  left: 144px;
+  top: 1669px;
+}
+#Become_a_contributor {
+  left: 192px;
+  top: 1695px;
+  position: absolute;
+  overflow: visible;
+  width: 272px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(56, 56, 56, 1);
+}
+#amueso-v2 {
+  position: absolute;
+  width: 170px;
+  height: 64px;
+  left: 80px;
+  top: 13px;
+  overflow: visible;
+}
+#Polygon_1 {
+  fill: rgba(255, 199, 28, 1);
+}
+.Polygon_1 {
+  overflow: visible;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transform: matrix(1, 0, 0, 1, 819.0002, 2013.0003) rotate(-5deg);
+  transform-origin: center;
+  left: 0px;
+  top: 0px;
+}
+#Polygon_2 {
+  fill: rgba(240, 240, 240, 1);
+}
+.Polygon_2 {
+  overflow: visible;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transform: matrix(1, 0, 0, 1, 867.0002, 2015.0003) rotate(-5deg);
+  transform-origin: center;
+  left: 0px;
+  top: 0px;
+}
+#Rectangle_96 {
+  fill: rgba(43, 196, 145, 1);
+}
+.Rectangle_96 {
+  width: 20px;
+  height: 24px;
+  position: absolute;
+  overflow: visible;
+  transform: matrix(1, 0, 0, 1, 964.5728, 2017.2749) rotate(-8deg);
+  transform-origin: center;
+}
+#Polygon_4 {
+  fill: rgba(51, 51, 108, 1);
+}
+.Polygon_4 {
+  overflow: visible;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transform: matrix(1, 0, 0, 1, 1010.9015, 2009.9015) rotate(10deg);
+  transform-origin: center;
+  left: 0px;
+  top: 0px;
+}
+#Group_4 {
+  transform: matrix(1, 0, 0, 1, 916.018, 2020.5964) rotate(-25deg);
+  transform-origin: center;
+  position: absolute;
+  width: 24px;
+  height: 10.139px;
+  left: 0px;
+  top: 0px;
+  overflow: visible;
+}
+#Path_12 {
+  fill: rgba(255, 79, 80, 1);
+  stroke: rgba(255, 79, 80, 1);
+  stroke-width: 1px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-miterlimit: 4;
+  shape-rendering: auto;
+}
+.Path_12 {
+  overflow: visible;
+  position: absolute;
+  width: 27.307px;
+  height: 20.535px;
+  left: 0px;
+  top: 0px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+#Path_13 {
+  fill: rgba(255, 255, 255, 1);
+  stroke: rgba(255, 79, 80, 1);
+  stroke-width: 1px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-miterlimit: 4;
+  shape-rendering: auto;
+}
+.Path_13 {
+  overflow: visible;
+  position: absolute;
+  width: 25.267px;
+  height: 15.565px;
+  left: 2.536px;
+  top: 5.438px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+#Path_14 {
+  fill: rgba(240, 240, 240, 1);
+}
+.Path_14 {
+  overflow: visible;
+  position: absolute;
+  width: 24px;
+  height: 16.971px;
+  transform: matrix(1, 0, 0, 1, 1060.7873, 2020.8167) rotate(15deg);
+  transform-origin: center;
+  left: 0px;
+  top: 0px;
+}
+#Rectangle_132 {
+  opacity: 0.125;
+  fill: rgba(0, 0, 0, 1);
+  stroke: rgba(112, 112, 112, 1);
+  stroke-width: 1px;
+  stroke-linejoin: miter;
+  stroke-linecap: butt;
+  stroke-miterlimit: 4;
+  shape-rendering: auto;
+}
+.Rectangle_132 {
+  position: absolute;
+  overflow: visible;
+  width: 1920px;
+  height: 2320px;
+  left: 0px;
+  top: 0px;
+}
+#Sign_up_Modal {
+  position: absolute;
+  width: 824px;
+  height: 1140px;
+  left: 548px;
+  top: 128px;
+  overflow: visible;
+}
+#Rectangle_87 {
+  fill: rgba(255, 255, 255, 1);
+}
+.Rectangle_87 {
+  filter: drop-shadow(0px 4px 64px rgba(0, 0, 0, 0.078));
+  position: absolute;
+  overflow: visible;
+  width: 1016px;
+  height: 1332px;
+  left: 0px;
+  top: 0px;
+}
+#Welcome_to_Amueso {
+  left: 48px;
+  top: 48px;
+  position: absolute;
+  overflow: visible;
+  width: 518px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  color: rgba(56, 56, 56, 1);
+}
+#Your_Name {
+  left: 48px;
+  top: 170px;
+  position: absolute;
+  overflow: visible;
+  width: 138px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(56, 56, 56, 1);
+}
+#Email {
+  left: 48px;
+  top: 311px;
+  position: absolute;
+  overflow: visible;
+  width: 71px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(56, 56, 56, 1);
+}
+#Password {
+  left: 48px;
+  top: 452px;
+  position: absolute;
+  overflow: visible;
+  width: 121px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(56, 56, 56, 1);
+}
+#Rectangle_91 {
+  fill: rgba(255, 255, 255, 1);
+  stroke: rgba(245, 245, 245, 1);
+  stroke-width: 2px;
+  stroke-linejoin: miter;
+  stroke-linecap: butt;
+  stroke-miterlimit: 4;
+  shape-rendering: auto;
+}
+.Rectangle_91 {
+  position: absolute;
+  overflow: visible;
+  width: 728px;
+  height: 80px;
+  left: 48px;
+  top: 207px;
+}
+#Rectangle_92 {
+  fill: rgba(255, 255, 255, 1);
+  stroke: rgba(245, 245, 245, 1);
+  stroke-width: 2px;
+  stroke-linejoin: miter;
+  stroke-linecap: butt;
+  stroke-miterlimit: 4;
+  shape-rendering: auto;
+}
+.Rectangle_92 {
+  position: absolute;
+  overflow: visible;
+  width: 728px;
+  height: 80px;
+  left: 48px;
+  top: 348px;
+}
+#Rectangle_93 {
+  fill: rgba(255, 255, 255, 1);
+  stroke: rgba(245, 245, 245, 1);
+  stroke-width: 2px;
+  stroke-linejoin: miter;
+  stroke-linecap: butt;
+  stroke-miterlimit: 4;
+  shape-rendering: auto;
+}
+.Rectangle_93 {
+  position: absolute;
+  overflow: visible;
+  width: 728px;
+  height: 80px;
+  left: 48px;
+  top: 489px;
+}
+#Rectangle_133 {
+  fill: rgba(189, 189, 189, 1);
+}
+.Rectangle_133 {
+  position: absolute;
+  overflow: visible;
+  width: 728px;
+  height: 80px;
+  left: 48px;
+  top: 585px;
+}
+#Rectangle_135 {
+  fill: rgba(189, 189, 189, 1);
+}
+.Rectangle_135 {
+  position: absolute;
+  overflow: visible;
+  width: 728px;
+  height: 80px;
+  left: 48px;
+  top: 787px;
+}
+#Rectangle_136 {
+  fill: rgba(189, 189, 189, 1);
+}
+.Rectangle_136 {
+  position: absolute;
+  overflow: visible;
+  width: 728px;
+  height: 80px;
+  left: 48px;
+  top: 875px;
+}
+#Enter_your_full_name {
+  left: 72px;
+  top: 233px;
+  position: absolute;
+  overflow: visible;
+  width: 247px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  color: rgba(189, 189, 189, 1);
+}
+#Enter_your_email_address {
+  left: 72px;
+  top: 374px;
+  position: absolute;
+  overflow: visible;
+  width: 300px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  color: rgba(189, 189, 189, 1);
+}
+#Create_a_new_password {
+  left: 72px;
+  top: 515px;
+  position: absolute;
+  overflow: visible;
+  width: 279px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  color: rgba(189, 189, 189, 1);
+}
+#Continue {
+  left: 355px;
+  top: 611px;
+  position: absolute;
+  overflow: visible;
+  width: 115px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 1);
+}
+#Continue_with_Google {
+  left: 277px;
+  top: 813px;
+  position: absolute;
+  overflow: visible;
+  width: 272px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 1);
+}
+#Continue_with_Facebook {
+  left: 260px;
+  top: 901px;
+  position: absolute;
+  overflow: visible;
+  width: 305px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 1);
+}
+#Group_29 {
+  position: absolute;
+  width: 728px;
+  height: 26px;
+  left: 48.5px;
+  top: 713px;
+  overflow: visible;
+}
+#Line_4 {
+  fill: transparent;
+  stroke: rgba(234, 234, 234, 1);
+  stroke-width: 1px;
+  stroke-linejoin: miter;
+  stroke-linecap: butt;
+  stroke-miterlimit: 4;
+  shape-rendering: auto;
+}
+.Line_4 {
+  overflow: visible;
+  position: absolute;
+  width: 728px;
+  height: 1px;
+  left: 0px;
+  top: 13.5px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+#Group_28 {
+  position: absolute;
+  width: 38px;
+  height: 26px;
+  left: 344.5px;
+  top: 0px;
+  overflow: visible;
+}
+#Rectangle_134 {
+  fill: rgba(255, 255, 255, 1);
+}
+.Rectangle_134 {
+  position: absolute;
+  overflow: visible;
+  width: 38px;
+  height: 26px;
+  left: 0px;
+  top: 0px;
+}
+#OR {
+  left: 8px;
+  top: 4px;
+  position: absolute;
+  overflow: visible;
+  width: 23px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: rgba(189, 189, 189, 1);
+}
+#By_continuing_you_agree_to_Amu {
+  left: 82px;
+  top: 971px;
+  position: absolute;
+  overflow: visible;
+  width: 661px;
+  white-space: nowrap;
+  text-align: center;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  color: rgba(118, 118, 118, 1);
+}
+#Already_have_an_account_Sign_i {
+  left: 207px;
+  top: 1063px;
+  position: absolute;
+  overflow: visible;
+  width: 411px;
+  white-space: nowrap;
+  text-align: center;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  color: rgba(118, 118, 118, 1);
+}
