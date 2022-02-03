@@ -374,7 +374,14 @@
   font-weight: bold;
   font-size: 24px;
   color: rgba(23, 208, 158, 1);
+  cursor: pointer;
 }
+
+#Get_started a {
+  text-decoration: none;
+  color: rgba(23, 208, 158, 1);
+}
+
 #Rectangle_8 {
   fill: rgba(245, 245, 245, 1);
 }

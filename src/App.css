@@ -1,0 +1,211 @@
+body {
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: bold;
+}
+
+a {
+  color: gray;
+  text-decoration: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+a:hover,
+button:hover {
+  color: #000;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: gray;
+}
+
+p {
+  font-size: 0.7rem;
+}
+
+input {
+  padding: 10px 15px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+
+.navbar {
+  padding: 0 40px;
+}
+
+.navbar button {
+  font-size: 2rem;
+}
+
+.landing .head,
+div.main,
+.hosting,
+.spaces,
+.story-double,
+.story-single {
+  padding: 50px 100px;
+}
+
+.btn-green {
+  padding: 10px 25px;
+  color: #17d09e;
+  border: 3px solid #17d09e;
+  border-radius: 10px;
+}
+
+div.absolute {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  z-index: 1000;
+  justify-content: center;
+  height: 100vh;
+  overflow-y: hidden;
+  top: 0;
+  left: 0;
+}
+
+img.avatar {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50px;
+}
+
+div.absolute .absolute-content {
+  width: 50%;
+  height: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 50px auto;
+  padding: 20px;
+  position: relative;
+}
+
+button.absolute-close {
+  color: red;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
+
+button.absolute-close:hover {
+  color: #bd3922;
+}
+
+.landing .head button {
+  font-size: 1.3rem;
+}
+
+.login hr {
+  width: 100%;
+}
+
+.main .ad .item {
+  width: 30%;
+}
+
+.main .ad .item img {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.book,
+.group,
+.stories {
+  overflow-x: auto;
+}
+
+.book .item {
+  margin-right: 20px;
+}
+
+.book .item img {
+  height: 300px;
+  width: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.group .item {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+}
+
+.group .item img {
+  margin-left: 200px;
+  width: 20px;
+}
+
+.hosting img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.hosting img.cover {
+  width: 40%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.hosting h6 {
+  color: gray;
+}
+
+.hosting .responses .item {
+  padding: 0 20px;
+  width: 30%;
+}
+
+.stories .item {
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+.stories .item h5 {
+  margin-right: 200px;
+  width: 100%;
+}
+
+.spaces .head {
+  background-color: #bdbdbd;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.story-double .page,
+.story-single .page {
+  width: 50%;
+  height: 100vh;
+  border: 2px solid lightgray;
+}
+
+.story-double .page:first-of-type {
+  border-radius: 10px 0 0 10px;
+}
+
+.story-double .page:last-of-type {
+  border-radius: 0 10px 10px 0;
+}
