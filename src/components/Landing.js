@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import {} from "@material-ui/icons";
 import "../styles/landing.css";
 import Login from "./User/Login";
 import Signup from "./User/Signup";
 
-const Landing = () => {
+const Landing = ({ authenticate, auth: { isAuthenticated, err } }) => {
   const [auth, setAuth] = useState("");
+
+  if (isAuthenticated) {
+    return <Redirect to='/mainscreen' />;
+  }
+
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     history.push("/mainscreen");
+  //   }
+  // }, [isAuthenticated]);
 
   return (
     <div>
@@ -21,9 +32,29 @@ const Landing = () => {
             Get Started
           </button>
         </div>
+        <img
+          className='landing-books '
+          src={process.env.PUBLIC_URL + "/images/landing_image.png"}
+        />
+        <div className='d-flex flex-column align-items-center'>
+          <img
+            className='contribute'
+            src={process.env.PUBLIC_URL + "/images/Writer Contribution.png"}
+          />
+
+          <img
+            className='logo'
+            src={process.env.PUBLIC_URL + "/images/amueso-v2.png"}
+          />
+        </div>
       </div>
-      {auth === "login" && <Login setAuth={setAuth} />}
-      {auth === "signup" && <Signup setAuth={setAuth} />}
+
+      {auth === "login" && (
+        <Login setAuth={setAuth} authenticate={authenticate} err={err} />
+      )}
+      {auth === "signup" && (
+        <Signup setAuth={setAuth} authenticate={authenticate} err={err} />
+      )}
     </div>
   );
 };

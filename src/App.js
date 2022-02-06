@@ -1,5 +1,10 @@
 import React, { Fragment, useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  useHistory,
+  Redirect,
+} from "react-router-dom";
 import Landing from "./components/Landing";
 import LoginNew from "./components/User/LoginNew";
 import SignupNew from "./components/User/SignupNew";
@@ -17,36 +22,69 @@ const App = () => {
   const [auth, setAuth] = useState({
     isAuthenticated: false,
     user: null,
-    err: null,
+    err: { login: null, signup: null },
   });
 
-  const authenticate = async (formData, func) => {
+  const authenticate = async (formData, func, history) => {
+    if (func === "google") {
+      axios
+        .get("http://18.191.249.121:4000/auth/google/callback")
+        .then((res) => {
+          //history.push(res.data.url);
+          console.log(res.data.url);
+          window.location.assign(res.data.url);
+        });
+
+      return;
+    }
+
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    try {
-      axios
-        .post(`http://localhost:4000/api/user/${func}`, formData, config)
-        .then((res) => {
-          setAuth({ ...auth, isAuthenticated: true, user: res.data.data });
+
+    axios
+      .post(`http://18.191.249.121:4000/api/user/${func}/`, formData, config)
+      .then((res) => {
+        setAuth({
+          ...auth,
+          isAuthenticated: true,
+          user: res.data.data,
+          err: { ...auth.err, login: null, signup: null },
         });
-      return true;
-    } catch (err) {
-      console.log(err);
-      console.log("error");
-      setAuth({ ...auth, isAuthenticated: false, user: null, err: err });
-      return false;
-    }
+      })
+      .catch((err) => {
+        func === "login" &&
+          setAuth({
+            ...auth,
+            isAuthenticated: false,
+            user: null,
+            err: { ...auth.err, login: err.response.data, signup: null },
+          });
+
+        func === "signup" &&
+          setAuth({
+            ...auth,
+            isAuthenticated: false,
+            user: null,
+            err: { ...auth.err, signup: err.response.data, login: null },
+          });
+      });
   };
 
   return (
     <Fragment>
-      <Navbar />
+      <Navbar auth={auth} />
       <Router>
         <div>
-          <Route exact path='/' component={Landing} />
+          <Route
+            exact
+            path='/'
+            component={() => (
+              <Landing authenticate={authenticate} auth={auth} />
+            )}
+          />
           <Route
             exact
             path='/user/login'
@@ -57,7 +95,11 @@ const App = () => {
             path='/user/signup'
             component={() => <SignupNew authenticate={authenticate} />}
           />
-          <Route exact path='/mainscreen' component={() => <MainScreen />} />
+          <Route
+            exact
+            path='/mainscreen'
+            component={() => <MainScreen auth={auth} />}
+          />
           <Route exact path='/hosting' component={() => <LiveHosting />} />
           <Route exact path='/spaces' component={() => <SpacesGroups />} />
           <Route exact path='/story/single' component={() => <SinglePage />} />

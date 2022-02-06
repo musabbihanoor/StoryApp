@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const SpacesGroups = () => {
+  const [books, setBooks] = useState(null);
+
+  const fetchBooks = async () => {
+    axios
+      .get("http://18.191.249.121:4000/api/books/allbooks")
+      .then((res) => setBooks(res.data.data))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
   return (
     <div className='spaces'>
       <div className='head mb-5'>
@@ -35,29 +50,57 @@ const SpacesGroups = () => {
 
       <h3 className='my-5'>Upcoming live stories</h3>
       <div className='stories d-flex'>
-        {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((x) => (
-          <div className='item me-3 mb-3'>
-            <h5 className='fw-bold'>Story Title</h5>
-            <h6 className='mb-5'>Expected time</h6>
-            <p>Hosted by</p>
-            <span className='d-flex'>
-              <img
-                className='avatar me-3'
-                src='https://api.time.com/wp-content/uploads/2018/04/listening-to-music-headphones.jpg?quality=85&w=1200&h=628&crop=1'
-              />
-              <h5>Host Name</h5>
-            </span>
-          </div>
-        ))}
+        {books ? (
+          books.map((x) => (
+            <div className='item me-3 mb-3' key={x._id}>
+              <h5 className='fw-bold'>{x.title}</h5>
+              <h6 className='mb-5'>1 year</h6>
+              <p>Hosted by</p>
+              <span className='d-flex'>
+                <img
+                  className='avatar me-3'
+                  src='http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg'
+                />
+                <h5>{x.author}</h5>
+              </span>
+            </div>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+
+      <div className='create-space'>
+        <h3>
+          Lorem ipsum dolor sit amet,
+          <br />
+          consectetur adipiscing elit
+        </h3>
+        <button className='btn btn-secondary'>Create a space</button>
       </div>
 
       <h2 className='fw-bold my-5'>Read stories that are being hosted</h2>
       <div className='book d-flex'>
-        {[1, 1, 1, 1, 1, 1, 1].map((x) => (
-          <div className='item mb-3'>
-            <img src='https://www.jagahonline.com/blog/wp-content/uploads/2020/08/Main-Title_8.jpg' />
-          </div>
-        ))}
+        {books ? (
+          books.map((x) => (
+            <Link
+              key={x._id}
+              to={{
+                pathname: "/story/single",
+                state: {
+                  bookid: x._id,
+                  book: x,
+                },
+              }}
+            >
+              <div className='item mb-3'>
+                <img src={x.imgsrc} />
+              </div>
+            </Link>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
+
 body {
-  font-family: "Times New Roman", Times, serif !important;
+  font-family: "Poppins", sans-serif !important;
 }
 
 h1,
@@ -42,8 +44,13 @@ input {
   padding: 0 40px;
 }
 
-.navbar button {
+.navbar .notAuth button {
   font-size: 2rem;
+}
+
+.navbar input {
+  width: 400px;
+  font-size: 1rem;
 }
 
 .landing .head,
@@ -75,10 +82,10 @@ div.absolute {
 }
 
 img.avatar {
-  width: 50px;
-  height: 50px;
+  width: 50px !important;
+  height: 50px !important;
   object-fit: cover;
-  border-radius: 50px;
+  border-radius: 50px !important;
 }
 
 div.absolute .absolute-content {
@@ -198,8 +205,6 @@ button.absolute-close:hover {
 .story-double .page,
 .story-single .page {
   width: 50%;
-  height: 100vh;
-  border: 2px solid lightgray;
 }
 
 .story-double .page:first-of-type {
@@ -208,4 +213,47 @@ button.absolute-close:hover {
 
 .story-double .page:last-of-type {
   border-radius: 0 10px 10px 0;
+}
+
+.story-single .page img {
+  width: 100%;
+  object-fit: cover;
+  border: 2px solid lightgray;
+}
+
+img.landing-books {
+  width: 100%;
+}
+
+img.contribute {
+  width: 100%;
+  padding: 50px;
+}
+
+img.logo {
+  width: 200px;
+}
+
+.main select {
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.create-space {
+  background-color: #bdbdbd;
+  margin-top: 50px;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .create-space h3 {
+  width: 300px;
+} */
+
+.create-space button {
+  height: 40px;
 }
