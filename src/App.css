@@ -257,3 +257,89 @@ img.logo {
 .create-space button {
   height: 40px;
 }
+
+button.btn-purple {
+  background-color: #33336c !important;
+  border: 1px solid #33336c;
+}
+
+button.btn-purple:hover {
+  border: 1px solid #222248;
+  background-color: #222248;
+}
+
+.write-story {
+  width: 80%;
+}
+
+.write-story h1,
+.write-story label {
+  text-transform: uppercase;
+  color: #33336c;
+  font-size: 24px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.write-story form span {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+}
+
+.write-story input,
+.write-story label.file {
+  background-color: #eeeeee;
+  border: none;
+  box-shadow: -3px 6px 26px -12px rgba(0, 0, 0, 0.47);
+  outline: none;
+}
+
+.write-story label {
+  font-size: 18px;
+  text-align: left;
+  margin: 10px 0;
+}
+
+.write-story label.file {
+  display: flex;
+  width: 48%;
+  border-radius: 10px;
+  height: 40px;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: none;
+  color: #000;
+  font-weight: 100;
+}
+
+.write-story label.file p {
+  font-size: 16px;
+  margin: 0 15px;
+}
+
+.write-story label.file button {
+  background-color: #33336c;
+  color: #fff;
+  padding: 9px 20px;
+  border-radius: 10px;
+}
+
+.write-story .story {
+  background-color: #eeeeee;
+  height: 280px;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.write-story textarea {
+  height: 85%;
+  width: 100%;
+  outline: none;
+  border: none;
+  resize: none;
+  border-radius: 20px;
+  overflow-y: auto;
+  padding: 10px;
+}

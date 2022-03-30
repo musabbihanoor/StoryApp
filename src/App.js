@@ -2,10 +2,8 @@ import React, { Fragment, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Landing from "./components/Landing";
 import MainScreen from "./components/MainScreen";
-import Navbar from "./components/Navbar";
-import LiveHosting from "./components/LiveHosting";
+import Navbar from "./components/Layout/Navbar";
 import SpacesGroups from "./components/SpacesGroups";
-import DoublePage from "./components/Story/DoublePage";
 import SinglePage from "./components/Story/SinglePage";
 import axios from "axios";
 
@@ -118,14 +116,13 @@ const App = ({ history }) => {
             path='/mainscreen'
             component={() => <MainScreen auth={auth} />}
           />
-          <Route exact path='/hosting' component={() => <LiveHosting />} />
+
           <Route exact path='/spaces' component={() => <SpacesGroups />} />
           <Route
             exact
             path='/story/single'
             component={() => <SinglePage user={auth.user} />}
           />
-          <Route exact path='/story/double' component={() => <DoublePage />} />
         </div>
       </Router>
     </Fragment>
