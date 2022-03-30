@@ -4,7 +4,8 @@ import { Link, Redirect } from "react-router-dom";
 
 const MainScreen = ({ auth: { isAuthenticated, user } }) => {
   const [books, setBooks] = useState(null);
-  const [genre, setGenre] = useState(null);
+  const [bookmarks, setBookmarks] = useState(null);
+  const [genre, setGenre] = useState("");
   const [genres, setGenres] = useState(null);
   const [genreBooks, setGenreBooks] = useState(null);
 
@@ -35,19 +36,34 @@ const MainScreen = ({ auth: { isAuthenticated, user } }) => {
       });
   };
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      return <Redirect to='/' />;
-    }
+  const fetchBookmarkBooks = async (genre) => {
+    axios
+      .get(`http://localhost:4000/api/books/allbookmarked/${user._id}`)
+      .then((res) => {
+        setBookmarks(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setGenreBooks(null);
+      });
+  };
 
+  useEffect(() => {
     fetchBooks();
     fetchGenres();
-    genre !== null && fetchGenreBooks(genre);
+    fetchBookmarkBooks();
+
+    genre !== "" && fetchGenreBooks(genre);
   }, [genre, isAuthenticated]);
+
+  if (!isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <div className='main'>
-      <h1 className='fw-bold mb-5'>Welcome back, {user.name}</h1>
+      <h1 className='fw-bold mb-5'>Welcome back, {user.name && user.name}</h1>
       <div className='ad d-flex justify-content-between'>
         <div className='item'>
           <img src='https://www.jagahonline.com/blog/wp-content/uploads/2020/08/Main-Title_8.jpg' />
@@ -93,6 +109,38 @@ const MainScreen = ({ auth: { isAuthenticated, user } }) => {
           <p>Loading...</p>
         )}
       </div>
+
+      <h2 className='fw-bold my-5'>Your bookmarks</h2>
+      <div className='book d-flex'>
+        {bookmarks ? (
+          bookmarks.map((x) => (
+            <div className='item' key={x._id}>
+              {/* <Link
+                to={{
+                  pathname: "/story/single",
+                  state: {
+                    bookid: x._id,
+                    book: x,
+                  },
+                }}
+              > */}
+              <img
+                src={
+                  x.imgsrc
+                    ? x.imgsrc
+                    : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+                }
+              />
+              <h6 className='fw-bold mt-3'>{x}</h6>
+              {/* <h6 className='fw-bold mt-3'>{x.title}</h6> */}
+              {/* </Link> */}
+            </div>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
+
       <h2 className='fw-bold my-5'>See what's happening around you</h2>
       <div className='group d-flex'>
         {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((x, i) => (

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
+import { GoogleLogin } from "react-google-login";
 
-const Login = ({ setAuth, authenticate, history, err }) => {
+const Login = ({ setAuth, authenticate, history, err, handleLogin }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -22,6 +23,7 @@ const Login = ({ setAuth, authenticate, history, err }) => {
       //alert("user dont exist");
     }
   };
+
   return (
     <div className='absolute login'>
       <div className='absolute-content'>
@@ -62,7 +64,7 @@ const Login = ({ setAuth, authenticate, history, err }) => {
             <label className='mx-3'>or</label>
             <hr />
           </span>
-          <button
+          {/* <button
             className='btn btn-outline-primary my-3'
             type='button'
             onClick={(e) => {
@@ -71,7 +73,15 @@ const Login = ({ setAuth, authenticate, history, err }) => {
             }}
           >
             Continue with Google
-          </button>
+          </button> */}
+          <GoogleLogin
+            clientId='636528711514-k9249hu4mf349vagt2sf4vq8lo58k7gt.apps.googleusercontent.com'
+            buttonText='Login'
+            onSuccess={handleLogin}
+            onFailure={handleLogin}
+            // cookiePolicy={'single_host_origin'}
+            redirectUri={"http://localhost:4000/auth/google/callback"}
+          />
           <hr />
           <button className='fw-bold' type='button'>
             Not you? Login from a different account

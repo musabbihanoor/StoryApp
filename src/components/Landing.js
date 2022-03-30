@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import {} from "@material-ui/icons";
-import "../styles/landing.css";
 import Login from "./User/Login";
 import Signup from "./User/Signup";
 
-const Landing = ({ authenticate, auth: { isAuthenticated, err } }) => {
-  const [auth, setAuth] = useState("");
-
+const Landing = ({
+  authenticate,
+  auth: { isAuthenticated, err },
+  handleLogin,
+  authOption,
+  setAuthOption,
+}) => {
   if (isAuthenticated) {
     return <Redirect to='/mainscreen' />;
   }
@@ -27,7 +30,7 @@ const Landing = ({ authenticate, auth: { isAuthenticated, err } }) => {
           <h5>People, stories, and more - all in one place.</h5>
           <button
             className='btn-green mt-5 fw-bold'
-            onClick={() => setAuth("login")}
+            onClick={() => setAuthOption("login")}
           >
             Get Started
           </button>
@@ -49,11 +52,16 @@ const Landing = ({ authenticate, auth: { isAuthenticated, err } }) => {
         </div>
       </div>
 
-      {auth === "login" && (
-        <Login setAuth={setAuth} authenticate={authenticate} err={err} />
+      {authOption === "login" && (
+        <Login
+          setAuth={setAuthOption}
+          authenticate={authenticate}
+          err={err}
+          handleLogin={handleLogin}
+        />
       )}
-      {auth === "signup" && (
-        <Signup setAuth={setAuth} authenticate={authenticate} err={err} />
+      {authOption === "signup" && (
+        <Signup setAuth={setAuthOption} authenticate={authenticate} err={err} />
       )}
     </div>
   );

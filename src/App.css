@@ -44,7 +44,7 @@ input {
   padding: 0 40px;
 }
 
-.navbar .notAuth button {
+.navbar button.user {
   font-size: 2rem;
 }
 

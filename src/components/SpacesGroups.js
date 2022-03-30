@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const SpacesGroups = () => {
   const [books, setBooks] = useState(null);
+  let history = useHistory();
 
   const fetchBooks = async () => {
     axios
@@ -18,6 +19,12 @@ const SpacesGroups = () => {
 
   return (
     <div className='spaces'>
+      <button
+        className='btn btn-outline-primary mb-3'
+        onClick={(e) => history.goBack()}
+      >
+        Go back
+      </button>
       <div className='head mb-5'>
         <h1>
           Lorem ipsum dolor sit amet,

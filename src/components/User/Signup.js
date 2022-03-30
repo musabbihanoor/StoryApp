@@ -69,9 +69,9 @@ const Signup = ({ setAuth, authenticate, history, err }) => {
             <label className='mx-3'>or</label>
             <hr />
           </span>
-          <button className='btn btn-outline-primary my-3'>
+          {/* <button className='btn btn-outline-primary my-3'>
             Continue with Google
-          </button>
+          </button> */}
           {/* <button className='btn btn-outline-secondary my-3'>
             Continue with Facebook
           </button> */}
