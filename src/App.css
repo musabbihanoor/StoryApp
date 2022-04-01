@@ -259,13 +259,24 @@ img.logo {
 }
 
 button.btn-purple {
-  background-color: #33336c !important;
+  background-color: #33336c;
   border: 1px solid #33336c;
 }
 
 button.btn-purple:hover {
   border: 1px solid #222248;
   background-color: #222248;
+}
+
+button.btn-green {
+  background-color: #38bb8f;
+  border: 1px solid #38bb8f;
+  color: white;
+}
+
+button.btn-green:hover {
+  border: 1px solid #257c5f;
+  background-color: #257c5f;
 }
 
 .write-story {
@@ -288,10 +299,10 @@ button.btn-purple:hover {
 }
 
 .write-story input,
-.write-story label.file {
-  background-color: #eeeeee;
-  border: none;
-  box-shadow: -3px 6px 26px -12px rgba(0, 0, 0, 0.47);
+.write-story label.file,
+.write-story select {
+  background-color: #fff;
+  border: 1px solid #ccc;
   outline: none;
 }
 
@@ -301,9 +312,10 @@ button.btn-purple:hover {
   margin: 10px 0;
 }
 
-.write-story label.file {
+.write-story label.file,
+.write-story select {
   display: flex;
-  width: 48%;
+  width: 100%;
   border-radius: 10px;
   height: 40px;
   margin-top: 30px;
@@ -312,6 +324,7 @@ button.btn-purple:hover {
   text-transform: none;
   color: #000;
   font-weight: 100;
+  outline: none;
 }
 
 .write-story label.file p {
@@ -322,7 +335,7 @@ button.btn-purple:hover {
 .write-story label.file button {
   background-color: #33336c;
   color: #fff;
-  padding: 9px 20px;
+  padding: 5px 20px;
   border-radius: 10px;
 }
 
@@ -331,6 +344,16 @@ button.btn-purple:hover {
   height: 280px;
   border-radius: 20px;
   padding: 20px;
+  position: relative;
+}
+
+.write-story button.add-chapter {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  background-color: #eee;
+  color: #222248;
+  border-radius: 5px;
 }
 
 .write-story textarea {
@@ -342,4 +365,60 @@ button.btn-purple:hover {
   border-radius: 20px;
   overflow-y: auto;
   padding: 10px;
+}
+
+.write-story label.file {
+  background-color: #eee;
+  border: none;
+}
+
+.proof-read {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.proof-read .head {
+  background-color: #33336c;
+  padding: 10px 0;
+  color: #fff;
+  text-align: center;
+}
+
+.proof-read .head h1 {
+  font-weight: 100;
+  text-transform: uppercase;
+  font-style: normal;
+  margin: 0;
+}
+
+.proof-read .head p {
+  font-size: 1rem;
+}
+
+.proof-read h1 {
+  text-transform: capitalize;
+  text-align: center;
+  font-style: italic;
+  margin: 10px 0;
+}
+
+.proof-read h3 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.proof-read .content {
+  padding: 0 50px;
+}
+
+.proof-read h2 {
+  text-transform: uppercase;
+  font-weight: 100;
+  margin-top: 20px;
+}
+
+.proof-read p {
+  font-size: 1.2rem;
 }

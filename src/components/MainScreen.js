@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import WriteStory from "./Story/WriteStory";
+import WriteBook from "./Story/WriteBook";
+import CreateGroup from "./Group/CreateGroup";
 
 const MainScreen = ({ auth: { isAuthenticated, user } }) => {
   const [books, setBooks] = useState(null);
@@ -12,6 +14,7 @@ const MainScreen = ({ auth: { isAuthenticated, user } }) => {
 
   const [writeStory, setWriteStory] = useState(false);
   const [writeBook, setWriteBook] = useState(false);
+  const [createGroup, setCreateGroup] = useState(false);
 
   const fetchBooks = async () => {
     axios
@@ -100,7 +103,10 @@ const MainScreen = ({ auth: { isAuthenticated, user } }) => {
             >
               Write a Book
             </button>
-            <button className='btn btn-primary btn-purple'>
+            <button
+              className='btn btn-primary btn-purple'
+              onClick={() => setCreateGroup(true)}
+            >
               Create a group
             </button>
           </span>
@@ -219,8 +225,9 @@ const MainScreen = ({ auth: { isAuthenticated, user } }) => {
           <p>Loading...</p>
         )}
       </div>
-      {writeStory && <WriteStory close={setWriteStory} role='story' />}
-      {writeBook && <WriteStory close={setWriteBook} role='book' />}
+      {writeStory && <WriteStory close={setWriteStory} />}
+      {writeBook && <WriteBook close={setWriteBook} />}
+      {createGroup && <CreateGroup close={setCreateGroup} />}
     </div>
   );
 };

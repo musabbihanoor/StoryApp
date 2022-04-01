@@ -5,6 +5,8 @@ import MainScreen from "./components/MainScreen";
 import Navbar from "./components/Layout/Navbar";
 import SpacesGroups from "./components/SpacesGroups";
 import SinglePage from "./components/Story/SinglePage";
+import ProofRead from "./components/Story/ProofRead";
+import Group from "./components/Group/Group";
 import axios from "axios";
 
 import "./App.css";
@@ -123,6 +125,14 @@ const App = ({ history }) => {
             path='/story/single'
             component={() => <SinglePage user={auth.user} />}
           />
+
+          <Route
+            exact
+            path='/story/proofread'
+            component={() => <ProofRead />}
+          />
+
+          <Route exact path='/group' component={() => <Group />} />
         </div>
       </Router>
     </Fragment>

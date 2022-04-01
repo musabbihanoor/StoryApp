@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const WriteStory = ({ close }) => {
+const WriteBook = ({ close }) => {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -17,7 +17,7 @@ const WriteStory = ({ close }) => {
         <button className='absolute-close' onClick={() => close(false)}>
           <i className='fa fa-times'></i>
         </button>
-        <h1>Write a story</h1>
+        <h1>Write a book</h1>
         <form>
           <div className='d-flex justify-content-between'>
             <span>
@@ -49,6 +49,9 @@ const WriteStory = ({ close }) => {
 
           <label>story</label>
           <div className='story'>
+            <button className='add-chapter'>
+              <i className='far fa-plus'></i> Add
+            </button>
             <textarea />
             <div className='d-flex justify-content-center'>
               <button className='btn btn-primary btn-green m-1'>
@@ -65,4 +68,4 @@ const WriteStory = ({ close }) => {
   );
 };
 
-export default WriteStory;
+export default WriteBook;
