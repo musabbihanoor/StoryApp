@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
 
+
+
 body {
   font-family: "Poppins", sans-serif !important;
 }
@@ -28,6 +30,7 @@ button {
   border: none;
   cursor: pointer;
   color: gray;
+  transition: all 0.3s ease-in;
 }
 
 p {
@@ -38,6 +41,7 @@ input {
   padding: 10px 15px;
   border: 1px solid lightgray;
   border-radius: 10px;
+  outline: none;
 }
 
 .navbar {
@@ -279,6 +283,16 @@ button.btn-green:hover {
   background-color: #257c5f;
 }
 
+button.btn-gray {
+  background-color: #D4D4D4;
+  padding: 0 20px;
+  height: 30px;
+}
+
+button.btn-gray:hover {
+  background-color: #8D8D8D;
+}
+
 .write-story {
   width: 80%;
 }
@@ -421,4 +435,131 @@ button.btn-green:hover {
 
 .proof-read p {
   font-size: 1.2rem;
+}
+
+.group .cover {
+  background-color: #33336c;
+  height: 30vh;
+  position: relative;
+  z-index: 1;
+}
+
+.group .cover button {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  width: 200px;
+  background-color: #5C5C81;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 5px 0;
+  color: #fff;
+}
+
+.group .cover button:hover {
+  background-color: #222248;
+}
+
+.group .info {
+  background-color: #EEEEEE;
+  margin: -50px 100px 0;
+  z-index: 2;
+  position: relative;
+  border-radius: 20px;
+  padding: 20px 20px 0;
+}
+
+.group .info h1,
+.group .discussion h1 {
+  color: #33336c;
+  text-transform: uppercase;
+  font-size: 24px;
+}
+
+.group .nav button.selected {
+  border-bottom: 3px solid #33336c;
+  color: #000;
+  transition: none;
+}
+
+.group .about {
+  padding: 30px 100px;
+}
+
+.group .discussion {
+  background-color: #eee;
+  margin: 30px 100px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.group .about p {
+  font-size: 16px;
+}
+
+.group img {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+  border-radius: 30px;
+  margin-right: 10px;
+}
+
+.group .discussion h2 {
+  font-size: 1rem;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.group .discussion h3 {
+  font-size: 1rem;
+}
+
+.group .discussion h3 span {
+  font-size: 0.8rem;
+  color: #9B9B9B;
+  font-weight: 100;
+}
+
+.group .members {
+  width: 500px;
+  background-color: #eee;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.group .members h1 {
+  font-size: 18px;
+  color: #33336c;
+}
+
+.group .members h2 {
+  font-size: 1rem;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.group .members hr {
+  margin: 0 0 10px;
+}
+
+.group .members p {
+  color: #9B9B9B;
+  font-size: 10px;
+}
+
+.invite {
+  width: 500px !important;
+  border-radius: 20px !important;
+}
+
+.invite h1 {
+  font-size: 20px;
+  text-align: center;
+}
+
+.invite h2 {
+  font-size: 1rem;
+  margin: 0;
 }
