@@ -1,0 +1,59 @@
+import axios from "axios";
+import { makeObservable, observable, action } from "mobx";
+import { BASE_URL } from "./url";
+
+class Book {
+  state = {
+    books: [],
+    book: {},
+    err: {},
+    genres: [],
+    genreBooks: [],
+    bookmarks: [],
+  };
+
+  constructor() {
+    makeObservable(this, {
+      state: observable,
+      getBooks: action,
+      getGenres: action,
+      getGenreBooks: action,
+      getBookmarkBooks: action,
+    });
+  }
+
+  getBooks = async () => {
+    axios
+      .get(`${BASE_URL}books/allbooks`)
+      .then((res) => (this.state = { ...this.state, books: res }))
+      .catch((err) => (this.state = { ...this.state, err: err }));
+  };
+
+  getGenres = async () => {
+    axios
+      .get(`${BASE_URL}books/allgenres`)
+      .then((res) => (this.state = { ...this.state, genres: res.data.data }))
+      .catch((err) => (this.state = { ...this.state, err: err }));
+  };
+
+  getGenreBooks = async (genre) => {
+    axios
+      .get(`${BASE_URL}books/filter/${genre}`)
+      .then(
+        (res) => (this.state = { ...this.state, genreBooks: res.data.data }),
+      )
+      .catch(
+        (err) => (this.state = { ...this.state, err: err, genreBooks: [] }),
+      );
+  };
+
+  getBookmarkBooks = async (id) => {
+    axios
+      .get(`${BASE_URL}books/allbookmarked/${id}`)
+      .then((res) => (this.state = { ...this.state, bookmarks: res.data.data }))
+      .catch(
+        (err) => (this.state = { ...this.state, err: err, genreBooks: [] }),
+      );
+  };
+}
+export const BookStore = new Book();
