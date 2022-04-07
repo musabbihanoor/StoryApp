@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import WriteStory from "./Story/WriteStory";
 import WriteBook from "./Story/WriteBook";
@@ -20,11 +19,11 @@ const MainScreen = observer(() => {
     if (!AuthStore.auth.isAuthenticated) {
       history.push("/");
     }
-
     BookStore.getBooks();
     BookStore.getGenres();
     BookStore.getBookmarkBooks(AuthStore.auth.user._id);
     genre !== "" && BookStore.getGenreBooks(genre);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [genre, AuthStore.auth.isAuthenticated]);
 
   return (
@@ -35,17 +34,26 @@ const MainScreen = observer(() => {
         </h1>
         <div className="ad d-flex justify-content-between">
           <div className="item">
-            <img src="https://media-cdn.tripadvisor.com/media/photo-s/0b/33/a1/93/picnix-setup.jpg" />
+            <img
+              alt="theme"
+              src="https://media-cdn.tripadvisor.com/media/photo-s/0b/33/a1/93/picnix-setup.jpg"
+            />
             <h6 className="fw-bold mt-3">
               Planning for a picnic? We've got you covered
             </h6>
           </div>
           <div className="item">
-            <img src="https://image.made-in-china.com/2f0j00jbyRBsJqycoE/2020-New-Good-Quality-English-Story-Kids-Children-Books-Printing-for-Child-Book.jpg" />
+            <img
+              alt="theme"
+              src="https://image.made-in-china.com/2f0j00jbyRBsJqycoE/2020-New-Good-Quality-English-Story-Kids-Children-Books-Printing-for-Child-Book.jpg"
+            />
             <h6 className="fw-bold mt-3">The story time with Jessica</h6>
           </div>
           <div className="item">
-            <img src="https://api.time.com/wp-content/uploads/2018/04/listening-to-music-headphones.jpg?quality=85&w=1200&h=628&crop=1" />
+            <img
+              alt="theme"
+              src="https://api.time.com/wp-content/uploads/2018/04/listening-to-music-headphones.jpg?quality=85&w=1200&h=628&crop=1"
+            />
             <h6 className="fw-bold mt-3">Listen and scream</h6>
           </div>
         </div>
@@ -82,6 +90,7 @@ const MainScreen = observer(() => {
                     },
                   }}>
                   <img
+                    alt="book"
                     src={
                       x.imgsrc
                         ? x.imgsrc
@@ -112,6 +121,7 @@ const MainScreen = observer(() => {
                 }}
               > */}
                 <img
+                  alt="book"
                   src={
                     x.imgsrc
                       ? x.imgsrc
@@ -135,6 +145,7 @@ const MainScreen = observer(() => {
               <div className="item me-3 mb-3">
                 <img
                   className="mb-5"
+                  alt="group"
                   src={process.env.PUBLIC_URL + "/images/Mask_Group_5_pk.png"}
                 />
                 <h5 className="fw-bold">Group Name</h5>
@@ -167,9 +178,9 @@ const MainScreen = observer(() => {
                       },
                     }}>
                     <div className="item">
-                      <img src={x.imgsrc} />
+                      <img src={x.imgsrc} alt="book" />
                       <h6 className="fw-bold mt-3">{x.title}</h6>
-                    </div>{" "}
+                    </div>
                   </Link>
                 ))
               ) : (

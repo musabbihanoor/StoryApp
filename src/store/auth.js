@@ -27,7 +27,7 @@ class Auth {
     };
 
     axios
-      .post(`${BASE_URL}user/signup/`, formData, config)
+      .post(`${BASE_URL}/user/signup/`, formData, config)
       .then((res) => {
         this.auth = {
           ...this.auth,
@@ -54,7 +54,7 @@ class Auth {
     };
 
     axios
-      .post(`${BASE_URL}user/login/`, formData, config)
+      .post(`${BASE_URL}/user/login/`, formData, config)
       .then((res) => {
         this.auth = {
           ...this.auth,
