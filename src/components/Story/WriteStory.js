@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BookStore } from "../../store/book";
 
 const WriteStory = ({ close }) => {
@@ -7,9 +7,11 @@ const WriteStory = ({ close }) => {
     author: "",
     genre: "",
     content: "",
+    imgsrc: "",
+    type: "story",
   });
 
-  const { title, author, content } = formData;
+  const { title, author, content, imgsrc } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,11 +57,8 @@ const WriteStory = ({ close }) => {
               </select>
             </span>
             <span>
-              <label className="file ">
-                <input type="file" className="d-none" />
-                <p>amueso.padding</p>
-                <button>Upload</button>
-              </label>
+              <label>Image</label>
+              <input name="imgsrc" value={imgsrc} onChange={onChange} />
             </span>
           </div>
 

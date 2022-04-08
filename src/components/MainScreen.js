@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Link, withRouter, useHistory } from "react-router-dom";
+import React, { useState, useEffect, Fragment } from "react";
+import { Link, withRouter } from "react-router-dom";
 import WriteStory from "./Story/WriteStory";
 import WriteBook from "./Story/WriteBook";
 import CreateGroup from "./Group/CreateGroup";
 import { AuthStore } from "../store/auth";
 import { BookStore } from "../store/book";
+import { GroupStore } from "../store/group";
 import { observer } from "mobx-react";
 
-const MainScreen = observer(() => {
-  const history = useHistory();
-
+const MainScreen = observer(({ history }) => {
   const [genre, setGenre] = useState("");
   const [writeStory, setWriteStory] = useState(false);
   const [writeBook, setWriteBook] = useState(false);
@@ -19,6 +18,7 @@ const MainScreen = observer(() => {
     if (!AuthStore.auth.isAuthenticated) {
       history.push("/");
     }
+    GroupStore.getGroups();
     BookStore.getBooks();
     BookStore.getGenres();
     BookStore.getBookmarkBooks(AuthStore.auth.user._id);
@@ -27,7 +27,7 @@ const MainScreen = observer(() => {
   }, [genre, AuthStore.auth.isAuthenticated]);
 
   return (
-    <div>
+    <Fragment>
       <div className="main">
         <h1 className="fw-bold mb-5">
           Welcome back, {AuthStore.auth.user.name && AuthStore.auth.user.name}
@@ -140,19 +140,42 @@ const MainScreen = observer(() => {
 
         <h2 className="fw-bold my-5">See what's happening around you</h2>
         <div className="group d-flex">
-          {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((x, i) => (
-            <Link to="/spaces" key={i}>
-              <div className="item me-3 mb-3">
-                <img
-                  className="mb-5"
-                  alt="group"
-                  src={process.env.PUBLIC_URL + "/images/Mask_Group_5_pk.png"}
-                />
-                <h5 className="fw-bold">Group Name</h5>
-                <h6>description of the group</h6>
+          {GroupStore.state.groups.length > 0 &&
+            GroupStore.state.groups.map((x, i) => (
+              <div>
+                {x.type === "private" &&
+                !x.members.find((x) => AuthStore.auth.user.email === x) ? (
+                  <div className="item me-3 mb-3 disabled">
+                    <img
+                      className="mb-5"
+                      alt="group"
+                      src={
+                        process.env.PUBLIC_URL + "/images/Mask_Group_5_pk.png"
+                      }
+                    />
+                    <h5 className="fw-bold">{x.title}</h5>
+                    <h6>{x.type}</h6>
+                  </div>
+                ) : (
+                  <Link
+                    key={i}
+                    to="/group"
+                    onClick={() => GroupStore.setGroup(x)}>
+                    <div className="item me-3 mb-3">
+                      <img
+                        className="mb-5"
+                        alt="group"
+                        src={
+                          process.env.PUBLIC_URL + "/images/Mask_Group_5_pk.png"
+                        }
+                      />
+                      <h5 className="fw-bold">{x.title}</h5>
+                      <h6>{x.type}</h6>
+                    </div>
+                  </Link>
+                )}
               </div>
-            </Link>
-          ))}
+            ))}
         </div>
         <h2 className="fw-bold my-5">Choose by genre</h2>
         {BookStore.state.genres > 0 ? (
@@ -195,7 +218,7 @@ const MainScreen = observer(() => {
       {writeStory && <WriteStory close={setWriteStory} />}
       {writeBook && <WriteBook close={setWriteBook} />}
       {createGroup && <CreateGroup close={setCreateGroup} />}
-    </div>
+    </Fragment>
   );
 });
 

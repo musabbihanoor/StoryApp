@@ -78,7 +78,7 @@ class Auth {
       alert(googleData.error);
     } else {
       try {
-        const res = await fetch("http://18.191.249.121:4000/auth/google/", {
+        const res = await fetch("http://18.191.249.121:4000/api/auth/google/", {
           method: "POST",
           body: JSON.stringify({
             token: googleData.tokenId,

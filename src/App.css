@@ -1,7 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
 
-
-
 body {
   font-family: "Poppins", sans-serif !important;
 }
@@ -162,6 +160,16 @@ button.absolute-close:hover {
   border: 1px solid lightgray;
 }
 
+.group .item h5,
+.group .item h6 {
+  color: #000;
+}
+
+.group .item.disabled h5,
+.group .item.disabled h6 {
+  color: gray;
+}
+
 .group .item img {
   margin-left: 200px;
   width: 20px;
@@ -284,13 +292,13 @@ button.btn-green:hover {
 }
 
 button.btn-gray {
-  background-color: #D4D4D4;
+  background-color: #d4d4d4;
   padding: 0 20px;
   height: 30px;
 }
 
 button.btn-gray:hover {
-  background-color: #8D8D8D;
+  background-color: #8d8d8d;
 }
 
 .write-story {
@@ -449,7 +457,7 @@ button.btn-gray:hover {
   top: 40%;
   left: 45%;
   width: 200px;
-  background-color: #5C5C81;
+  background-color: #5c5c81;
   border: 1px solid #fff;
   border-radius: 10px;
   padding: 5px 0;
@@ -461,7 +469,7 @@ button.btn-gray:hover {
 }
 
 .group .info {
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   margin: -50px 100px 0;
   z-index: 2;
   position: relative;
@@ -517,7 +525,7 @@ button.btn-gray:hover {
 
 .group .discussion h3 span {
   font-size: 0.8rem;
-  color: #9B9B9B;
+  color: #9b9b9b;
   font-weight: 100;
 }
 
@@ -545,7 +553,7 @@ button.btn-gray:hover {
 }
 
 .group .members p {
-  color: #9B9B9B;
+  color: #9b9b9b;
   font-size: 10px;
 }
 

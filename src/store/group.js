@@ -22,6 +22,10 @@ class Group {
     });
   }
 
+  setGroup = (group) => {
+    this.state.group = group;
+  };
+
   createGroup = async (formData) => {
     const config = {
       headers: {
@@ -32,11 +36,7 @@ class Group {
     axios
       .post(`${BASE_URL}/groups/creategroup`, formData, config)
       .then(
-        (res) =>
-          (this.state = {
-            ...this.state,
-            groups: [...this.state.groups, res.data],
-          }),
+        (res) => (this.state.groups = [...this.state.groups, res.data.data]),
       )
       .catch((err) => (this.state = { ...this.state, err: err }));
   };
@@ -57,20 +57,17 @@ class Group {
 
     axios
       .post(`${BASE_URL}/groups/joingroup`, formData, config)
-      .then(
-        (res) =>
-          (this.state = {
-            ...this.state,
-            members: [...this.state.members, res.data],
-          }),
-      )
-      .catch((err) => (this.state = { ...this.state, err: err }));
+      .then((res) => (this.state.group = res.data.data))
+      .catch((err) => {
+        console.log(err);
+        this.state.err = err;
+      });
   };
 
   getMessages = async () => {
     axios
       .get(`${BASE_URL}/chats/allchats`)
-      .then((res) => (this.state = { ...this.state, messages: res.data.data }))
+      .then((res) => (this.state.messages = res.data.message))
       .catch((err) => (this.state = { ...this.state, err: err }));
   };
 
@@ -83,13 +80,7 @@ class Group {
 
     axios
       .post(`${BASE_URL}/chats/send`, formData, config)
-      .then(
-        (res) =>
-          (this.state = {
-            ...this.state,
-            messages: [...this.state.messages, res.data],
-          }),
-      )
+      .then((res) => (this.state.group.forum = res.data.message))
       .catch((err) => (this.state = { ...this.state, err: err }));
   };
 }

@@ -29,7 +29,7 @@ class Book {
   getBooks = async () => {
     axios
       .get(`${BASE_URL}/books/allbooks`)
-      .then((res) => (this.state = { ...this.state, books: res }))
+      .then((res) => (this.state = { ...this.state, books: res.data.data }))
       .catch((err) => (this.state = { ...this.state, err: err }));
   };
 
@@ -61,6 +61,8 @@ class Book {
   };
 
   createBook = async (formData) => {
+    const updatedData = { ...formData, genre: [formData.genre] };
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -68,12 +70,12 @@ class Book {
     };
 
     axios
-      .post(`${BASE_URL}/custombook/writenew`, formData, config)
+      .post(`${BASE_URL}/custombook/writenew`, updatedData, config)
       .then(
         (res) =>
           (this.state = {
             ...this.state,
-            books: [...this.state.books, res.data],
+            books: [...this.state.books, res.data.data],
           }),
       )
       .catch((err) => (this.state = { ...this.state, err: err }));
