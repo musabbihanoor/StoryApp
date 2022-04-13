@@ -26,9 +26,13 @@ class Book {
     });
   }
 
+  setBook = (book) => {
+    this.state.book = book;
+  };
+
   getBooks = async () => {
     axios
-      .get(`${BASE_URL}/books/allbooks`)
+      .get(`${BASE_URL}/custombook/allcustombooks`)
       .then((res) => (this.state = { ...this.state, books: res.data.data }))
       .catch((err) => (this.state = { ...this.state, err: err }));
   };

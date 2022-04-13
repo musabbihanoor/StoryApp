@@ -4,10 +4,11 @@ import { GroupStore } from "../../store/group";
 const CreateGroup = ({ close }) => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("public");
+  const [imgsrc, setImgsrc] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    GroupStore.createGroup({ title: title, type: type });
+    GroupStore.createGroup({ title: title, type: type, imgsrc: imgsrc });
     close(false);
   };
 
@@ -18,11 +19,15 @@ const CreateGroup = ({ close }) => {
           <i className="fa fa-times"></i>
         </button>
         <h1>create a group</h1>
-        <form className="d-flex flex-column">
+        <form className="d-flex flex-column" onSubmit={(e) => onSubmit(e)}>
           <div className="d-flex justify-content-between">
             <span>
               <label>group topic</label>
-              <input value={title} onChange={(e) => setTitle(e.target.value)} />
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
             </span>
             <span>
               <label>choose privacy</label>
@@ -34,10 +39,18 @@ const CreateGroup = ({ close }) => {
               </select>
             </span>
           </div>
+          <span>
+            <label>Image Link</label>
+            <input
+              value={imgsrc}
+              onChange={(e) => setImgsrc(e.target.value)}
+              required
+            />
+          </span>
           <label>about group</label>
           <textarea style={{ background: "#eee", height: 300 }} />
           <button
-            onClick={(e) => onSubmit(e)}
+            type="submit"
             className="btn btn-primary btn-purple align-self-center mt-3">
             Create
           </button>

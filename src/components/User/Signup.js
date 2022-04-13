@@ -7,9 +7,10 @@ const Signup = ({ setAuth }) => {
     name: "",
     email: "",
     password: "",
+    imgsrc: "",
   });
 
-  const { name, email, password } = formData;
+  const { name, email, password, imgsrc } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,6 +34,14 @@ const Signup = ({ setAuth }) => {
             placeholder="Enter your full name"
             name="name"
             value={name}
+            required
+            onChange={(e) => onChange(e)}
+          />
+          <label className="fw-bold my-2">Image Link</label>
+          <input
+            placeholder="Enter your full name"
+            name="imgsrc"
+            value={imgsrc}
             required
             onChange={(e) => onChange(e)}
           />

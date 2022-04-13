@@ -1,22 +1,40 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { BookStore } from "../../store/book";
 
 const WriteBook = ({ close }) => {
+  const [add, setAdd] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     author: "",
     genre: "",
     content: "",
+    imgsrc: "",
+    type: "book",
   });
 
-  const { title, author, content } = formData;
+  const { title, author, content, imgsrc } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    BookStore.createBook(formData);
+  const addChapter = () => {
+    BookStore.addChapter({ title: title, content: content });
+  };
+
+  const onSubmit = () => {
+    if (add) {
+      addChapter();
+    } else {
+      BookStore.createBook(formData);
+    }
+    close(false);
+  };
+
+  const onProofRead = () => {
+    localStorage.setItem("title", title);
+    localStorage.setItem("author", author);
+    localStorage.setItem("content", content);
   };
 
   return (
@@ -26,15 +44,27 @@ const WriteBook = ({ close }) => {
           <i className="fa fa-times"></i>
         </button>
         <h1>Write a book</h1>
-        <form>
+        <form onSubmit={() => (add ? addChapter() : onSubmit())}>
           <div className="d-flex justify-content-between">
             <span>
               <label>title</label>
-              <input name="title" value={title} onChange={onChange} />
+              <input
+                name="title"
+                value={title}
+                onChange={onChange}
+                readOnly={add}
+                required
+              />
             </span>
             <span>
               <label>author name</label>
-              <input name="author" value={author} onChange={onChange} />
+              <input
+                name="author"
+                value={author}
+                onChange={onChange}
+                readOnly={add}
+                required
+              />
             </span>
           </div>
 
@@ -52,27 +82,47 @@ const WriteBook = ({ close }) => {
               </select>
             </span>
             <span>
-              <label className="file ">
-                <input type="file" className="d-none" />
-                <p>amueso.padding</p>
-                <button>Upload</button>
-              </label>
+              <label>Image</label>
+              <input
+                name="imgsrc"
+                value={imgsrc}
+                onChange={onChange}
+                readOnly={add}
+                required
+              />
             </span>
           </div>
 
           <label>story</label>
           <div className="story">
-            <button className="add-chapter">
+            <button
+              className="add-chapter"
+              onClick={() => {
+                setFormData({ ...formData, content: "" });
+                if (!add) {
+                  BookStore.createBook(formData);
+                  setAdd(true);
+                } else {
+                  addChapter();
+                }
+              }}>
               <i className="far fa-plus"></i> Add
             </button>
-            <textarea name="content" value={content} onChange={onChange} />
+            <textarea
+              name="content"
+              value={content}
+              onChange={onChange}
+              required
+            />
             <div className="d-flex justify-content-center">
-              <button className="btn btn-primary btn-green m-1">
+              <Link
+                target="_blank"
+                className="btn btn-primary btn-green m-1"
+                to="/story/proofread"
+                onClick={() => onProofRead()}>
                 Proof Read
-              </button>
-              <button
-                onClick={(e) => onSubmit(e)}
-                className="btn btn-primary btn-purple m-1">
+              </Link>
+              <button type="submit" className="btn btn-primary btn-purple m-1">
                 Published
               </button>
             </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { BookStore } from "../../store/book";
 
 const WriteStory = ({ close }) => {
@@ -19,10 +20,14 @@ const WriteStory = ({ close }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     BookStore.createBook(formData);
+    close(false);
   };
-  // useEffect(() => {
-  //   BookStore
-  // },[])
+
+  const onProofRead = () => {
+    localStorage.setItem("title", title);
+    localStorage.setItem("author", author);
+    localStorage.setItem("content", content);
+  };
 
   return (
     <div className="absolute">
@@ -31,15 +36,20 @@ const WriteStory = ({ close }) => {
           <i className="fa fa-times"></i>
         </button>
         <h1>Write a story</h1>
-        <form>
+        <form onSubmit={(e) => onSubmit(e)}>
           <div className="d-flex justify-content-between">
             <span>
               <label>title</label>
-              <input name="title" value={title} onChange={onChange} />
+              <input name="title" value={title} onChange={onChange} required />
             </span>
             <span>
               <label>author name</label>
-              <input name="author" value={author} onChange={onChange} />
+              <input
+                name="author"
+                value={author}
+                onChange={onChange}
+                required
+              />
             </span>
           </div>
 
@@ -58,20 +68,32 @@ const WriteStory = ({ close }) => {
             </span>
             <span>
               <label>Image</label>
-              <input name="imgsrc" value={imgsrc} onChange={onChange} />
+              <input
+                name="imgsrc"
+                value={imgsrc}
+                onChange={onChange}
+                required
+              />
             </span>
           </div>
 
           <label>story</label>
           <div className="story">
-            <textarea name="content" value={content} onChange={onChange} />
+            <textarea
+              name="content"
+              value={content}
+              onChange={onChange}
+              required
+            />
             <div className="d-flex justify-content-center">
-              <button className="btn btn-primary btn-green m-1">
+              <Link
+                target="_blank"
+                className="btn btn-green m-1"
+                to="/story/proofread"
+                onClick={() => onProofRead()}>
                 Proof Read
-              </button>
-              <button
-                onClick={(e) => onSubmit(e)}
-                className="btn btn-primary btn-purple m-1">
+              </Link>
+              <button type="submit" className="btn btn-primary btn-purple m-1">
                 Published
               </button>
             </div>

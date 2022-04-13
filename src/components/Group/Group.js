@@ -25,13 +25,17 @@ const Group = observer(({ history }) => {
       history.push("/");
     }
 
+    console.log(GroupStore.state.group.imgsrc);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [AuthStore.auth.isAuthenticated]);
 
   return (
     <div className="group">
       <div className="cover">
-        <button>Upload Image</button>
+        {GroupStore.state.group.imgsrc && (
+          <img src={GroupStore.state.group.imgsrc} />
+        )}
       </div>
       <div className="info">
         <div className="d-flex justify-content-between">

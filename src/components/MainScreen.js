@@ -82,13 +82,8 @@ const MainScreen = observer(({ history }) => {
             BookStore.state.books.map((x) => (
               <div className="item" key={x._id}>
                 <Link
-                  to={{
-                    pathname: "/story/single",
-                    state: {
-                      bookid: x._id,
-                      book: x,
-                    },
-                  }}>
+                  to="/story/proofread"
+                  onClick={() => BookStore.setBook(x)}>
                   <img
                     alt="book"
                     src={
@@ -178,7 +173,7 @@ const MainScreen = observer(({ history }) => {
             ))}
         </div>
         <h2 className="fw-bold my-5">Choose by genre</h2>
-        {BookStore.state.genres > 0 ? (
+        {BookStore.state.genres.length > 0 ? (
           <>
             <select value={genre} onChange={(e) => setGenre(e.target.value)}>
               <option>Choose</option>

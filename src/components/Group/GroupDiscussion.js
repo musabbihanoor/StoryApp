@@ -19,7 +19,7 @@ const GroupDiscussion = observer(({ messages, member, func, title }) => {
       <div className="account d-flex">
         <img
           alt="profile"
-          src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/social-media-profile-photos-3.jpg"
+          src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
         />
         <span>
           <h2>amueso</h2>
@@ -51,11 +51,15 @@ const GroupDiscussion = observer(({ messages, member, func, title }) => {
           <div key={i} className="comment d-flex mt-3">
             <img
               alt="profile"
-              src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/social-media-profile-photos-3.jpg"
+              src={
+                x.imgsrc
+                  ? x.imgsrc
+                  : "https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+              }
             />
             <span>
               <h3>
-                {x.sender} <span>4hr ago</span>
+                {x.name ? x.name : x.sender} <span>4hr ago</span>
               </h3>
               <p>{x.message}</p>
             </span>

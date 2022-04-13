@@ -3,11 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Landing from "./components/Landing";
 import MainScreen from "./components/MainScreen";
 import Navbar from "./components/Layout/Navbar";
-import SpacesGroups from "./components/SpacesGroups";
-import SinglePage from "./components/Story/SinglePage";
 import ProofRead from "./components/Story/ProofRead";
 import Group from "./components/Group/Group";
-import axios from "axios";
 import { observer } from "mobx-react";
 
 import "./App.css";
@@ -30,7 +27,7 @@ const App = observer(() => {
 
           <Route exact path="/mainscreen" component={() => <MainScreen />} />
 
-          <Route exact path="/spaces" component={() => <SpacesGroups />} />
+          {/* <Route exact path="/spaces" component={() => <SpacesGroups />} /> */}
           {/* <Route exact path="/story/single" component={() => <SinglePage />} /> */}
 
           <Route

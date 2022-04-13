@@ -21,10 +21,14 @@ const GroupMembers = ({ members }) => {
           <div key={i} className="account d-flex">
             <img
               alt="profile"
-              src="https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/social-media-profile-photos-3.jpg"
+              src={
+                x.imgsrc
+                  ? x.imgsrc
+                  : "https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+              }
             />
             <span>
-              <h2>{x}</h2>
+              <h2>{x.name ? x.name : x}</h2>
               <p>Group Member</p>
             </span>
           </div>

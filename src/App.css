@@ -66,9 +66,9 @@ div.main,
 
 .btn-green {
   padding: 10px 25px;
-  color: #17d09e;
   border: 3px solid #17d09e;
-  border-radius: 10px;
+  border-radius: 5px;
+  color: #17d09e;
 }
 
 div.absolute {
@@ -280,13 +280,13 @@ button.btn-purple:hover {
   background-color: #222248;
 }
 
-button.btn-green {
+.btn-green {
   background-color: #38bb8f;
   border: 1px solid #38bb8f;
   color: white;
 }
 
-button.btn-green:hover {
+.btn-green:hover {
   border: 1px solid #257c5f;
   background-color: #257c5f;
 }
@@ -450,6 +450,14 @@ button.btn-gray:hover {
   height: 30vh;
   position: relative;
   z-index: 1;
+}
+
+.group .cover img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  object-fit: cover;
+  margin: 0;
 }
 
 .group .cover button {
