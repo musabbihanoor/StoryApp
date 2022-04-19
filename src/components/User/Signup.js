@@ -39,7 +39,7 @@ const Signup = ({ setAuth }) => {
           />
           <label className="fw-bold my-2">Image Link</label>
           <input
-            placeholder="Enter your full name"
+            placeholder="Enter Link for your Picture"
             name="imgsrc"
             value={imgsrc}
             required

@@ -157,22 +157,32 @@ button.absolute-close:hover {
 .group .item {
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid lightgray;
+  background-color: #33336c;
+  display: flex;
+  width: 250px;
+  height: 150px;
+  align-items: center;
 }
 
-.group .item h5,
-.group .item h6 {
+.group .item a {
+  background-color: #fff;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 5px;
   color: #000;
 }
 
-.group .item.disabled h5,
-.group .item.disabled h6 {
-  color: gray;
+.group .item h5 {
+  color: #fff;
+  font-size: 1rem;
+  text-transform: uppercase;
 }
 
 .group .item img {
-  margin-left: 200px;
-  width: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  margin-right: 10px;
 }
 
 .hosting img {

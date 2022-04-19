@@ -18,13 +18,14 @@ const WriteBook = ({ close }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const addChapter = () => {
+  const addChapter = (e) => {
+    e.preventDefault();
     BookStore.addChapter({ title: title, content: content });
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
     if (add) {
-      addChapter();
+      addChapter(e);
     } else {
       BookStore.createBook(formData);
     }
@@ -44,7 +45,7 @@ const WriteBook = ({ close }) => {
           <i className="fa fa-times"></i>
         </button>
         <h1>Write a book</h1>
-        <form onSubmit={() => (add ? addChapter() : onSubmit())}>
+        <form onSubmit={(e) => (add ? addChapter(e) : onSubmit(e))}>
           <div className="d-flex justify-content-between">
             <span>
               <label>title</label>
@@ -97,29 +98,27 @@ const WriteBook = ({ close }) => {
           <div className="story">
             <button
               className="add-chapter"
-              onClick={() => {
+              onClick={(e) => {
                 setFormData({ ...formData, content: "" });
                 if (!add) {
                   BookStore.createBook(formData);
                   setAdd(true);
                 } else {
-                  addChapter();
+                  addChapter(e);
                 }
               }}>
-              <i className="far fa-plus"></i> Add
+              <img
+                alt="add"
+                src={process.env.PUBLIC_URL + "/images/addchapter.png"}
+              />
             </button>
-            <textarea
-              name="content"
-              value={content}
-              onChange={onChange}
-              required
-            />
+            <textarea name="content" value={content} onChange={onChange} />
             <div className="d-flex justify-content-center">
               <Link
                 target="_blank"
                 className="btn btn-primary btn-green m-1"
                 to="/story/proofread"
-                onClick={() => onProofRead()}>
+                onClick={(e) => onProofRead(e)}>
                 Proof Read
               </Link>
               <button type="submit" className="btn btn-primary btn-purple m-1">

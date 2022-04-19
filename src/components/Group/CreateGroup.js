@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { GroupStore } from "../../store/group";
 
-const CreateGroup = ({ close }) => {
+const CreateGroup = ({ close, user }) => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("public");
   const [imgsrc, setImgsrc] = useState("");
+  const [description, setDescription] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    GroupStore.createGroup({ title: title, type: type, imgsrc: imgsrc });
+    GroupStore.createGroup(
+      { title: title, type: type, imgsrc: imgsrc, description: description },
+      user,
+    );
     close(false);
   };
 
@@ -48,7 +52,11 @@ const CreateGroup = ({ close }) => {
             />
           </span>
           <label>about group</label>
-          <textarea style={{ background: "#eee", height: 300 }} />
+          <textarea
+            style={{ background: "#eee", height: 300 }}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
           <button
             type="submit"
             className="btn btn-primary btn-purple align-self-center mt-3">

@@ -26,7 +26,7 @@ class Group {
     this.state.group = group;
   };
 
-  createGroup = async (formData) => {
+  createGroup = async (formData, user) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -35,10 +35,21 @@ class Group {
 
     axios
       .post(`${BASE_URL}/groups/creategroup`, formData, config)
-      .then(
-        (res) => (this.state.groups = [...this.state.groups, res.data.data]),
-      )
-      .catch((err) => (this.state = { ...this.state, err: err }));
+      .then((res) => {
+        this.state.groups = [
+          ...this.state.groups,
+          {
+            ...res.data.data,
+            members: [
+              { email: user.email, name: user.name, imgsrc: user.imgsrc },
+            ],
+          },
+        ];
+        this.joinGroup({ title: res.data.data.title, email: user.email });
+      })
+      .catch((err) => {
+        this.state = { ...this.state, err: err };
+      });
   };
 
   getGroups = async () => {

@@ -1,6 +1,7 @@
 import React from "react";
+import { observer } from "mobx-react";
 
-const GroupMembers = ({ members }) => {
+const GroupMembers = observer(({ members }) => {
   return (
     <div className="members">
       {/* <h1>Admin</h1> */}
@@ -35,6 +36,6 @@ const GroupMembers = ({ members }) => {
         ))}
     </div>
   );
-};
+});
 
 export default GroupMembers;

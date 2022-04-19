@@ -16,7 +16,6 @@ const Group = observer(({ history }) => {
     GroupStore.joinGroup({
       email: AuthStore.auth.user.email,
       title: GroupStore.state.group.title,
-      join: true,
     });
   };
 
@@ -24,9 +23,6 @@ const Group = observer(({ history }) => {
     if (!AuthStore.auth.isAuthenticated) {
       history.push("/");
     }
-
-    console.log(GroupStore.state.group.imgsrc);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [AuthStore.auth.isAuthenticated]);
 
@@ -40,25 +36,35 @@ const Group = observer(({ history }) => {
       <div className="info">
         <div className="d-flex justify-content-between">
           <h1>{GroupStore.state.group.title}</h1>
-          {GroupStore.state.group.members.find(
-            (x) => AuthStore.auth.user.email === x,
+          {!GroupStore.state.group.members.find(
+            (x) => AuthStore.auth.user.email === x.email,
           ) ? (
-            <button
-              className="btn-purple btn btn-primary"
-              onClick={() => setInvite(true)}>
-              Invite
-            </button>
-          ) : (
             <button
               className="btn-purple btn btn-primary"
               onClick={() => joinGroup()}>
               Join
             </button>
+          ) : (
+            <button
+              className="btn-purple btn btn-primary"
+              onClick={() => setInvite(true)}>
+              Invite
+            </button>
           )}
         </div>
         <span className="d-flex">
-          <p className="mx-2">{GroupStore.state.group.type} Group</p>
-          <p className="mx-2">{GroupStore.state.group.members.length} Member</p>
+          <img
+            alt="icon"
+            src={process.env.PUBLIC_URL + "/images/globe.png"}
+            style={{ background: "#33336C", height: 15, width: 15, padding: 3 }}
+          />
+          <p className="me-2">{GroupStore.state.group.type} Group</p>
+          <img
+            alt="icon"
+            src={process.env.PUBLIC_URL + "/images/person.png"}
+            style={{ background: "#33336C", height: 15, width: 15, padding: 3 }}
+          />
+          <p className="me-2">{GroupStore.state.group.members.length} Member</p>
         </span>
         <div className="nav">
           <button
@@ -78,7 +84,9 @@ const Group = observer(({ history }) => {
           </button>
         </div>
       </div>
-      {selected === 1 && <About />}
+      {selected === 1 && (
+        <About description={GroupStore.state.group.description} />
+      )}
       {selected === 2 && (
         <Discussion
           func={GroupStore.createMessage}
@@ -86,7 +94,7 @@ const Group = observer(({ history }) => {
           title={GroupStore.state.group.title}
           member={
             GroupStore.state.group.members.find(
-              (x) => AuthStore.auth.user.email === x,
+              (x) => AuthStore.auth.user.email === x.email,
             )
               ? AuthStore.auth.user.email
               : null
@@ -94,7 +102,9 @@ const Group = observer(({ history }) => {
         />
       )}
       {selected === 3 && <Members members={GroupStore.state.group.members} />}
-      {invite && <Invite close={setInvite} />}
+      {invite && (
+        <Invite close={setInvite} title={GroupStore.state.group.title} />
+      )}
     </div>
   );
 });

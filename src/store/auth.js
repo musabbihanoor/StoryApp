@@ -6,6 +6,7 @@ class Auth {
   auth = {
     isAuthenticated: false,
     user: {},
+    users: [],
     err: { login: null, signup: null },
   };
 
@@ -16,6 +17,7 @@ class Auth {
       login: action,
       logout: action,
       googleLogin: action,
+      getAllUsers: action,
     });
   }
 
@@ -78,7 +80,7 @@ class Auth {
       alert(googleData.error);
     } else {
       try {
-        const res = await fetch("http://18.191.249.121:4000/api/auth/google/", {
+        const res = await fetch("http://18.191.249.121:4000/auth/google/", {
           method: "POST",
           body: JSON.stringify({
             token: googleData.tokenId,
@@ -113,6 +115,13 @@ class Auth {
       user: {},
       err: { ...this.auth.err, signup: null, login: null },
     };
+  };
+
+  getAllUsers = () => {
+    axios
+      .get(`${BASE_URL}/user/allusers`)
+      .then((res) => (this.auth.users = res.data.data))
+      .catch((err) => (this.auth.err = err.response));
   };
 }
 

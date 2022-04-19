@@ -78,7 +78,7 @@ const Login = ({ setAuth }) => {
             onSuccess={AuthStore.googleLogin}
             onFailure={AuthStore.googleLogin}
             // cookiePolicy={'single_host_origin'}
-            redirectUri={"http://localhost:4000/auth/google/callback"}
+            redirectUri={"http://18.191.249.121:4000/auth/google/callback"}
           />
           <hr />
           <button className="fw-bold" type="button">

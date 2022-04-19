@@ -20,6 +20,7 @@ const MainScreen = observer(({ history }) => {
     }
     GroupStore.getGroups();
     BookStore.getBooks();
+    BookStore.getStories();
     BookStore.getGenres();
     BookStore.getBookmarkBooks(AuthStore.auth.user._id);
     genre !== "" && BookStore.getGenreBooks(genre);
@@ -101,31 +102,49 @@ const MainScreen = observer(({ history }) => {
           )}
         </div>
 
+        <h2 className="fw-bold my-5">Top Stories for you</h2>
+        <div className="book d-flex">
+          {BookStore.state.stories.length > 0 ? (
+            BookStore.state.stories.map((x) => (
+              <div className="item" key={x._id}>
+                <Link
+                  to="/story/proofread"
+                  onClick={() => BookStore.setBook(x)}>
+                  <img
+                    alt="book"
+                    src={
+                      x.imgsrc
+                        ? x.imgsrc
+                        : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+                    }
+                  />
+                  <h6 className="fw-bold mt-3">{x.title}</h6>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p>No books</p>
+          )}
+        </div>
+
         <h2 className="fw-bold my-5">Your bookmarks</h2>
         <div className="book d-flex">
           {BookStore.state.bookmarks.length > 0 ? (
-            BookStore.state.bookmarks.map((x) => (
-              <div className="item" key={x._id}>
-                {/* <Link
-                to={{
-                  pathname: "/story/single",
-                  state: {
-                    bookid: x._id,
-                    book: x,
-                  },
-                }}
-              > */}
-                <img
-                  alt="book"
-                  src={
-                    x.imgsrc
-                      ? x.imgsrc
-                      : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-                  }
-                />
-                <h6 className="fw-bold mt-3">{x}</h6>
-                {/* <h6 className='fw-bold mt-3'>{x.title}</h6> */}
-                {/* </Link> */}
+            BookStore.state.bookmarks.map((x, i) => (
+              <div className="item" key={i}>
+                <Link
+                  to="/story/proofread"
+                  onClick={() => BookStore.setBook(x)}>
+                  <img
+                    alt="book"
+                    src={
+                      x.imgsrc
+                        ? x.imgsrc
+                        : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+                    }
+                  />
+                  <h6 className="fw-bold mt-3">{x.title && x.title}</h6>
+                </Link>
               </div>
             ))
           ) : (
@@ -133,45 +152,68 @@ const MainScreen = observer(({ history }) => {
           )}
         </div>
 
-        <h2 className="fw-bold my-5">See what's happening around you</h2>
+        <h2 className="fw-bold my-5">Groups for you</h2>
         <div className="group d-flex">
           {GroupStore.state.groups.length > 0 &&
             GroupStore.state.groups.map((x, i) => (
-              <div>
+              <div key={i}>
                 {x.type === "private" &&
-                !x.members.find((x) => AuthStore.auth.user.email === x) ? (
-                  <div className="item me-3 mb-3 disabled">
+                !x.members.find((x) => AuthStore.auth.user.email === x) &&
+                !x.members.find(
+                  (x) => AuthStore.auth.user.email === x.email,
+                ) ? (
+                  <div></div>
+                ) : (
+                  <div className="item me-3 mb-3">
                     <img
-                      className="mb-5"
                       alt="group"
                       src={
-                        process.env.PUBLIC_URL + "/images/Mask_Group_5_pk.png"
+                        x.imgsrc
+                          ? x.imgsrc
+                          : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
                       }
                     />
-                    <h5 className="fw-bold">{x.title}</h5>
-                    <h6>{x.type}</h6>
-                  </div>
-                ) : (
-                  <Link
-                    key={i}
-                    to="/group"
-                    onClick={() => GroupStore.setGroup(x)}>
-                    <div className="item me-3 mb-3">
-                      <img
-                        className="mb-5"
-                        alt="group"
-                        src={
-                          process.env.PUBLIC_URL + "/images/Mask_Group_5_pk.png"
-                        }
-                      />
+                    <div>
                       <h5 className="fw-bold">{x.title}</h5>
-                      <h6>{x.type}</h6>
+                      <Link
+                        key={i}
+                        to="/group"
+                        onClick={() => GroupStore.setGroup(x)}>
+                        View
+                      </Link>
                     </div>
-                  </Link>
+                  </div>
                 )}
               </div>
             ))}
         </div>
+
+        <h2 className="fw-bold my-5">Private Groups</h2>
+        <div className="group d-flex">
+          {GroupStore.state.groups.length > 0 &&
+            GroupStore.state.groups.map((x, i) => (
+              <div key={i}>
+                {x.type === "private" &&
+                  !x.members.find((x) => AuthStore.auth.user.email === x) &&
+                  !x.members.find(
+                    (x) => AuthStore.auth.user.email === x.email,
+                  ) && (
+                    <div className="item me-3 mb-3 disabled">
+                      <img
+                        alt="group"
+                        src={
+                          x.imgsrc
+                            ? x.imgsrc
+                            : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+                        }
+                      />
+                      <h5 className="fw-bold">{x.title}</h5>
+                    </div>
+                  )}
+              </div>
+            ))}
+        </div>
+
         <h2 className="fw-bold my-5">Choose by genre</h2>
         {BookStore.state.genres.length > 0 ? (
           <>
@@ -184,26 +226,44 @@ const MainScreen = observer(({ history }) => {
               ))}
             </select>
             <div className="book d-flex">
-              {BookStore.state.genreBooks.length > 0 ? (
-                BookStore.state.genreBooks.map((x) => (
+              {BookStore.state.genreBooks.books &&
+                BookStore.state.genreBooks.books.map((x) => (
                   <Link
                     key={x._id}
-                    to={{
-                      pathname: "/story/single",
-                      state: {
-                        bookid: x._id,
-                        book: x,
-                      },
-                    }}>
+                    to="/story/proofread"
+                    onClick={() => BookStore.setBook(x)}>
                     <div className="item">
-                      <img src={x.imgsrc} alt="book" />
+                      <img
+                        src={
+                          x.imgsrc
+                            ? x.imgsrc
+                            : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+                        }
+                        alt="book"
+                      />
                       <h6 className="fw-bold mt-3">{x.title}</h6>
                     </div>
                   </Link>
-                ))
-              ) : (
-                <p>No books</p>
-              )}
+                ))}
+              {BookStore.state.genreBooks.stories &&
+                BookStore.state.genreBooks.stories.map((x) => (
+                  <Link
+                    key={x._id}
+                    to="/story/proofread"
+                    onClick={() => BookStore.setBook(x)}>
+                    <div className="item">
+                      <img
+                        src={
+                          x.imgsrc
+                            ? x.imgsrc
+                            : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+                        }
+                        alt="book"
+                      />
+                      <h6 className="fw-bold mt-3">{x.title}</h6>
+                    </div>
+                  </Link>
+                ))}
             </div>
           </>
         ) : (
@@ -212,7 +272,9 @@ const MainScreen = observer(({ history }) => {
       </div>
       {writeStory && <WriteStory close={setWriteStory} />}
       {writeBook && <WriteBook close={setWriteBook} />}
-      {createGroup && <CreateGroup close={setCreateGroup} />}
+      {createGroup && (
+        <CreateGroup close={setCreateGroup} user={AuthStore.auth.user} />
+      )}
     </Fragment>
   );
 });

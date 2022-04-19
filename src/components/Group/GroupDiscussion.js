@@ -22,14 +22,24 @@ const GroupDiscussion = observer(({ messages, member, func, title }) => {
           src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
         />
         <span>
-          <h2>amueso</h2>
+          <h2>{title}</h2>
           <p>Group Admin</p>
         </span>
       </div>
       <h1>5 best books you need to read</h1>
       <span className="d-flex">
-        <p className="mx-2">2 comments</p>
-        <p className="mx-2">250 share</p>
+        <img
+          alt="icon"
+          src={process.env.PUBLIC_URL + "/images/comment.png"}
+          style={{ height: 15, width: 15, borderRadius: 0 }}
+        />
+        <p className="me-2">{messages.length} comments</p>
+        <img
+          alt="icon"
+          src={process.env.PUBLIC_URL + "/images/share.png"}
+          style={{ height: 15, width: 15, borderRadius: 0 }}
+        />
+        <p className="me-2">250 share</p>
       </span>
       {member && (
         <form className="d-flex">
