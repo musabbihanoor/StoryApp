@@ -70,7 +70,6 @@ class Group {
       .post(`${BASE_URL}/groups/joingroup`, formData, config)
       .then((res) => (this.state.group = res.data.data))
       .catch((err) => {
-        console.log(err);
         this.state.err = err;
       });
   };

@@ -24,12 +24,12 @@ const WriteBook = ({ close }) => {
   };
 
   const onSubmit = (e) => {
+    close(true);
     if (add) {
       addChapter(e);
     } else {
       BookStore.createBook(formData);
     }
-    close(false);
   };
 
   const onProofRead = () => {

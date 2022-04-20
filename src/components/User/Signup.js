@@ -81,18 +81,12 @@ const Signup = ({ setAuth }) => {
             <label className="mx-3">or</label>
             <hr />
           </span>
-          {/* <button className='btn btn-outline-primary my-3'>
-            Continue with Google
-          </button> */}
-          {/* <button className='btn btn-outline-secondary my-3'>
-            Continue with Facebook
-          </button> */}
           <p className="text-center">
             By continuing, you agree to Amuesos Terms of Services and
             acknowledge you've read our Privacy Policy
           </p>
           <button className="fw-bold" onClick={() => setAuth("login")}>
-            Don't have an account? Sign In
+            Already have an account? Sign In
           </button>
         </form>
       </div>

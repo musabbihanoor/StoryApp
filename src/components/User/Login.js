@@ -62,16 +62,6 @@ const Login = ({ setAuth }) => {
             <label className="mx-3">or</label>
             <hr />
           </span>
-          {/* <button
-            className='btn btn-outline-primary my-3'
-            type='button'
-            onClick={(e) => {
-              e.preventDefault();
-              authenticate({}, "google", history);
-            }}
-          >
-            Continue with Google
-          </button> */}
           <GoogleLogin
             clientId="636528711514-k9249hu4mf349vagt2sf4vq8lo58k7gt.apps.googleusercontent.com"
             buttonText="Login"

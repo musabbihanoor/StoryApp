@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BookStore } from "../../store/book";
 import { AuthStore } from "../../store/auth";
 import { Book } from "@material-ui/icons";
 
 const ProofRead = () => {
-  useEffect(() => {
-    console.log(BookStore.state.book.book_id);
-  }, [BookStore.state.book]);
-
   const [show, setShow] = useState(true);
 
   const bookmark = () => {

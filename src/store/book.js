@@ -59,7 +59,6 @@ class Book {
       .get(`${BASE_URL}/custombook/filter/${genre}`)
       .then((res) => {
         this.state = { ...this.state, genreBooks: res.data.data };
-        console.log(res.data.data);
       })
       .catch(
         (err) => (this.state = { ...this.state, err: err, genreBooks: [] }),
@@ -70,7 +69,6 @@ class Book {
     axios
       .get(`${BASE_URL}/custombook/allbookmark/${id}`)
       .then((res) => {
-        console.log(res);
         this.state = { ...this.state, bookmarks: res.data.data };
       })
       .catch(
@@ -132,7 +130,12 @@ class Book {
 
     axios
       .post(`${BASE_URL}/custombook/addChapter`, formData, config)
-      .then((res) => (this.state = { ...this.state, book: res.data.data }))
+      .then(
+        (res) =>
+          (this.state.books = this.state.books.map((x) =>
+            x.book_id === res.data.data.book_id ? res.data.data : x,
+          )),
+      )
       .catch((err) => (this.state = { ...this.state, err: err }));
   };
 }
