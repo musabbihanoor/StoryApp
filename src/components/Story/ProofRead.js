@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { BookStore } from "../../store/book";
 import { AuthStore } from "../../store/auth";
-import { Book } from "@material-ui/icons";
 
 const ProofRead = () => {
   const [show, setShow] = useState(true);

@@ -69,6 +69,7 @@ class Book {
     axios
       .get(`${BASE_URL}/custombook/allbookmark/${id}`)
       .then((res) => {
+        console.log(res.data.data);
         this.state = { ...this.state, bookmarks: res.data.data };
       })
       .catch(
