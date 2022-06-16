@@ -7,6 +7,7 @@ import ProofRead from "./components/Story/ProofRead";
 import Group from "./components/Group/Group";
 import Menu from "./components/Layout/Menu";
 import Profile from "./components/User/Profile";
+import Cover from "./components/Story/Cover";
 import { observer } from "mobx-react";
 
 import "./App.css";
@@ -41,6 +42,7 @@ const App = observer(() => {
           <Route exact path="/group" component={() => <Group />} />
           <Route exact path="/menu" component={() => <Menu />} />
           <Route exact path="/profile" component={() => <Profile />} />
+          <Route exact path="/cover" component={() => <Cover />} />
         </div>
       </Router>
     </Fragment>

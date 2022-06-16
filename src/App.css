@@ -718,7 +718,7 @@ button.btn-gray:hover {
 
 .profile .user .right .about {
   box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 0.2);
-  border: 10px;
+  border-radius: 10px;
   padding: 10px;
   margin: 20px 0;
 }
@@ -787,4 +787,31 @@ button.btn-gray:hover {
   color: #000;
   padding: 3px 10px;
   border-radius: 5px;
+}
+
+.cover {
+  background-color: #33336c;
+  height: 100%;
+}
+
+.print {
+  height: 100vh;
+  padding: 30px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cover h1 {
+  font-size: 5rem;
+  width: 40%;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: -1px 1px 20px rgba(0, 0, 0, 0.7);
+}
+
+.cover img {
+  height: 80%;
+  border-radius: 10px;
 }
