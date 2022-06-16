@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthStore } from "../../store/auth";
 
 const Menu = () => {
   const [option, setOption] = useState("");
@@ -29,11 +31,13 @@ const Menu = () => {
             </div>
           </span>
           <center>
-            <button
+            <Link
+              to="/mainscreen"
+              onClick={() => option !== "" && AuthStore.setRole(option)}
               className="btn btn-purple btn-primary mt-3"
               style={{ width: 150 }}>
               Next
-            </button>
+            </Link>
           </center>
         </div>
       </div>

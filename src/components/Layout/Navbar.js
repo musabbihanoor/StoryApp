@@ -1,6 +1,7 @@
 import React from "react";
 import { AuthStore } from "../../store/auth";
 import { observer } from "mobx-react";
+import { Link } from "react-router-dom";
 
 const Navbar = observer(() => {
   return (
@@ -27,9 +28,11 @@ const Navbar = observer(() => {
             </a>{" "}
           </>
         )}
-        <button className="user">
-          <i className="fa fa-user-circle-o"></i>
-        </button>
+        <Link to="/profile">
+          <button className="user">
+            <i className="fa fa-user-circle-o"></i>
+          </button>
+        </Link>
         {AuthStore.auth.isAuthenticated && (
           <button onClick={AuthStore.logout} className="btn btn-warning mx-3">
             Logout

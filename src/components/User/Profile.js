@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthStore } from "../../store/auth";
 
 const Profile = () => {
   const [switched, setSwitched] = useState(false);
@@ -13,11 +14,8 @@ const Profile = () => {
           </button>
           <div className="user">
             <div className="left">
-              <img
-                alt="profile"
-                src="https://preview.redd.it/dqq7ej1f4u881.jpg?auto=webp&s=2c14875195b3741301566ba144631ba7507c6e0b"
-              />
-              <h1>John Doe</h1>
+              <img alt="profile" src={AuthStore.auth.user.imgsrc} />
+              <h1>{AuthStore.auth.user.name}</h1>
               <div className="switch">
                 <button
                   className={`${switched && "switched"}`}
@@ -28,7 +26,7 @@ const Profile = () => {
               </div>
             </div>
             <div className="right">
-              <h1>john doe</h1>
+              <h1>{AuthStore.auth.user.name}</h1>
               <div className="about">
                 <h2>about</h2>
                 <p>

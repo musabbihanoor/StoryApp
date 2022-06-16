@@ -7,6 +7,7 @@ class Auth {
     isAuthenticated: false,
     user: {},
     users: [],
+    role: "",
     err: { login: null, signup: null },
   };
 
@@ -18,6 +19,7 @@ class Auth {
       logout: action,
       googleLogin: action,
       getAllUsers: action,
+      setRole: action,
     });
   }
 
@@ -122,6 +124,10 @@ class Auth {
       .get(`${BASE_URL}/user/allusers`)
       .then((res) => (this.auth.users = res.data.data))
       .catch((err) => (this.auth.err = err.response));
+  };
+
+  setRole = (role) => {
+    this.auth.role = role;
   };
 }
 

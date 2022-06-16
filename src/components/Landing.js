@@ -10,7 +10,7 @@ const Landing = observer(({ authOption, setAuthOption }) => {
 
   useEffect(() => {
     if (AuthStore.auth.isAuthenticated) {
-      history.push("/mainscreen");
+      history.push("/menu");
     }
   }, [AuthStore.auth.isAuthenticated]);
 

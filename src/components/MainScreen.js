@@ -61,16 +61,21 @@ const MainScreen = observer(({ history }) => {
         <div className="d-flex align-items-center justify-content-between">
           <h2 className="fw-bold my-5">Top picks for you</h2>
           <span>
-            <button
-              className="btn btn-primary btn-purple"
-              onClick={() => setWriteStory(true)}>
-              Write a Story
-            </button>
-            <button
-              className="btn btn-primary btn-purple mx-3"
-              onClick={() => setWriteBook(true)}>
-              Write a Book
-            </button>
+            {AuthStore.auth.role === "writer" && (
+              <>
+                <button
+                  className="btn btn-primary btn-purple"
+                  onClick={() => setWriteStory(true)}>
+                  Write a Story
+                </button>
+                <button
+                  className="btn btn-primary btn-purple mx-3"
+                  onClick={() => setWriteBook(true)}>
+                  Write a Book
+                </button>
+              </>
+            )}
+
             <button
               className="btn btn-primary btn-purple"
               onClick={() => setCreateGroup(true)}>

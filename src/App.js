@@ -17,9 +17,9 @@ const App = observer(() => {
 
   return (
     <Fragment>
-      <Navbar />
       <Router>
         <div>
+          <Navbar />
           <Route
             exact
             path="/"
@@ -27,18 +27,14 @@ const App = observer(() => {
               <Landing authOption={authOption} setAuthOption={setAuthOption} />
             )}
           />
-
           <Route exact path="/mainscreen" component={() => <MainScreen />} />
-
           {/* <Route exact path="/spaces" component={() => <SpacesGroups />} /> */}
           {/* <Route exact path="/story/single" component={() => <SinglePage />} /> */}
-
           <Route
             exact
             path="/story/proofread"
             component={() => <ProofRead />}
           />
-
           <Route exact path="/group" component={() => <Group />} />
           <Route exact path="/menu" component={() => <Menu />} />
           <Route exact path="/profile" component={() => <Profile />} />
