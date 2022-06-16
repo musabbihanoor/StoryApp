@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:display=swap");
 
 body {
   font-family: "Poppins", sans-serif !important;
@@ -588,4 +588,203 @@ button.btn-gray:hover {
 .invite h2 {
   font-size: 1rem;
   margin: 0;
+}
+
+.menu .bg,
+.profile .bg {
+  position: absolute;
+  background-color: #33336c;
+  width: 100%;
+  height: 40vh;
+}
+
+.menu .option {
+  width: 800px;
+  margin: 100px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 50px -3px rgba(0, 0, 0, 0.1);
+}
+
+.menu span {
+  display: flex;
+  justify-content: center;
+}
+
+.menu img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0px 0px 50px -3px rgba(0, 0, 0, 0.1);
+}
+
+.menu img.selected {
+  border: 2px solid #17d09e;
+}
+
+.menu p {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #222248;
+}
+
+.menu hr {
+  border: 2px solid #33336c;
+  height: 350px;
+  background-color: #33336c;
+  color: #33336c;
+  opacity: 1;
+  border-radius: 50px;
+  margin: 0 50px;
+}
+
+.profile .content {
+  width: 80%;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 50px -3px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.profile .content button.back {
+  position: absolute;
+  color: #33336c;
+  font-size: 25px;
+  left: 20px;
+  top: 30px;
+}
+
+.profile .user {
+  display: flex;
+}
+
+.profile .user img {
+  height: 150px;
+  width: 150px;
+  border-radius: 100px;
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 50px -3px rgba(0, 0, 0, 0.1);
+}
+
+.profile .user .left h1 {
+  font-size: 1rem;
+  text-align: center;
+  margin: 20px 0;
+  color: #8d8d8d;
+  font-weight: 500;
+}
+
+.profile .user .left .switch {
+  padding: 5px 15px;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 0.3);
+}
+
+.profile .user .left .switch button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.1rem;
+  transition: all 0.2s ease-in;
+  color: #33336c;
+}
+
+.profile .user .left .switch button.switched {
+  right: 0;
+  left: auto;
+}
+
+.profile .user .left .switch p {
+  margin: 0;
+  text-align: center;
+  color: #000;
+}
+
+.profile .user .right {
+  margin-left: 100px;
+}
+
+.profile .user .right h1 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: #222248;
+}
+
+.profile .user .right .about {
+  box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 0.2);
+  border: 10px;
+  padding: 10px;
+  margin: 20px 0;
+}
+
+.profile .user .right p {
+  font-size: 1rem;
+  color: #8d8d8d;
+}
+
+.profile .user .right h2 {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  color: #000;
+}
+
+.profile .user .right .dob {
+  display: flex;
+}
+
+.profile .user .right .dob p {
+  box-shadow: 0px 0px 20px -3px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.profile .books h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.profile .books .list {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.profile .books .list img {
+  height: 200px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.profile .groups .item {
+  background-color: #33336c;
+  display: flex;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.profile .groups .item img {
+  width: 70px;
+  height: 70px;
+  border-radius: 100px;
+}
+
+.profile .groups h5 {
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.profile .groups a {
+  background-color: #fff;
+  font-size: 0.8rem;
+  color: #000;
+  padding: 3px 10px;
+  border-radius: 5px;
 }
