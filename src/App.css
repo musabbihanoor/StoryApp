@@ -330,6 +330,38 @@ button.btn-gray:hover {
   width: 48%;
 }
 
+.write-story form div.img {
+  display: flex;
+  align-items: center;
+  background-color: #eee;
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
+.write-story form div.img p {
+  width: 70%;
+  padding: 0 10px;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.write-story form div.img label {
+  background-color: #33336c;
+  color: #fff;
+  font-weight: 400;
+  text-transform: capitalize;
+  font-size: 1rem;
+  padding: 5px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.write-story form div.img input {
+  display: none;
+}
+
 .write-story input,
 .write-story label.file,
 .write-story select {

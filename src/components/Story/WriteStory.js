@@ -67,13 +67,22 @@ const WriteStory = ({ close }) => {
               </select>
             </span>
             <span>
-              <label>Image</label>
-              <input
-                name="imgsrc"
-                value={imgsrc}
-                onChange={onChange}
-                required
-              />
+              <div className="img">
+                <img
+                  alt="file"
+                  src={process.env.PUBLIC_URL + "/images/file.png"}
+                />
+                <p>{imgsrc.name ? imgsrc.name : "Select"}</p>
+                <label>
+                  Upload
+                  <input
+                    type="file"
+                    onChange={(e) =>
+                      setFormData({ ...formData, imgsrc: e.target.files[0] })
+                    }
+                  />
+                </label>
+              </div>
             </span>
           </div>
 
