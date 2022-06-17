@@ -36,6 +36,7 @@ const WriteBook = ({ close }) => {
     localStorage.setItem("title", title);
     localStorage.setItem("author", author);
     localStorage.setItem("content", content);
+    localStorage.setItem("img", imgsrc);
   };
 
   return (
@@ -117,7 +118,7 @@ const WriteBook = ({ close }) => {
               <Link
                 target="_blank"
                 className="btn btn-primary btn-green m-1"
-                to="/story/proofread"
+                to="/cover"
                 onClick={(e) => onProofRead(e)}>
                 Proof Read
               </Link>

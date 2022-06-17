@@ -11,14 +11,14 @@ const Read = observer(() => {
         className="print"
         style={{
           backgroundImage: `url(${
-            process.env.PUBLIC_URL + "/assets/images/bg-print.png"
+            process.env.PUBLIC_URL + "/images/bg-print.png"
           })`,
         }}>
         <div
           className="book"
           style={{
             backgroundImage: `url(${
-              process.env.PUBLIC_URL + "/assets/images/open-book.png"
+              process.env.PUBLIC_URL + "/images/open-book.png"
             })`,
           }}>
           {BookStore.state.book.booksrc && (
@@ -48,12 +48,17 @@ const Read = observer(() => {
             </div>
           )}
 
-          {console.log(BookStore.state.book.title)}
-
           {BookStore.state.book.content && (
             <div className="page">
               <div className="left">{BookStore.state.book.content}</div>
-              <div className="right">{BookStore.state.book.content}</div>
+              <div className="right"></div>
+            </div>
+          )}
+
+          {localStorage.content && (
+            <div className="page">
+              <div className="left">{localStorage.content}</div>
+              <div className="right"></div>
             </div>
           )}
 
@@ -62,7 +67,7 @@ const Read = observer(() => {
               <button className="fold" onClick={() => setPage(page + 2)}>
                 <img
                   alt="fold"
-                  src={process.env.PUBLIC_URL + "/assets/images/fold.png"}
+                  src={process.env.PUBLIC_URL + "/images/fold.png"}
                 />
               </button>
             )}
