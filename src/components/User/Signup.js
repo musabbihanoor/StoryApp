@@ -8,9 +8,11 @@ const Signup = ({ setAuth }) => {
     email: "",
     password: "",
     imgsrc: "",
+    dob: null,
+    description: "",
   });
 
-  const { name, email, password, imgsrc } = formData;
+  const { name, email, password, imgsrc, dob, description } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,6 +44,22 @@ const Signup = ({ setAuth }) => {
             placeholder="Enter Link for your Picture"
             name="imgsrc"
             value={imgsrc}
+            required
+            onChange={(e) => onChange(e)}
+          />
+          <label className="fw-bold my-2">Date of birth</label>
+          <input
+            type="date"
+            name="dob"
+            value={dob}
+            required
+            onChange={(e) => onChange(e)}
+          />
+          <label className="fw-bold my-2">Description</label>
+          <input
+            placeholder="Enter Link for your Picture"
+            name="description"
+            value={description}
             required
             onChange={(e) => onChange(e)}
           />

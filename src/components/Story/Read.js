@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory, withRouter } from "react-router-dom";
 import { BookStore } from "../../store/book";
 import { observer } from "mobx-react";
+import { AuthStore } from "../../store/auth";
 
 const Read = observer(() => {
+  const history = useHistory();
+  const [switched, setSwitched] = useState(false);
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    if (!AuthStore.auth.isAuthenticated) {
+      history.push("/");
+    }
+  }, [AuthStore.auth.isAuthenticated]);
 
   return (
     <div className="read">
@@ -77,4 +87,4 @@ const Read = observer(() => {
   );
 });
 
-export default Read;
+export default withRouter(Read);

@@ -11,6 +11,8 @@ class Book {
     genres: [],
     genreBooks: [],
     bookmarks: [],
+    userBook: [],
+    userStory: [],
   };
 
   constructor() {
@@ -26,6 +28,8 @@ class Book {
       createBook: action,
       createBookMark: action,
       getStories: action,
+      getUserBook: action,
+      getUserStory: action,
     });
   }
 
@@ -78,16 +82,21 @@ class Book {
   };
 
   createBook = async (formData) => {
-    const updatedData = { ...formData, genre: [formData.genre] };
-
+    const updatedData = await { ...formData, genre: [formData.genre] };
+    console.log(updatedData);
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
 
-    axios
-      .post(`${BASE_URL}/custombook/writenew`, updatedData, config)
+    await axios
+      // .post(`${BASE_URL}/custombook/writenew`, updatedData, config)
+      .post(
+        `http://localhost:4000/api/custombook/writenew`,
+        updatedData,
+        config,
+      )
       .then((res) => {
         formData.type === "book"
           ? (this.state = {
@@ -138,6 +147,32 @@ class Book {
           )),
       )
       .catch((err) => (this.state = { ...this.state, err: err }));
+  };
+
+  getUserBook = async (data) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    console.log(data);
+
+    axios
+      .get(`http://localhost:4000/api/custombook/getUserBooks`, data, config)
+      .then((res) => console.log(res));
+  };
+
+  getUserStory = async (data) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios
+      .get(`http://localhost:4000/api/custombook/getUserStories`, data, config)
+      .then((res) => console.log(res));
   };
 }
 export const BookStore = new Book();

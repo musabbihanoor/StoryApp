@@ -1,31 +1,47 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BookStore } from "../../store/book";
+import { AuthStore } from "../../store/auth";
 
 const WriteStory = ({ close }) => {
+  const getBase64 = (file, cb) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      cb(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
+  };
+
+  const [img, setImg] = useState(null);
+
   const [formData, setFormData] = useState({
     title: "",
-    author: "",
+    author: AuthStore.auth.user._id,
     genre: "",
     content: "",
     imgsrc: "",
     type: "story",
   });
 
-  const { title, author, content, imgsrc } = formData;
+  const { title, content } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    BookStore.createBook(formData);
+    await BookStore.createBook(formData);
     close(false);
+
+    console.log(formData);
   };
 
   const onProofRead = () => {
     localStorage.setItem("title", title);
-    localStorage.setItem("author", author);
+    localStorage.setItem("author", AuthStore.auth.user.name);
     localStorage.setItem("content", content);
   };
 
@@ -46,8 +62,8 @@ const WriteStory = ({ close }) => {
               <label>author name</label>
               <input
                 name="author"
-                value={author}
-                onChange={onChange}
+                value={AuthStore.auth.user.name}
+                readOnly
                 required
               />
             </span>
@@ -72,14 +88,17 @@ const WriteStory = ({ close }) => {
                   alt="file"
                   src={process.env.PUBLIC_URL + "/images/file.png"}
                 />
-                <p>{imgsrc.name ? imgsrc.name : "Select"}</p>
+                {/* <p>{imgsrc.name ? imgsrc.name : "Select"}</p> */}
                 <label>
                   Upload
                   <input
                     type="file"
-                    onChange={(e) =>
-                      setFormData({ ...formData, imgsrc: e.target.files[0] })
-                    }
+                    onChange={(e) => {
+                      getBase64(e.target.files[0], (result) => {
+                        console.log(result);
+                        setFormData({ ...formData, imgsrc: result });
+                      });
+                    }}
                   />
                 </label>
               </div>

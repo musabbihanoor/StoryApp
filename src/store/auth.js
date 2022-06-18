@@ -20,6 +20,7 @@ class Auth {
       googleLogin: action,
       getAllUsers: action,
       setRole: action,
+      editUser: action,
     });
   }
 
@@ -128,6 +129,28 @@ class Auth {
 
   setRole = (role) => {
     this.auth.role = role;
+  };
+
+  editUser = async (formData) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios
+      .post(`${BASE_URL}/user/editUser/`, formData, config)
+      .then((res) => {
+        this.auth = {
+          ...this.auth,
+          isAuthenticated: true,
+          user: res.data.data,
+          err: { ...this.auth.err, login: null, signup: null },
+        };
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 }
 

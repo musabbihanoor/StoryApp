@@ -45,6 +45,7 @@ class Group {
             ],
           },
         ];
+        this.state.group = res.data.data;
         this.joinGroup({ title: res.data.data.title, email: user.email });
       })
       .catch((err) => {
@@ -68,7 +69,12 @@ class Group {
 
     axios
       .post(`${BASE_URL}/groups/joingroup`, formData, config)
-      .then((res) => (this.state.group = res.data.data))
+      .then(
+        (res) =>
+          (this.state.groups = this.state.groups.map((x) =>
+            x._id === res.data.data._id ? res.data.data : x,
+          )),
+      )
       .catch((err) => {
         this.state.err = err;
       });

@@ -1,12 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BookStore } from "../../store/book";
+import { AuthStore } from "../../store/auth";
 
 const WriteBook = ({ close }) => {
+  const getBase64 = (file, cb) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      cb(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
+  };
+
   const [add, setAdd] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
-    author: "",
+    author: AuthStore.auth.user._id,
     genre: "",
     content: "",
     imgsrc: "",
@@ -35,7 +47,7 @@ const WriteBook = ({ close }) => {
 
   const onProofRead = () => {
     localStorage.setItem("title", title);
-    localStorage.setItem("author", author);
+    localStorage.setItem("author", AuthStore.auth.user._id);
     localStorage.setItem("content", content);
     localStorage.setItem("img", imgsrc);
   };
@@ -63,9 +75,8 @@ const WriteBook = ({ close }) => {
               <label>author name</label>
               <input
                 name="author"
-                value={author}
-                onChange={onChange}
-                readOnly={add}
+                value={AuthStore.auth.user.name}
+                readOnly
                 required
               />
             </span>
@@ -95,9 +106,12 @@ const WriteBook = ({ close }) => {
                   Upload
                   <input
                     type="file"
-                    onChange={(e) =>
-                      setFormData({ ...formData, imgsrc: e.target.files[0] })
-                    }
+                    onChange={(e) => {
+                      getBase64(e.target.files[0], (result) => {
+                        console.log(result);
+                        setFormData({ ...formData, imgsrc: result });
+                      });
+                    }}
                   />
                 </label>
               </div>

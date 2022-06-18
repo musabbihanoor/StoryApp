@@ -11,20 +11,33 @@ import { observer } from "mobx-react";
 const Group = observer(({ history }) => {
   const [selected, setSelected] = useState(1);
   const [invite, setInvite] = useState(false);
+  const [joined, setJoined] = useState(false);
 
   const joinGroup = () => {
     GroupStore.joinGroup({
       email: AuthStore.auth.user.email,
       title: GroupStore.state.group.title,
     });
+    setJoined(true);
   };
 
   useEffect(() => {
     if (!AuthStore.auth.isAuthenticated) {
       history.push("/");
     }
+
+    const data = GroupStore.state.group.members.find(
+      (x) => AuthStore.auth.user.email === x.email,
+    );
+
+    data && setJoined(true);
+
+    console.log(data);
+    console.log(AuthStore.auth.user.email);
+    GroupStore.state.group.members.map((x) => console.log(x.email));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [AuthStore.auth.isAuthenticated]);
+  }, [AuthStore.auth.isAuthenticated, GroupStore.state.group]);
 
   return (
     <div className="group">
@@ -36,9 +49,7 @@ const Group = observer(({ history }) => {
       <div className="info">
         <div className="d-flex justify-content-between">
           <h1>{GroupStore.state.group.title}</h1>
-          {!GroupStore.state.group.members.find(
-            (x) => AuthStore.auth.user.email === x.email,
-          ) ? (
+          {!joined ? (
             <button
               className="btn-purple btn btn-primary"
               onClick={() => joinGroup()}>
