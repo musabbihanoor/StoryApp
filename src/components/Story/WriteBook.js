@@ -184,7 +184,7 @@ const WriteBook = ({ close }) => {
               <Link
                 target="_blank"
                 className="btn btn-primary btn-green m-1"
-                to="/cover"
+                to="/story/proofread"
                 onClick={(e) => onProofRead(e)}>
                 Proof Read
               </Link>

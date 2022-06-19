@@ -45,12 +45,6 @@ const ProofRead = () => {
           <h1>{localStorage.title}</h1>
         )}
 
-        {BookStore.state.book.author ? (
-          <h3>written by {BookStore.state.book.author}</h3>
-        ) : (
-          <h3>written by {localStorage.author}</h3>
-        )}
-
         {BookStore.state.book.booksrc ? (
           BookStore.state.book.booksrc.map((x, i) => (
             <div key={i}>
