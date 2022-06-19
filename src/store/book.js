@@ -14,6 +14,7 @@ class Book {
     userBook: [],
     userStory: [],
     read: [],
+    oldBooks: [],
   };
 
   constructor() {
@@ -32,6 +33,7 @@ class Book {
       getUserStory: action,
       markRead: action,
       getRead: action,
+      getOldBooks: action,
     });
   }
 
@@ -43,6 +45,13 @@ class Book {
     axios
       .get(`${BASE_URL}/custombook/allcustombooks`)
       .then((res) => (this.state = { ...this.state, books: res.data.data }))
+      .catch((err) => (this.state = { ...this.state, err: err }));
+  };
+
+  getOldBooks = async () => {
+    axios
+      .get(`${BASE_URL}/books/allbooks`)
+      .then((res) => (this.state = { ...this.state, oldBooks: res.data.data }))
       .catch((err) => (this.state = { ...this.state, err: err }));
   };
 

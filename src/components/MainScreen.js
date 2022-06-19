@@ -22,6 +22,7 @@ const MainScreen = observer(({ history }) => {
     BookStore.getBooks();
     BookStore.getStories();
     BookStore.getGenres();
+    BookStore.getOldBooks();
     BookStore.getBookmarkBooks(AuthStore.auth.user._id);
     genre !== "" && BookStore.getGenreBooks(genre);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,6 +127,35 @@ const MainScreen = observer(({ history }) => {
                   />
                   <h6 className="fw-bold mt-3">{x.title}</h6>
                 </Link>
+              </div>
+            ))
+          ) : (
+            <p>No books</p>
+          )}
+        </div>
+
+        <h2 className="fw-bold my-5">Author's books</h2>
+        <div className="book d-flex">
+          {BookStore.state.oldBooks.length > 0 ? (
+            BookStore.state.oldBooks.map((x) => (
+              <div className="item" key={x._id}>
+                <a
+                  href={x.booksrc}
+                  target="_blank"
+                  onClick={() => {
+                    BookStore.setBook(x);
+                    BookStore.markRead(x.book_id, AuthStore.auth.user._id);
+                  }}>
+                  <img
+                    alt="book"
+                    src={
+                      x.imgsrc
+                        ? x.imgsrc
+                        : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+                    }
+                  />
+                  <h6 className="fw-bold mt-3">{x.title}</h6>
+                </a>
               </div>
             ))
           ) : (
