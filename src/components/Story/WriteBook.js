@@ -142,7 +142,12 @@ const WriteBook = ({ close }) => {
                   content: EditorState.createEmpty(),
                 });
                 if (!add) {
-                  BookStore.createBook(formData);
+                  BookStore.createBook({
+                    ...formData,
+                    content: draftToHtml(
+                      convertToRaw(content.getCurrentContent()),
+                    ),
+                  });
                   setAdd(true);
                 } else {
                   addChapter(e);

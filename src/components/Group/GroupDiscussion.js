@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
+import { AuthStore } from "../../store/auth";
+import { GroupStore } from "../../store/group";
 
 const GroupDiscussion = observer(({ messages, member, func, title }) => {
   const [text, setText] = useState("");
+  const [deleteMessage, setDeleteMessage] = useState("");
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -13,6 +16,20 @@ const GroupDiscussion = observer(({ messages, member, func, title }) => {
     });
     setText("");
   };
+
+  const updateGroup = () => {
+    GroupStore.updateGroup({
+      ...GroupStore.state.group,
+      forum: GroupStore.state.group.forum.filter(
+        (x) => x.message !== deleteMessage,
+      ),
+    });
+    setDeleteMessage("");
+  };
+
+  useEffect(() => {
+    deleteMessage && updateGroup();
+  }, [deleteMessage]);
 
   return (
     <div className="discussion">
@@ -67,12 +84,19 @@ const GroupDiscussion = observer(({ messages, member, func, title }) => {
                   : "https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
               }
             />
-            <span>
+            <span style={{ flex: 1 }}>
               <h3>
                 {x.name ? x.name : x.sender} <span>4hr ago</span>
               </h3>
               <p>{x.message}</p>
             </span>
+            {x.sender === AuthStore.auth.user.email && (
+              <button
+                style={{ color: "red" }}
+                onClick={() => setDeleteMessage(x.message)}>
+                <i className="fa fa-trash"></i>
+              </button>
+            )}
           </div>
         ))}
     </div>

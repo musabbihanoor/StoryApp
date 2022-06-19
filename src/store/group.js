@@ -19,6 +19,7 @@ class Group {
       joinGroup: action,
       getMessages: action,
       createMessage: action,
+      updateGroup: action,
     });
   }
 
@@ -98,6 +99,18 @@ class Group {
       .post(`${BASE_URL}/chats/send`, formData, config)
       .then((res) => (this.state.group.forum = res.data.message))
       .catch((err) => (this.state = { ...this.state, err: err }));
+  };
+
+  updateGroup = async (formData) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios.post(`${BASE_URL}/chats/editChats`, formData, config).then((res) => {
+      this.state.group = res.data.data;
+    });
   };
 }
 export const GroupStore = new Group();
