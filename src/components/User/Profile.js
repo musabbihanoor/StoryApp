@@ -74,7 +74,7 @@ const Profile = observer(() => {
                 </button>
                 <p>
                   switch to{" "}
-                  {AuthStore.auth.role === "writer" ? "writer" : "reader"}
+                  {AuthStore.auth.role === "writer" ? "reader" : "writer"}
                 </p>
               </div>
             </div>
