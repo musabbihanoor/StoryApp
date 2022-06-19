@@ -7,7 +7,7 @@ import { AuthStore } from "../../store/auth";
 const Read = observer(() => {
   const history = useHistory();
   const [switched, setSwitched] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     // if (!AuthStore.auth.isAuthenticated) {
@@ -35,23 +35,18 @@ const Read = observer(() => {
             <div className="page">
               {BookStore.state.book.booksrc.map((x, i) => (
                 <>
-                  {i % 2 === 0 && i === page - 1 && (
-                    <div className="left">
-                      <span>{x.chapter}</span>
-                      <br />
-                      {x.content}
-                    </div>
-                  )}
-                </>
-              ))}
-              {BookStore.state.book.booksrc.map((x, i) => (
-                <>
-                  {i % 2 === 1 && i === page && (
-                    <div className="right">
-                      <span>{x.chapter}</span>
-                      <br />
-                      {x.content}
-                    </div>
+                  {i === page && (
+                    <>
+                      <div
+                        className="left"
+                        dangerouslySetInnerHTML={{
+                          __html: x.content,
+                        }}></div>
+                      <div className="right">
+                        <span></span>
+                        <br />
+                      </div>{" "}
+                    </>
                   )}
                 </>
               ))}
@@ -60,21 +55,31 @@ const Read = observer(() => {
 
           {BookStore.state.book.content && (
             <div className="page">
-              <div className="left">{BookStore.state.book.content}</div>
+              <div
+                className="left"
+                dangerouslySetInnerHTML={{
+                  __html: BookStore.state.book.content,
+                }}></div>
               <div className="right"></div>
             </div>
           )}
 
-          {localStorage.content && (
-            <div className="page">
-              <div className="left">{localStorage.content}</div>
-              <div className="right"></div>
-            </div>
-          )}
+          {localStorage.content &&
+            !BookStore.state.book.booksrc &&
+            !BookStore.state.book.content && (
+              <div className="page">
+                <div
+                  className="left"
+                  dangerouslySetInnerHTML={{
+                    __html: localStorage.content,
+                  }}></div>
+                <div className="right"></div>
+              </div>
+            )}
 
           {BookStore.state.book.booksrc &&
             page < BookStore.state.book.booksrc.length - 1 && (
-              <button className="fold" onClick={() => setPage(page + 2)}>
+              <button className="fold" onClick={() => setPage(page + 1)}>
                 <img
                   alt="fold"
                   src={process.env.PUBLIC_URL + "/images/fold.png"}

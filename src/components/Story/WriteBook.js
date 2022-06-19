@@ -80,7 +80,7 @@ const WriteBook = ({ close }) => {
               <input
                 name="title"
                 value={title}
-                onChange={onChange}
+                onChange={(e) => onChange(e)}
                 readOnly={add}
                 required
               />

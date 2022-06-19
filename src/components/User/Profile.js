@@ -8,7 +8,6 @@ import { BookStore } from "../../store/book";
 
 const Profile = observer(() => {
   const history = useHistory();
-  const [switched, setSwitched] = useState(false);
   const [description, setDescription] = useState(
     AuthStore.auth.user.description ? AuthStore.auth.user.description : "",
   );

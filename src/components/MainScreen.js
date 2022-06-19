@@ -87,7 +87,12 @@ const MainScreen = observer(({ history }) => {
           {BookStore.state.books.length > 0 ? (
             BookStore.state.books.map((x) => (
               <div className="item" key={x._id}>
-                <Link to="/cover" onClick={() => BookStore.setBook(x)}>
+                <Link
+                  to="/cover"
+                  onClick={() => {
+                    BookStore.setBook(x);
+                    BookStore.markRead(x.book_id, AuthStore.auth.user._id);
+                  }}>
                   <img
                     alt="book"
                     src={
@@ -230,7 +235,10 @@ const MainScreen = observer(({ history }) => {
                   <Link
                     key={x._id}
                     to="/story/proofread"
-                    onClick={() => BookStore.setBook(x)}>
+                    onClick={() => {
+                      BookStore.setBook(x);
+                      BookStore.markRead(x.book_id, AuthStore.auth.user._id);
+                    }}>
                     <div className="item">
                       <img
                         src={
