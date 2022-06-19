@@ -4,15 +4,19 @@ import { GroupStore } from "../../store/group";
 const CreateGroup = ({ close, user }) => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("public");
-  const [imgsrc, setImgsrc] = useState("");
+  const [imgsrc, setImgsrc] = useState({});
   const [description, setDescription] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    GroupStore.createGroup(
-      { title: title, type: type, imgsrc: imgsrc, description: description },
-      user,
-    );
+
+    var formdata = new FormData();
+    formdata.append("title", title);
+    formdata.append("type", type);
+    formdata.append("picture", imgsrc);
+    formdata.append("description", description);
+
+    GroupStore.createGroup(formdata, user);
     close(false);
   };
 
@@ -44,12 +48,22 @@ const CreateGroup = ({ close, user }) => {
             </span>
           </div>
           <span>
-            <label>Image Link</label>
-            <input
-              value={imgsrc}
-              onChange={(e) => setImgsrc(e.target.value)}
-              required
-            />
+            <div className="img">
+              <img
+                alt="file"
+                src={process.env.PUBLIC_URL + "/images/file.png"}
+              />
+              <p>{imgsrc.name ? imgsrc.name : "Select"}</p>
+              <label>
+                Upload
+                <input
+                  type="file"
+                  onChange={(e) => {
+                    setImgsrc(e.target.files[0]);
+                  }}
+                />
+              </label>
+            </div>
           </span>
           <label>about group</label>
           <textarea

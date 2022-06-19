@@ -8,6 +8,7 @@ class Auth {
     user: {},
     users: [],
     role: "reader",
+    img: null,
     err: { login: null, signup: null },
   };
 
@@ -21,6 +22,7 @@ class Auth {
       getAllUsers: action,
       setRole: action,
       editUser: action,
+      getUserImage: action,
     });
   }
 
@@ -151,6 +153,11 @@ class Auth {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  getUserImage = async (email) => {
+    const data = await axios.get(`${BASE_URL}/user/getUserImage/${email}`);
+    return data.data.data;
   };
 }
 

@@ -16,7 +16,7 @@ const Menu = () => {
                 className={`${option === "reader" && "selected"}`}
                 onClick={() => setOption("reader")}
                 alt="reader"
-                src="https://basmo.app/wp-content/uploads/2021/08/how-to-become-a-better-reader.jpg"
+                src={process.env.PUBLIC_URL + "/images/reader.png"}
               />
             </div>
             <hr />
@@ -26,7 +26,7 @@ const Menu = () => {
                 className={`${option === "writer" && "selected"}`}
                 onClick={() => setOption("writer")}
                 alt="writer"
-                src="https://basmo.app/wp-content/uploads/2021/08/how-to-become-a-better-reader.jpg"
+                src={process.env.PUBLIC_URL + "/images/writer.png"}
               />
             </div>
           </span>

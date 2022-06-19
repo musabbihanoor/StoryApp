@@ -145,30 +145,15 @@ class Book {
       .catch((err) => (this.state = { ...this.state, err: err }));
   };
 
-  getUserBook = async (data) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    console.log(data);
-
+  getUserBook = async (id) => {
     axios
-      .get(`${BASE_URL}/custombook/getUserBooks`, data, config)
+      .get(`${BASE_URL}/custombook/getUserBooks/${id}`)
       .then((res) => console.log(res));
   };
 
   getUserStory = async (userId) => {
-    console.log(userId);
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
     axios
-      .get(`${BASE_URL}/custombook/getUserStories`, { userId: userId }, config)
+      .get(`${BASE_URL}/custombook/getUserStories/${userId}`)
       .then((res) => (this.state.userStory = res.data.data));
   };
 

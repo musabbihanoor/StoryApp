@@ -16,6 +16,7 @@ const Profile = observer(() => {
   );
   const [editDesc, setEditDesc] = useState(false);
   const [editDob, setEditDob] = useState(false);
+  const [showImg, setShowImg] = useState(null);
 
   const editingDesc = (e) => {
     e.preventDefault();
@@ -35,6 +36,11 @@ const Profile = observer(() => {
     });
   };
 
+  const fetchImg = async () => {
+    const data = await AuthStore.getUserImage(AuthStore.auth.user.email);
+    setShowImg(data);
+  };
+
   useEffect(() => {
     if (!AuthStore.auth.isAuthenticated) {
       history.push("/");
@@ -42,9 +48,10 @@ const Profile = observer(() => {
 
     BookStore.getBooks();
     GroupStore.getGroups();
-    // BookStore.getUserBook(AuthStore.auth.user._id);
+    BookStore.getUserBook(AuthStore.auth.user._id);
     BookStore.getUserStory(AuthStore.auth.user._id);
     BookStore.getRead(AuthStore.auth.user._id);
+    fetchImg();
   }, [AuthStore.auth.isAuthenticated]);
 
   return (
@@ -58,7 +65,39 @@ const Profile = observer(() => {
           </button>
           <div className="user">
             <div className="left">
-              <img alt="profile" src={AuthStore.auth.user.imgsrc} />
+              {" "}
+              {console.log(showImg)}
+              <img
+                alt="profile"
+                src={
+                  showImg
+                    ? `"data:image/png;base64, ${showImg}`
+                    : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+                }
+              />
+              <center>
+                <label className="btn btn-success">
+                  Upload{" "}
+                  <input
+                    type="file"
+                    className="d-none"
+                    onChange={(e) => {
+                      AuthStore.editUser({
+                        email: AuthStore.auth.user.email,
+                        picture: e.target.files[0],
+                      });
+
+                      var binaryData = [];
+                      binaryData.push(e.target.files[0]);
+                      setShowImg(
+                        window.URL.createObjectURL(
+                          new Blob(binaryData, { type: "application/zip" }),
+                        ),
+                      );
+                    }}
+                  />
+                </label>
+              </center>
               <h1>{AuthStore.auth.user.name}</h1>
               <div className="switch">
                 <button
