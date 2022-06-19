@@ -7,7 +7,7 @@ class Auth {
     isAuthenticated: false,
     user: {},
     users: [],
-    role: "",
+    role: "reader",
     err: { login: null, signup: null },
   };
 

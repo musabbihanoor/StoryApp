@@ -40,8 +40,12 @@ const Profile = observer(() => {
     if (!AuthStore.auth.isAuthenticated) {
       history.push("/");
     }
+
+    BookStore.getBooks();
     GroupStore.getGroups();
     BookStore.getUserBook({ userId: AuthStore.auth.user._id });
+    BookStore.getUserStory({ userId: AuthStore.auth.user._id });
+    BookStore.getRead(AuthStore.auth.user._id);
   }, [AuthStore.auth.isAuthenticated]);
 
   return (
@@ -49,7 +53,9 @@ const Profile = observer(() => {
       <div className="bg">
         <div className="content">
           <button className="back">
-            <i className="fa fa-arrow-left"></i>
+            <Link to="mainscreen">
+              <i className="fa fa-arrow-left"></i>
+            </Link>
           </button>
           <div className="user">
             <div className="left">
@@ -57,11 +63,20 @@ const Profile = observer(() => {
               <h1>{AuthStore.auth.user.name}</h1>
               <div className="switch">
                 <button
-                  className={`${switched && "switched"}`}
-                  onClick={() => setSwitched(!switched)}>
+                  className={`${
+                    AuthStore.auth.role === "writer" && "switched"
+                  }`}
+                  onClick={() =>
+                    AuthStore.auth.role === "writer"
+                      ? AuthStore.setRole("reader")
+                      : AuthStore.setRole("writer")
+                  }>
                   <i className="fa fa-circle"></i>
                 </button>
-                <p>switch to reader</p>
+                <p>
+                  switch to{" "}
+                  {AuthStore.auth.role === "writer" ? "writer" : "reader"}
+                </p>
               </div>
             </div>
             <div className="right">
@@ -126,34 +141,74 @@ const Profile = observer(() => {
             </div>
           </div>
 
-          <div className="books ">
-            <h1>My Books</h1>
-            <div className="list">
-              {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((x, i) => (
-                <img
-                  key={i}
-                  alt="cover"
-                  src="https://images-na.ssl-images-amazon.com/images/I/61ZKNw0xixL.jpg"
-                />
-              ))}
+          {AuthStore.auth.role === "reader" && (
+            <div className="books mt-3">
+              <h1>My Reads</h1>
+              <div className="list">
+                {BookStore.state.read.map((x, i) => (
+                  <>
+                    {BookStore.state.books
+                      .filter((y) => y.title === x)
+                      .map((x) => (
+                        <Link to="/cover" onClick={() => BookStore.setBook(x)}>
+                          <img
+                            key={i}
+                            alt="cover"
+                            src={
+                              x.imgsrc
+                                ? x.imgsrc
+                                : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+                            }
+                          />
+                        </Link>
+                      ))}
+                  </>
+                ))}
+              </div>
+              {BookStore.state.read.length === 0 && (
+                <p>No reads for this user</p>
+              )}
             </div>
-          </div>
+          )}
 
-          <div className="books">
-            <h1>My Stories</h1>
-            <div className="list">
-              {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((x, i) => (
-                <img
-                  key={i}
-                  alt="cover"
-                  src="https://images-na.ssl-images-amazon.com/images/I/61ZKNw0xixL.jpg"
-                />
-              ))}
-            </div>
-          </div>
+          {AuthStore.auth.role === "writer" && (
+            <>
+              <div className="books mt-3">
+                <h1>My Books</h1>
+                <div className="list">
+                  {BookStore.state.userBook.map((x, i) => (
+                    <img
+                      key={i}
+                      alt="cover"
+                      src="https://images-na.ssl-images-amazon.com/images/I/61ZKNw0xixL.jpg"
+                    />
+                  ))}
+                </div>
+                {BookStore.state.userBook.length === 0 && (
+                  <p>No books for this user</p>
+                )}
+              </div>
+
+              <div className="books">
+                <h1>My Stories</h1>
+                <div className="list">
+                  {BookStore.state.userStory.map((x, i) => (
+                    <img
+                      key={i}
+                      alt="cover"
+                      src="https://images-na.ssl-images-amazon.com/images/I/61ZKNw0xixL.jpg"
+                    />
+                  ))}
+                </div>
+                {BookStore.state.userStory.length === 0 && (
+                  <p>No stories for this user</p>
+                )}
+              </div>
+            </>
+          )}
 
           <div className="books groups">
-            <h1>Groups for you</h1>
+            <h1 className="my-3">Groups for you</h1>
             <div className="list">
               {GroupStore.state.groups.length > 0 &&
                 GroupStore.state.groups.map((x, i) => (

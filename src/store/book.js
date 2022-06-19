@@ -13,6 +13,7 @@ class Book {
     bookmarks: [],
     userBook: [],
     userStory: [],
+    read: [],
   };
 
   constructor() {
@@ -30,6 +31,8 @@ class Book {
       getStories: action,
       getUserBook: action,
       getUserStory: action,
+      markRead: action,
+      getRead: action,
     });
   }
 
@@ -155,11 +158,12 @@ class Book {
     console.log(data);
 
     axios
-      .get(`http://localhost:4000/api/custombook/getUserBooks`, data, config)
+      .get(`${BASE_URL}/custombook/getUserBooks`, data, config)
       .then((res) => console.log(res));
   };
 
   getUserStory = async (data) => {
+    console.log(data);
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -167,8 +171,22 @@ class Book {
     };
 
     axios
-      .get(`http://localhost:4000/api/custombook/getUserStories`, data, config)
+      .get(`${BASE_URL}/custombook/getUserStories`, data, config)
       .then((res) => console.log(res));
+  };
+
+  markRead = async (book_id, user_id) => {
+    axios
+      .get(`${BASE_URL}/custombook/read/${user_id}/${book_id}`)
+      .then((res) => (this.state.read = res.data.data.read))
+      .catch((err) => console.log(err));
+  };
+
+  getRead = async (user_id) => {
+    axios
+      .get(`${BASE_URL}/custombook/allread/${user_id}`)
+      .then((res) => (this.state.read = res.data.data))
+      .catch((err) => console.log(err));
   };
 }
 export const BookStore = new Book();
