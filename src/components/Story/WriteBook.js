@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BookStore } from "../../store/book";
 import { AuthStore } from "../../store/auth";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState } from "draft-js";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import draftToHtml from "draftjs-to-html";
+import { convertToRaw } from "draft-js";
 
 const WriteBook = ({ close }) => {
   const getBase64 = (file, cb) => {
@@ -20,7 +25,7 @@ const WriteBook = ({ close }) => {
     title: "",
     author: AuthStore.auth.user._id,
     genre: "",
-    content: "",
+    content: EditorState.createEmpty(),
     imgsrc: "",
     type: "book",
   });
@@ -30,25 +35,34 @@ const WriteBook = ({ close }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const addChapter = (e) => {
+  const addChapter = async (e) => {
     e.preventDefault();
-    BookStore.addChapter({ title: title, content: content });
+    await BookStore.addChapter({
+      title: title,
+      content: draftToHtml(convertToRaw(content.getCurrentContent())),
+    });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     close(true);
     if (add) {
       addChapter(e);
     } else {
-      BookStore.createBook(formData);
+      await BookStore.createBook({
+        ...formData,
+        content: draftToHtml(convertToRaw(content.getCurrentContent())),
+      });
     }
   };
 
   const onProofRead = () => {
     localStorage.setItem("title", title);
     localStorage.setItem("author", AuthStore.auth.user._id);
-    localStorage.setItem("content", content);
+    localStorage.setItem(
+      "content",
+      draftToHtml(convertToRaw(content.getCurrentContent())),
+    );
     localStorage.setItem("img", imgsrc);
   };
 
@@ -123,7 +137,10 @@ const WriteBook = ({ close }) => {
             <button
               className="add-chapter"
               onClick={(e) => {
-                setFormData({ ...formData, content: "" });
+                setFormData({
+                  ...formData,
+                  content: EditorState.createEmpty(),
+                });
                 if (!add) {
                   BookStore.createBook(formData);
                   setAdd(true);
@@ -136,7 +153,17 @@ const WriteBook = ({ close }) => {
                 src={process.env.PUBLIC_URL + "/images/addchapter.png"}
               />
             </button>
-            <textarea name="content" value={content} onChange={onChange} />
+            {/* <textarea name="content" value={content} onChange={onChange} /> */}
+
+            <Editor
+              onEditorStateChange={(e) =>
+                setFormData({
+                  ...formData,
+                  content: e,
+                })
+              }
+            />
+
             <div className="d-flex justify-content-center">
               <Link
                 target="_blank"

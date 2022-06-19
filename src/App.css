@@ -91,7 +91,7 @@ img.avatar {
 }
 
 div.absolute .absolute-content {
-  width: 50%;
+  width: 700px;
   height: 100%;
   max-height: 80vh;
   overflow-y: auto;
@@ -405,10 +405,17 @@ button.btn-gray:hover {
 
 .write-story .story {
   background-color: #eeeeee;
-  height: 280px;
+  height: 100%;
   border-radius: 20px;
   padding: 20px;
   position: relative;
+}
+
+.write-story .story .rdw-editor-main span {
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  display: initial;
 }
 
 .write-story button.add-chapter {

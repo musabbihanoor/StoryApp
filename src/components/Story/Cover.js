@@ -9,9 +9,9 @@ const Cover = observer(() => {
   const [switched, setSwitched] = useState(false);
 
   useEffect(() => {
-    if (!AuthStore.auth.isAuthenticated) {
-      history.push("/");
-    }
+    // if (!AuthStore.auth.isAuthenticated) {
+    //   history.push("/");
+    // }
   }, [AuthStore.auth.isAuthenticated]);
   return (
     <div className="cover">

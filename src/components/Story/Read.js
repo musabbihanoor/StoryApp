@@ -10,9 +10,9 @@ const Read = observer(() => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    if (!AuthStore.auth.isAuthenticated) {
-      history.push("/");
-    }
+    // if (!AuthStore.auth.isAuthenticated) {
+    //   history.push("/");
+    // }
   }, [AuthStore.auth.isAuthenticated]);
 
   return (

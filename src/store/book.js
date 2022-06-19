@@ -92,11 +92,7 @@ class Book {
 
     await axios
       // .post(`${BASE_URL}/custombook/writenew`, updatedData, config)
-      .post(
-        `http://localhost:4000/api/custombook/writenew`,
-        updatedData,
-        config,
-      )
+      .post(`${BASE_URL}/custombook/writenew`, updatedData, config)
       .then((res) => {
         formData.type === "book"
           ? (this.state = {

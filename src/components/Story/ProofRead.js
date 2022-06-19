@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { BookStore } from "../../store/book";
 import { AuthStore } from "../../store/auth";
+import draftToHtml from "draftjs-to-html";
+import { convertToRaw } from "draft-js";
 
 const ProofRead = () => {
   const [show, setShow] = useState(true);
@@ -59,7 +61,7 @@ const ProofRead = () => {
         ) : BookStore.state.book.content ? (
           <p>{BookStore.state.book.content}</p>
         ) : (
-          <p>{localStorage.content}</p>
+          <p dangerouslySetInnerHTML={{ __html: localStorage.content }}></p>
         )}
       </div>
     </div>

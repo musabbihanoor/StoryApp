@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BookStore } from "../../store/book";
 import { AuthStore } from "../../store/auth";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState } from "draft-js";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import draftToHtml from "draftjs-to-html";
+import { convertToRaw } from "draft-js";
 
 const WriteStory = ({ close }) => {
   const getBase64 = (file, cb) => {
@@ -15,13 +20,11 @@ const WriteStory = ({ close }) => {
     };
   };
 
-  const [img, setImg] = useState(null);
-
   const [formData, setFormData] = useState({
     title: "",
     author: AuthStore.auth.user._id,
     genre: "",
-    content: "",
+    content: EditorState.createEmpty(),
     imgsrc: "",
     type: "story",
   });
@@ -33,16 +36,22 @@ const WriteStory = ({ close }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await BookStore.createBook(formData);
-    close(false);
 
-    console.log(formData);
+    await BookStore.createBook({
+      ...formData,
+      content: draftToHtml(convertToRaw(content.getCurrentContent())),
+    });
+    close(false);
   };
 
   const onProofRead = () => {
+    console.log(content);
     localStorage.setItem("title", title);
     localStorage.setItem("author", AuthStore.auth.user.name);
-    localStorage.setItem("content", content);
+    localStorage.setItem(
+      "content",
+      draftToHtml(convertToRaw(content.getCurrentContent())),
+    );
   };
 
   return (
@@ -107,12 +116,43 @@ const WriteStory = ({ close }) => {
 
           <label>story</label>
           <div className="story">
-            <textarea
+            {/* <textarea
               name="content"
               value={content}
               onChange={onChange}
               required
+            /> */}
+            {/* <RichTextEditor
+              toolbarConfig={toolbarConfig}
+              value={content}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  content: e.target.value.toString("html"),
+                })
+              }
+            /> */}
+
+            <Editor
+              onEditorStateChange={(e) =>
+                setFormData({
+                  ...formData,
+                  content: e,
+                })
+              }
+              toolbar={{
+                inline: { inDropdown: true },
+                list: { inDropdown: true },
+                textAlign: { inDropdown: true },
+                link: { inDropdown: true },
+                history: { inDropdown: true },
+                // image: {
+                //   uploadCallback: uploadImageCallBack,
+                //   alt: { present: true, mandatory: true },
+                // },
+              }}
             />
+
             <div className="d-flex justify-content-center">
               <Link
                 target="_blank"
