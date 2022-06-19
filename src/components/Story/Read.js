@@ -8,7 +8,7 @@ const Read = observer(() => {
   const history = useHistory();
   const [switched, setSwitched] = useState(false);
   const [page, setPage] = useState(0);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   const bookmark = () => {
     BookStore.createBookMark(
