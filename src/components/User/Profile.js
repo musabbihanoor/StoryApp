@@ -226,7 +226,11 @@ const Profile = observer(() => {
                         />
                         <div>
                           <h5 className="fw-bold">{x.title}</h5>
-                          <Link>View</Link>
+                          <Link
+                            to="/group"
+                            onClick={() => GroupStore.setGroup(x)}>
+                            View
+                          </Link>
                         </div>
                       </div>
                     )}
