@@ -8,6 +8,15 @@ const Read = observer(() => {
   const history = useHistory();
   const [switched, setSwitched] = useState(false);
   const [page, setPage] = useState(0);
+  const [show, setShow] = useState(false);
+
+  const bookmark = () => {
+    BookStore.createBookMark(
+      AuthStore.auth.user._id,
+      BookStore.state.book.book_id,
+    );
+    setShow(false);
+  };
 
   useEffect(() => {
     // if (!AuthStore.auth.isAuthenticated) {
@@ -24,6 +33,23 @@ const Read = observer(() => {
             process.env.PUBLIC_URL + "/images/bg-print.png"
           })`,
         }}>
+        {BookStore.state.book.booksrc &&
+          show &&
+          !BookStore.state.bookmarks.find(
+            (x) => x.title === BookStore.state.book.title,
+          ) && (
+            <button
+              onClick={() => bookmark()}
+              style={{
+                position: "absolute",
+                top: 100,
+                right: 50,
+                fontFamily: "Poppins",
+              }}
+              className="btn btn-gray">
+              Add
+            </button>
+          )}
         <div
           className="book"
           style={{

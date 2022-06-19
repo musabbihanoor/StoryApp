@@ -42,8 +42,8 @@ const Profile = observer(() => {
 
     BookStore.getBooks();
     GroupStore.getGroups();
-    BookStore.getUserBook({ userId: AuthStore.auth.user._id });
-    BookStore.getUserStory({ userId: AuthStore.auth.user._id });
+    // BookStore.getUserBook(AuthStore.auth.user._id);
+    BookStore.getUserStory(AuthStore.auth.user._id);
     BookStore.getRead(AuthStore.auth.user._id);
   }, [AuthStore.auth.isAuthenticated]);
 

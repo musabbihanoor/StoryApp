@@ -26,7 +26,6 @@ class Book {
       createBook: action,
       addChapter: action,
       proofRead: action,
-      createBook: action,
       createBookMark: action,
       getStories: action,
       getUserBook: action,
@@ -85,8 +84,6 @@ class Book {
   };
 
   createBook = async (formData) => {
-    const updatedData = await { ...formData, genre: [formData.genre] };
-    console.log(updatedData);
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +92,7 @@ class Book {
 
     await axios
       // .post(`${BASE_URL}/custombook/writenew`, updatedData, config)
-      .post(`${BASE_URL}/custombook/writenew`, updatedData, config)
+      .post(`${BASE_URL}/custombook/writenew`, formData, config)
       .then((res) => {
         formData.type === "book"
           ? (this.state = {
@@ -162,8 +159,8 @@ class Book {
       .then((res) => console.log(res));
   };
 
-  getUserStory = async (data) => {
-    console.log(data);
+  getUserStory = async (userId) => {
+    console.log(userId);
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -171,8 +168,8 @@ class Book {
     };
 
     axios
-      .get(`${BASE_URL}/custombook/getUserStories`, data, config)
-      .then((res) => console.log(res));
+      .get(`${BASE_URL}/custombook/getUserStories`, { userId: userId }, config)
+      .then((res) => (this.state.userStory = res.data.data));
   };
 
   markRead = async (book_id, user_id) => {

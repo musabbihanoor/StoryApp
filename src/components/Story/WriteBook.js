@@ -26,11 +26,10 @@ const WriteBook = ({ close }) => {
     author: AuthStore.auth.user._id,
     genre: "",
     content: EditorState.createEmpty(),
-    imgsrc: "",
     type: "book",
   });
 
-  const { title, author, content, imgsrc } = formData;
+  const { title, author, content, picture, type, genre } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -49,10 +48,18 @@ const WriteBook = ({ close }) => {
     if (add) {
       addChapter(e);
     } else {
-      await BookStore.createBook({
-        ...formData,
-        content: draftToHtml(convertToRaw(content.getCurrentContent())),
-      });
+      var formdata = new FormData();
+      formdata.append("title", title);
+      formdata.append("author", author);
+      formdata.append(
+        "content",
+        draftToHtml(convertToRaw(content.getCurrentContent())),
+      );
+      formdata.append("genre", [genre]);
+      formdata.append("picture", picture);
+      formdata.append("type", type);
+
+      await BookStore.createBook(formdata);
     }
   };
 
@@ -63,7 +70,6 @@ const WriteBook = ({ close }) => {
       "content",
       draftToHtml(convertToRaw(content.getCurrentContent())),
     );
-    localStorage.setItem("img", imgsrc);
   };
 
   return (
@@ -115,16 +121,20 @@ const WriteBook = ({ close }) => {
                   alt="file"
                   src={process.env.PUBLIC_URL + "/images/file.png"}
                 />
-                <p>{imgsrc.name ? imgsrc.name : "Select"}</p>
+                {/* <p>{imgsrc.name ? imgsrc.name : "Select"}</p> */}
                 <label>
                   Upload
                   <input
                     type="file"
+                    // onChange={(e) => {
+                    //   getBase64(e.target.files[0], (result) => {
+                    //     console.log(result);
+                    //     setFormData({ ...formData, imgsrc: result });
+                    //   });
+                    // }}
                     onChange={(e) => {
-                      getBase64(e.target.files[0], (result) => {
-                        console.log(result);
-                        setFormData({ ...formData, imgsrc: result });
-                      });
+                      console.log(e.target.files[0]);
+                      setFormData({ ...formData, picture: e.target.files[0] });
                     }}
                   />
                 </label>

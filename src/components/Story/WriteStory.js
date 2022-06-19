@@ -25,11 +25,12 @@ const WriteStory = ({ close }) => {
     author: AuthStore.auth.user._id,
     genre: "",
     content: EditorState.createEmpty(),
-    imgsrc: "",
+    // imgsrc: null,
     type: "story",
+    picture: null,
   });
 
-  const { title, content } = formData;
+  const { title, content, picture, author, genre, type } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,10 +38,18 @@ const WriteStory = ({ close }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    await BookStore.createBook({
-      ...formData,
-      content: draftToHtml(convertToRaw(content.getCurrentContent())),
-    });
+    var formdata = new FormData();
+    formdata.append("title", title);
+    formdata.append("author", author);
+    formdata.append(
+      "content",
+      draftToHtml(convertToRaw(content.getCurrentContent())),
+    );
+    formdata.append("genre", [genre]);
+    formdata.append("picture", picture);
+    formdata.append("type", type);
+
+    await BookStore.createBook(formdata);
     close(false);
   };
 
@@ -102,11 +111,15 @@ const WriteStory = ({ close }) => {
                   Upload
                   <input
                     type="file"
+                    // onChange={(e) => {
+                    //   getBase64(e.target.files[0], (result) => {
+                    //     console.log(result);
+                    //     setFormData({ ...formData, imgsrc: result });
+                    //   });
+                    // }}
                     onChange={(e) => {
-                      getBase64(e.target.files[0], (result) => {
-                        console.log(result);
-                        setFormData({ ...formData, imgsrc: result });
-                      });
+                      console.log(e.target.files[0]);
+                      setFormData({ ...formData, picture: e.target.files[0] });
                     }}
                   />
                 </label>
