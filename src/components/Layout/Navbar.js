@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 const Navbar = observer(() => {
   return (
     <div className="navbar d-flex align-items-center">
-      <img src={process.env.PUBLIC_URL + "/images/amueso-v2.png"} />
+      <Link to="/mainscreen">
+        <img src={process.env.PUBLIC_URL + "/images/amueso-v2.png"} />
+      </Link>
       {AuthStore.auth.isAuthenticated && (
         <form className="form-inline d-flex">
           <div className="form-group mx-sm-3 mb-2">
