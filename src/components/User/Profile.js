@@ -188,17 +188,7 @@ const Profile = observer(() => {
                     {BookStore.state.books
                       .filter((y) => y.title === x)
                       .map((x) => (
-                        <Link to="/cover" onClick={() => BookStore.setBook(x)}>
-                          <img
-                            key={i}
-                            alt="cover"
-                            src={
-                              x.imgsrc
-                                ? x.imgsrc
-                                : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-                            }
-                          />
-                        </Link>
+                        <Book x={x} i={i} />
                       ))}
                   </>
                 ))}
@@ -215,11 +205,7 @@ const Profile = observer(() => {
                 <h1>My Books</h1>
                 <div className="list">
                   {BookStore.state.userBook.map((x, i) => (
-                    <img
-                      key={i}
-                      alt="cover"
-                      src="https://images-na.ssl-images-amazon.com/images/I/61ZKNw0xixL.jpg"
-                    />
+                    <Book x={x} i={i} />
                   ))}
                 </div>
                 {BookStore.state.userBook.length === 0 && (
@@ -231,11 +217,7 @@ const Profile = observer(() => {
                 <h1>My Stories</h1>
                 <div className="list">
                   {BookStore.state.userStory.map((x, i) => (
-                    <img
-                      key={i}
-                      alt="cover"
-                      src="https://images-na.ssl-images-amazon.com/images/I/61ZKNw0xixL.jpg"
-                    />
+                    <Story x={x} i={i} />
                   ))}
                 </div>
                 {BookStore.state.userStory.length === 0 && (
@@ -299,3 +281,49 @@ const Profile = observer(() => {
 });
 
 export default withRouter(Profile);
+
+const Book = ({ x, i }) => {
+  const [img, setImg] = useState(null);
+
+  useEffect(() => {
+    setImg(BookStore.getBookImg(x.book_id));
+  }, []);
+
+  return (
+    <Link to="/cover" onClick={() => BookStore.setBook(x)}>
+      <img
+        key={i}
+        alt="cover"
+        src={
+          typeof img === String
+            ? `data:image/png;base64,${img}`
+            : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+        }
+      />
+      <p>{x.title}</p>
+    </Link>
+  );
+};
+
+const Story = ({ x, i }) => {
+  const [img, setImg] = useState(null);
+
+  useEffect(() => {
+    setImg(BookStore.getStoryImg(x.story_id));
+  }, []);
+
+  return (
+    <Link to="/cover" onClick={() => BookStore.setBook(x)}>
+      <img
+        key={i}
+        alt="cover"
+        src={
+          typeof img === String
+            ? `data:image/png;base64,${img}`
+            : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+        }
+      />
+      <p>{x.title}</p>
+    </Link>
+  );
+};

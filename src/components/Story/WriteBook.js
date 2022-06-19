@@ -27,6 +27,7 @@ const WriteBook = ({ close }) => {
     genre: "",
     content: EditorState.createEmpty(),
     type: "book",
+    picture: {},
   });
 
   const { title, author, content, picture, type, genre } = formData;
@@ -121,7 +122,7 @@ const WriteBook = ({ close }) => {
                   alt="file"
                   src={process.env.PUBLIC_URL + "/images/file.png"}
                 />
-                {/* <p>{imgsrc.name ? imgsrc.name : "Select"}</p> */}
+                <p>{picture.name ? picture.name : "Select"}</p>
                 <label>
                   Upload
                   <input

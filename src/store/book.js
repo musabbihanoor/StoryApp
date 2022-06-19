@@ -34,6 +34,8 @@ class Book {
       markRead: action,
       getRead: action,
       getOldBooks: action,
+      getBookImg: action,
+      getStoryImg: action,
     });
   }
 
@@ -157,7 +159,7 @@ class Book {
   getUserBook = async (id) => {
     axios
       .get(`${BASE_URL}/custombook/getUserBooks/${id}`)
-      .then((res) => console.log(res));
+      .then((res) => (this.state.userBook = res.data.data));
   };
 
   getUserStory = async (userId) => {
@@ -178,6 +180,20 @@ class Book {
       .get(`${BASE_URL}/custombook/allread/${user_id}`)
       .then((res) => (this.state.read = res.data.data))
       .catch((err) => console.log(err));
+  };
+
+  getBookImg = async (book_id) => {
+    const data = await axios.get(
+      `${BASE_URL}/custombook/getBookImage/${book_id}`,
+    );
+    return data;
+  };
+
+  getStoryImg = async (story_id) => {
+    const data = await axios.get(
+      `${BASE_URL}/custombook/getStoryImage/${story_id}`,
+    );
+    return data;
   };
 }
 export const BookStore = new Book();

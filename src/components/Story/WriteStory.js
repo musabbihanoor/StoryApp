@@ -25,9 +25,8 @@ const WriteStory = ({ close }) => {
     author: AuthStore.auth.user._id,
     genre: "",
     content: EditorState.createEmpty(),
-    // imgsrc: null,
     type: "story",
-    picture: null,
+    picture: {},
   });
 
   const { title, content, picture, author, genre, type } = formData;
@@ -106,7 +105,7 @@ const WriteStory = ({ close }) => {
                   alt="file"
                   src={process.env.PUBLIC_URL + "/images/file.png"}
                 />
-                {/* <p>{imgsrc.name ? imgsrc.name : "Select"}</p> */}
+                <p>{picture.name ? picture.name : "Select"}</p>
                 <label>
                   Upload
                   <input

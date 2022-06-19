@@ -86,26 +86,7 @@ const MainScreen = observer(({ history }) => {
         </div>
         <div className="book d-flex">
           {BookStore.state.books.length > 0 ? (
-            BookStore.state.books.map((x) => (
-              <div className="item" key={x._id}>
-                <Link
-                  to="/cover"
-                  onClick={() => {
-                    BookStore.setBook(x);
-                    BookStore.markRead(x.book_id, AuthStore.auth.user._id);
-                  }}>
-                  <img
-                    alt="book"
-                    src={
-                      x.imgsrc
-                        ? x.imgsrc
-                        : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-                    }
-                  />
-                  <h6 className="fw-bold mt-3">{x.title}</h6>
-                </Link>
-              </div>
-            ))
+            BookStore.state.books.map((x) => <Book x={x} />)
           ) : (
             <p>No books</p>
           )}
@@ -114,21 +95,7 @@ const MainScreen = observer(({ history }) => {
         <h2 className="fw-bold my-5">Top Stories for you</h2>
         <div className="book d-flex">
           {BookStore.state.stories.length > 0 ? (
-            BookStore.state.stories.map((x) => (
-              <div className="item" key={x._id}>
-                <Link to="/cover" onClick={() => BookStore.setBook(x)}>
-                  <img
-                    alt="book"
-                    src={
-                      x.imgsrc
-                        ? x.imgsrc
-                        : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-                    }
-                  />
-                  <h6 className="fw-bold mt-3">{x.title}</h6>
-                </Link>
-              </div>
-            ))
+            BookStore.state.stories.map((x) => <Story x={x} />)
           ) : (
             <p>No books</p>
           )}
@@ -166,21 +133,7 @@ const MainScreen = observer(({ history }) => {
         <h2 className="fw-bold my-5">Your bookmarks</h2>
         <div className="book d-flex">
           {BookStore.state.bookmarks.length > 0 ? (
-            BookStore.state.bookmarks.map((x, i) => (
-              <div className="item" key={i}>
-                <Link to="/cover" onClick={() => BookStore.setBook(x)}>
-                  <img
-                    alt="book"
-                    src={
-                      x.imgsrc
-                        ? x.imgsrc
-                        : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-                    }
-                  />
-                  <h6 className="fw-bold mt-3">{x.title && x.title}</h6>
-                </Link>
-              </div>
-            ))
+            BookStore.state.bookmarks.map((x, i) => <Book x={x} />)
           ) : (
             <p>Loading...</p>
           )}
@@ -235,46 +188,9 @@ const MainScreen = observer(({ history }) => {
             </select>
             <div className="book d-flex">
               {BookStore.state.genreBooks.books &&
-                BookStore.state.genreBooks.books.map((x) => (
-                  <Link
-                    key={x._id}
-                    to="/story/proofread"
-                    onClick={() => {
-                      BookStore.setBook(x);
-                      BookStore.markRead(x.book_id, AuthStore.auth.user._id);
-                    }}>
-                    <div className="item">
-                      <img
-                        src={
-                          x.imgsrc
-                            ? x.imgsrc
-                            : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-                        }
-                        alt="book"
-                      />
-                      <h6 className="fw-bold mt-3">{x.title}</h6>
-                    </div>
-                  </Link>
-                ))}
+                BookStore.state.genreBooks.books.map((x) => <Book x={x} />)}
               {BookStore.state.genreBooks.stories &&
-                BookStore.state.genreBooks.stories.map((x) => (
-                  <Link
-                    key={x._id}
-                    to="/story/proofread"
-                    onClick={() => BookStore.setBook(x)}>
-                    <div className="item">
-                      <img
-                        src={
-                          x.imgsrc
-                            ? x.imgsrc
-                            : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-                        }
-                        alt="book"
-                      />
-                      <h6 className="fw-bold mt-3">{x.title}</h6>
-                    </div>
-                  </Link>
-                ))}
+                BookStore.state.genreBooks.stories.map((x) => <Story x={x} />)}
             </div>
           </>
         ) : (
@@ -291,3 +207,61 @@ const MainScreen = observer(({ history }) => {
 });
 
 export default withRouter(MainScreen);
+
+const Book = ({ x }) => {
+  const [img, setImg] = useState(null);
+
+  useEffect(() => {
+    setImg(BookStore.getBookImg(x.book_id));
+  }, []);
+
+  return (
+    <div className="item" key={x._id}>
+      <Link
+        to="/cover"
+        onClick={() => {
+          BookStore.setBook(x);
+          BookStore.markRead(x.book_id, AuthStore.auth.user._id);
+        }}>
+        <img
+          alt="book"
+          src={
+            typeof img === String
+              ? `data:image/png;base64,${img}`
+              : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+          }
+        />
+        <h6 className="fw-bold mt-3">{x.title}</h6>
+      </Link>
+    </div>
+  );
+};
+
+const Story = ({ x }) => {
+  const [img, setImg] = useState(null);
+
+  useEffect(() => {
+    setImg(BookStore.getStoryImg(x.story_id));
+  }, []);
+
+  return (
+    <div className="item" key={x._id}>
+      <Link
+        to="/cover"
+        onClick={() => {
+          BookStore.setBook(x);
+          BookStore.markRead(x.book_id, AuthStore.auth.user._id);
+        }}>
+        <img
+          alt="book"
+          src={
+            typeof img === String
+              ? `data:image/png;base64,${img}`
+              : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+          }
+        />
+        <h6 className="fw-bold mt-3">{x.title}</h6>
+      </Link>
+    </div>
+  );
+};
