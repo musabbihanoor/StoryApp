@@ -192,32 +192,6 @@ const MainScreen = observer(({ history }) => {
             ))}
         </div>
 
-        <h2 className="fw-bold my-5">Private Groups</h2>
-        <div className="group d-flex">
-          {GroupStore.state.groups.length > 0 &&
-            GroupStore.state.groups.map((x, i) => (
-              <div key={i}>
-                {x.type === "private" &&
-                  !x.members.find((x) => AuthStore.auth.user.email === x) &&
-                  !x.members.find(
-                    (x) => AuthStore.auth.user.email === x.email,
-                  ) && (
-                    <div className="item me-3 mb-3 disabled">
-                      <img
-                        alt="group"
-                        src={
-                          x.imgsrc
-                            ? x.imgsrc
-                            : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-                        }
-                      />
-                      <h5 className="fw-bold">{x.title}</h5>
-                    </div>
-                  )}
-              </div>
-            ))}
-        </div>
-
         <h2 className="fw-bold my-5">Choose by genre</h2>
         {BookStore.state.genres.length > 0 ? (
           <>
