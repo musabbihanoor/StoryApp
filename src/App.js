@@ -12,6 +12,7 @@ import Read from "./components/Story/Read";
 import { observer } from "mobx-react";
 
 import "./App.css";
+import { AuthStore } from "./store/auth";
 
 const App = observer(() => {
   const [authOption, setAuthOption] = useState("");
@@ -20,7 +21,7 @@ const App = observer(() => {
     <Fragment>
       <Router>
         <div>
-          <Navbar />
+          {AuthStore.auth.isAuthenticated && <Navbar />}
           <Route
             exact
             path="/"
