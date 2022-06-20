@@ -6,12 +6,11 @@ import { observer } from "mobx-react";
 
 const Cover = observer(() => {
   const history = useHistory();
-  const [switched, setSwitched] = useState(false);
 
   useEffect(() => {
-    // if (!AuthStore.auth.isAuthenticated) {
-    //   history.push("/");
-    // }
+    if (!AuthStore.auth.isAuthenticated) {
+      history.push("/");
+    }
   }, [AuthStore.auth.isAuthenticated]);
   return (
     <div className="cover">
@@ -34,6 +33,8 @@ const Cover = observer(() => {
               BookStore.state.book.imgsrc
                 ? BookStore.state.book.imgsrc
                 : localStorage.img
+                ? localStorage.img
+                : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
             }
           />
         </Link>

@@ -216,24 +216,26 @@ const Book = ({ x }) => {
   }, []);
 
   return (
-    <div className="item" key={x._id}>
-      <Link
-        to="/cover"
-        onClick={() => {
-          BookStore.setBook(x);
-          BookStore.markRead(x.book_id, AuthStore.auth.user._id);
-        }}>
-        <img
-          alt="book"
-          src={
-            typeof img === String
-              ? `data:image/png;base64,${img}`
-              : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-          }
-        />
-        <h6 className="fw-bold mt-3">{x.title}</h6>
-      </Link>
-    </div>
+    <Fragment>
+      <div className="item" key={x._id}>
+        <Link
+          to="/cover"
+          onClick={() => {
+            BookStore.setBook(x);
+            BookStore.markRead(x.book_id, AuthStore.auth.user._id);
+          }}>
+          <img
+            alt="book"
+            src={
+              typeof img === String
+                ? `data:image/png;base64,${img}`
+                : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+            }
+          />
+          <h6 className="fw-bold mt-3">{x.title}</h6>
+        </Link>
+      </div>
+    </Fragment>
   );
 };
 
@@ -245,23 +247,25 @@ const Story = ({ x }) => {
   }, []);
 
   return (
-    <div className="item" key={x._id}>
-      <Link
-        to="/cover"
-        onClick={() => {
-          BookStore.setBook(x);
-          BookStore.markRead(x.book_id, AuthStore.auth.user._id);
-        }}>
-        <img
-          alt="book"
-          src={
-            typeof img === String
-              ? `data:image/png;base64,${img}`
-              : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-          }
-        />
-        <h6 className="fw-bold mt-3">{x.title}</h6>
-      </Link>
-    </div>
+    <Fragment>
+      <div className="item" key={x._id}>
+        <Link
+          to="/cover"
+          onClick={() => {
+            BookStore.setBook(x);
+            BookStore.markRead(x.book_id, AuthStore.auth.user._id);
+          }}>
+          <img
+            alt="book"
+            src={
+              typeof img === String
+                ? `data:image/png;base64,${img}`
+                : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+            }
+          />
+          <h6 className="fw-bold mt-3">{x.title}</h6>
+        </Link>
+      </div>
+    </Fragment>
   );
 };

@@ -879,20 +879,32 @@ button.btn-gray:hover {
 .read .book {
   height: 90vh;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
-  width: 70%;
+  width: 30%;
   position: relative;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
 }
 
 .read .page {
   display: flex;
   justify-content: center;
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 100px 0;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+}
+
+.read .page::-webkit-scrollbar,
+.read .book::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
 }
 
 .read .left,
 .read .right {
-  width: 33%;
+  width: 70%;
   margin: 30px;
   font-family: "Poppins", sans-serif;
   color: #707070;

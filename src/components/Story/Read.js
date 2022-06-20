@@ -6,9 +6,9 @@ import { AuthStore } from "../../store/auth";
 
 const Read = observer(() => {
   const history = useHistory();
-  const [switched, setSwitched] = useState(false);
   const [page, setPage] = useState(0);
   const [show, setShow] = useState(true);
+  const [words, setWords] = useState("");
 
   const bookmark = () => {
     BookStore.createBookMark(
@@ -19,9 +19,9 @@ const Read = observer(() => {
   };
 
   useEffect(() => {
-    // if (!AuthStore.auth.isAuthenticated) {
-    //   history.push("/");
-    // }
+    if (!AuthStore.auth.isAuthenticated) {
+      history.push("/");
+    }
   }, [AuthStore.auth.isAuthenticated]);
 
   return (
@@ -53,28 +53,21 @@ const Read = observer(() => {
         <div
           className="book"
           style={{
+            // backgroundImage: `url(${
+            //   process.env.PUBLIC_URL + "/images/open-book.png"
+            // })`,
             backgroundImage: `url(${
-              process.env.PUBLIC_URL + "/images/open-book.png"
+              process.env.PUBLIC_URL + "/images/scroll.png"
             })`,
           }}>
           {BookStore.state.book.booksrc && (
             <div className="page">
               {BookStore.state.book.booksrc.map((x, i) => (
-                <>
-                  {i === page && (
-                    <>
-                      <div
-                        className="left"
-                        dangerouslySetInnerHTML={{
-                          __html: x.content,
-                        }}></div>
-                      <div className="right">
-                        <span></span>
-                        <br />
-                      </div>{" "}
-                    </>
-                  )}
-                </>
+                <div
+                  className="left"
+                  dangerouslySetInnerHTML={{
+                    __html: x.content,
+                  }}></div>
               ))}
             </div>
           )}
@@ -86,7 +79,6 @@ const Read = observer(() => {
                 dangerouslySetInnerHTML={{
                   __html: BookStore.state.book.content,
                 }}></div>
-              <div className="right"></div>
             </div>
           )}
 
@@ -99,11 +91,10 @@ const Read = observer(() => {
                   dangerouslySetInnerHTML={{
                     __html: localStorage.content,
                   }}></div>
-                <div className="right"></div>
               </div>
             )}
 
-          {BookStore.state.book.booksrc &&
+          {/* {BookStore.state.book.booksrc &&
             page < BookStore.state.book.booksrc.length - 1 && (
               <button className="fold" onClick={() => setPage(page + 1)}>
                 <img
@@ -111,7 +102,7 @@ const Read = observer(() => {
                   src={process.env.PUBLIC_URL + "/images/fold.png"}
                 />
               </button>
-            )}
+            )} */}
         </div>
       </div>
     </div>
