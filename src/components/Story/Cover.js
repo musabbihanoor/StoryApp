@@ -21,19 +21,13 @@ const Cover = observer(() => {
             process.env.PUBLIC_URL + "/images/bg-print.png"
           })`,
         }}>
-        <h1>
-          {BookStore.state.book.title
-            ? BookStore.state.book.title
-            : localStorage.title}
-        </h1>
+        <h1>{BookStore.state.book.title && BookStore.state.book.title}</h1>
         <Link to="/read">
           <img
             alt="cover"
             src={
-              BookStore.state.book.imgsrc
-                ? BookStore.state.book.imgsrc
-                : localStorage.img
-                ? localStorage.img
+              BookStore.state.book.picture
+                ? `data:image/png;base64,${BookStore.state.book.picture}`
                 : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
             }
           />

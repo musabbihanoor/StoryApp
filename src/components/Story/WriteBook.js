@@ -27,6 +27,7 @@ const WriteBook = ({ close }) => {
 
   const addChapter = async (e) => {
     e.preventDefault();
+    console.log("3");
     await BookStore.addChapter({
       title: title,
       content: draftToHtml(convertToRaw(content.getCurrentContent())),
@@ -37,20 +38,23 @@ const WriteBook = ({ close }) => {
     e.preventDefault();
     close(true);
     if (add) {
+      console.log("1");
       addChapter(e);
     } else {
+      console.log("2");
       var formdata = new FormData();
       formdata.append("title", title);
       formdata.append("author", author);
+      formdata.append("genre", [genre]);
+      formdata.append("picture", picture);
+      formdata.append("type", type);
       formdata.append(
         "content",
         draftToHtml(convertToRaw(content.getCurrentContent())),
       );
-      formdata.append("genre", [genre]);
-      formdata.append("picture", picture);
-      formdata.append("type", type);
 
       await BookStore.createBook(formdata);
+      setAdd(true);
     }
   };
 
@@ -66,7 +70,12 @@ const WriteBook = ({ close }) => {
   return (
     <div className="absolute">
       <div className="absolute-content write-story">
-        <button className="absolute-close" onClick={() => close(false)}>
+        <button
+          className="absolute-close"
+          onClick={() => {
+            setAdd(false);
+            close(false);
+          }}>
           <i className="fa fa-times"></i>
         </button>
         <h1>Write a book</h1>
@@ -119,14 +128,7 @@ const WriteBook = ({ close }) => {
                       Upload
                       <input
                         type="file"
-                        // onChange={(e) => {
-                        //   getBase64(e.target.files[0], (result) => {
-                        //     console.log(result);
-                        //     setFormData({ ...formData, imgsrc: result });
-                        //   });
-                        // }}
                         onChange={(e) => {
-                          console.log(e.target.files[0]);
                           setFormData({
                             ...formData,
                             picture: e.target.files[0],
@@ -138,6 +140,7 @@ const WriteBook = ({ close }) => {
                 </span>
               </div>
               <button
+                type="button"
                 className="btn btn-success mt-3"
                 onClick={() => setShowDetails(false)}>
                 Next
@@ -148,23 +151,25 @@ const WriteBook = ({ close }) => {
               <label>story</label>
               <div className="story">
                 <button
+                  type="button"
                   className="add-chapter"
                   onClick={(e) => {
+                    // if (add) {
+                    //   addChapter(e);
+                    // } else {
+                    //   BookStore.createBook({
+                    //     ...formData,
+                    //     content: draftToHtml(
+                    //       convertToRaw(content.getCurrentContent()),
+                    //     ),
+                    //   });
+                    //   setAdd(true);
+                    // }
+                    onSubmit(e);
                     setFormData({
                       ...formData,
                       content: EditorState.createEmpty(),
                     });
-                    if (!add) {
-                      BookStore.createBook({
-                        ...formData,
-                        content: draftToHtml(
-                          convertToRaw(content.getCurrentContent()),
-                        ),
-                      });
-                      setAdd(true);
-                    } else {
-                      addChapter(e);
-                    }
                   }}>
                   <img
                     alt="add"
@@ -198,6 +203,7 @@ const WriteBook = ({ close }) => {
                 </div>
               </div>
               <button
+                type="button"
                 className="btn btn-success mt-3"
                 onClick={() => setShowDetails(true)}>
                 Go Back

@@ -15,6 +15,7 @@ const CreateGroup = ({ close, user }) => {
     formdata.append("type", type);
     formdata.append("picture", imgsrc);
     formdata.append("description", description);
+    formdata.append("imgsrc", "...");
 
     GroupStore.createGroup(formdata, user);
     close(false);

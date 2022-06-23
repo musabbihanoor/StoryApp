@@ -102,19 +102,7 @@ class Book {
     };
 
     await axios
-      // .post(`${BASE_URL}/custombook/writenew`, updatedData, config)
       .post(`${BASE_URL}/custombook/writenew`, formData, config)
-      .then((res) => {
-        formData.type === "book"
-          ? (this.state = {
-              ...this.state,
-              books: [...this.state.books, res.data.data],
-            })
-          : (this.state = {
-              ...this.state,
-              stories: [...this.state.stories, res.data.data],
-            });
-      })
       .catch((err) => (this.state = { ...this.state, err: err }));
   };
 
@@ -186,14 +174,14 @@ class Book {
     const data = await axios.get(
       `${BASE_URL}/custombook/getBookImage/${book_id}`,
     );
-    return data;
+    return data.data;
   };
 
   getStoryImg = async (story_id) => {
     const data = await axios.get(
       `${BASE_URL}/custombook/getStoryImage/${story_id}`,
     );
-    return data;
+    return data.data;
   };
 }
 export const BookStore = new Book();

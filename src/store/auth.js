@@ -22,6 +22,7 @@ class Auth {
       getAllUsers: action,
       setRole: action,
       editUser: action,
+      uploadImage: action,
       getUserImage: action,
     });
   }
@@ -155,9 +156,23 @@ class Auth {
       });
   };
 
+  uploadImage = async (formData, email) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios
+      .post(`${BASE_URL}/user/uploadImage/${email}`, formData, config)
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   getUserImage = async (email) => {
     const data = await axios.get(`${BASE_URL}/user/getUserImage/${email}`);
-    return data.data.data;
+    return data.data;
   };
 }
 

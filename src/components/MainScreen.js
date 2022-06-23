@@ -151,25 +151,7 @@ const MainScreen = observer(({ history }) => {
                 ) ? (
                   <div></div>
                 ) : (
-                  <div className="item me-3 mb-3">
-                    <img
-                      alt="group"
-                      src={
-                        x.imgsrc
-                          ? x.imgsrc
-                          : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-                      }
-                    />
-                    <div>
-                      <h5 className="fw-bold">{x.title}</h5>
-                      <Link
-                        key={i}
-                        to="/group"
-                        onClick={() => GroupStore.setGroup(x)}>
-                        View
-                      </Link>
-                    </div>
-                  </div>
+                  <Group x={x} i={i} />
                 )}
               </div>
             ))}
@@ -211,8 +193,13 @@ export default withRouter(MainScreen);
 const Book = ({ x }) => {
   const [img, setImg] = useState(null);
 
+  const fetchImg = async () => {
+    const data = await BookStore.getBookImg(x.book_id);
+    setImg(data);
+  };
+
   useEffect(() => {
-    setImg(BookStore.getBookImg(x.book_id));
+    fetchImg();
   }, []);
 
   return (
@@ -221,13 +208,13 @@ const Book = ({ x }) => {
         <Link
           to="/cover"
           onClick={() => {
-            BookStore.setBook(x);
+            BookStore.setBook({ ...x, picture: img });
             BookStore.markRead(x.book_id, AuthStore.auth.user._id);
           }}>
           <img
             alt="book"
             src={
-              typeof img === String
+              img
                 ? `data:image/png;base64,${img}`
                 : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
             }
@@ -242,8 +229,13 @@ const Book = ({ x }) => {
 const Story = ({ x }) => {
   const [img, setImg] = useState(null);
 
+  const fetchImg = async () => {
+    const data = await BookStore.getStoryImg(x.story_id);
+    setImg(data);
+  };
+
   useEffect(() => {
-    setImg(BookStore.getStoryImg(x.story_id));
+    fetchImg();
   }, []);
 
   return (
@@ -252,19 +244,53 @@ const Story = ({ x }) => {
         <Link
           to="/cover"
           onClick={() => {
-            BookStore.setBook(x);
+            BookStore.setBook({ ...x, picture: img });
             BookStore.markRead(x.book_id, AuthStore.auth.user._id);
           }}>
           <img
             alt="book"
             src={
-              typeof img === String
+              img
                 ? `data:image/png;base64,${img}`
                 : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
             }
           />
           <h6 className="fw-bold mt-3">{x.title}</h6>
         </Link>
+      </div>
+    </Fragment>
+  );
+};
+
+const Group = ({ x, i }) => {
+  const [img, setImg] = useState(null);
+
+  const fetchImage = async () => {
+    const data = await GroupStore.getImage(x.title);
+    setImg(data);
+  };
+
+  useEffect(() => {
+    fetchImage();
+  }, []);
+
+  return (
+    <Fragment>
+      <div className="item me-3 mb-3">
+        <img
+          alt="group"
+          src={
+            img
+              ? `data:image/png;base64,${img}`
+              : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+          }
+        />
+        <div>
+          <h5 className="fw-bold">{x.title}</h5>
+          <Link key={i} to="/group" onClick={() => GroupStore.setGroup(x)}>
+            View
+          </Link>
+        </div>
       </div>
     </Fragment>
   );

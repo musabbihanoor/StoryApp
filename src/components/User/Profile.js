@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { Link, useHistory, withRouter } from "react-router-dom";
 import { AuthStore } from "../../store/auth";
 import { GroupStore } from "../../store/group";
@@ -17,6 +17,7 @@ const Profile = observer(() => {
   const [editDesc, setEditDesc] = useState(false);
   const [editDob, setEditDob] = useState(false);
   const [showImg, setShowImg] = useState(null);
+  const [tempImg, setTempImg] = useState(null);
 
   const editingDesc = (e) => {
     e.preventDefault();
@@ -34,6 +35,22 @@ const Profile = observer(() => {
       email: AuthStore.auth.user.email,
       dob: dob,
     });
+  };
+
+  const updateImage = (e) => {
+    const formData = new FormData();
+    formData.append("email", AuthStore.auth.user.email);
+    formData.append("picture", e.target.files[0]);
+
+    AuthStore.uploadImage(formData, AuthStore.auth.user.email);
+
+    var binaryData = [];
+    binaryData.push(e.target.files[0]);
+    setTempImg(
+      window.URL.createObjectURL(
+        new Blob(binaryData, { type: "application/zip" }),
+      ),
+    );
   };
 
   const fetchImg = async () => {
@@ -65,13 +82,14 @@ const Profile = observer(() => {
           </button>
           <div className="user">
             <div className="left">
-              {" "}
               {console.log(showImg)}
               <img
                 alt="profile"
                 src={
-                  showImg
-                    ? `"data:image/png;base64, ${showImg}`
+                  tempImg
+                    ? tempImg
+                    : showImg
+                    ? `data:image/png;base64, ${showImg}`
                     : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
                 }
               />
@@ -81,20 +99,7 @@ const Profile = observer(() => {
                   <input
                     type="file"
                     className="d-none"
-                    onChange={(e) => {
-                      AuthStore.editUser({
-                        email: AuthStore.auth.user.email,
-                        picture: e.target.files[0],
-                      });
-
-                      var binaryData = [];
-                      binaryData.push(e.target.files[0]);
-                      setShowImg(
-                        window.URL.createObjectURL(
-                          new Blob(binaryData, { type: "application/zip" }),
-                        ),
-                      );
-                    }}
+                    onChange={(e) => updateImage(e)}
                   />
                 </label>
               </center>
@@ -235,45 +240,11 @@ const Profile = observer(() => {
                   <>
                     {x.members.find(
                       (x) => AuthStore.auth.user.email === x.email,
-                    ) && (
-                      <div className="item me-3 mb-3">
-                        <img
-                          alt="group"
-                          src={
-                            x.imgsrc
-                              ? x.imgsrc
-                              : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
-                          }
-                        />
-                        <div>
-                          <h5 className="fw-bold">{x.title}</h5>
-                          <Link
-                            to="/group"
-                            onClick={() => GroupStore.setGroup(x)}>
-                            View
-                          </Link>
-                        </div>
-                      </div>
-                    )}
+                    ) && <Group x={x} i={i} />}
                   </>
                 ))}
             </div>
           </div>
-
-          {/* <input
-            type="file"
-            onChange={(e) => {
-              let base64String = "";
-              var reader = new FileReader();
-              reader.onload = function () {
-                base64String = reader.result
-                  .replace("data:", "")
-                  .replace(/^.+,/, "");
-                console.log(base64String);
-              };
-              reader.readAsDataURL(e.target.files[0]);
-            }}
-          /> */}
         </div>
       </div>
     </div>
@@ -285,8 +256,13 @@ export default withRouter(Profile);
 const Book = ({ x, i }) => {
   const [img, setImg] = useState(null);
 
+  const fetchImg = async () => {
+    const data = await BookStore.getBookImg(x.book_id);
+    setImg(data);
+  };
+
   useEffect(() => {
-    setImg(BookStore.getBookImg(x.book_id));
+    fetchImg();
   }, []);
 
   return (
@@ -295,7 +271,7 @@ const Book = ({ x, i }) => {
         key={i}
         alt="cover"
         src={
-          typeof img === String
+          img
             ? `data:image/png;base64,${img}`
             : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
         }
@@ -308,8 +284,13 @@ const Book = ({ x, i }) => {
 const Story = ({ x, i }) => {
   const [img, setImg] = useState(null);
 
+  const fetchImg = async () => {
+    const data = await BookStore.getStoryImg(x.story_id);
+    setImg(data);
+  };
+
   useEffect(() => {
-    setImg(BookStore.getStoryImg(x.story_id));
+    fetchImg();
   }, []);
 
   return (
@@ -318,12 +299,46 @@ const Story = ({ x, i }) => {
         key={i}
         alt="cover"
         src={
-          typeof img === String
+          img
             ? `data:image/png;base64,${img}`
             : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
         }
       />
       <p>{x.title}</p>
     </Link>
+  );
+};
+
+const Group = ({ x, i }) => {
+  const [img, setImg] = useState(null);
+
+  const fetchImage = async () => {
+    const data = await GroupStore.getImage(x.title);
+    setImg(data);
+  };
+
+  useEffect(() => {
+    fetchImage();
+  }, []);
+
+  return (
+    <Fragment>
+      <div className="item me-3 mb-3">
+        <img
+          alt="group"
+          src={
+            img
+              ? `data:image/png;base64,${img}`
+              : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+          }
+        />
+        <div>
+          <h5 className="fw-bold">{x.title}</h5>
+          <Link to="/group" onClick={() => GroupStore.setGroup(x)}>
+            View
+          </Link>
+        </div>
+      </div>
+    </Fragment>
   );
 };

@@ -20,6 +20,7 @@ class Group {
       getMessages: action,
       createMessage: action,
       updateGroup: action,
+      getImage: action,
     });
   }
 
@@ -111,6 +112,11 @@ class Group {
     axios.post(`${BASE_URL}/chats/editChats`, formData, config).then((res) => {
       this.state.group = res.data.data;
     });
+  };
+
+  getImage = async (title) => {
+    const data = await axios.get(`${BASE_URL}/groups/getGroupImage/${title}`);
+    return data.data;
   };
 }
 export const GroupStore = new Group();
