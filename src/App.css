@@ -927,3 +927,52 @@ button.btn-gray:hover {
 .rdw-editor-main {
   min-height: 300px !important;
 }
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.demoPage {
+  height: 60vh;
+  width: 40vw;
+  border-radius: 20px;
+  background-image: url("https://img.freepik.com/free-photo/old-paper-texture-background_118047-1365.jpg?w=2000");
+  background-size: cover;
+}
+
+.demoPage img {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.passport {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.cover-title {
+  position: absolute;
+  color: #fff;
+  text-shadow: -1px 1px 20px rgba(0, 0, 0, 0.7);
+  top: 50px;
+  left: 50px;
+  margin-right: 50px;
+  text-transform: uppercase;
+  font-size: 50px;
+}
+
+.stf__outerShadow {
+  height: 1000px !important;
+}
+
+.demoPage span {
+  background-color: transparent !important;
+}
+
+.demoPage p.main {
+  margin: 20px;
+}

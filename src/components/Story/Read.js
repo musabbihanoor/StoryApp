@@ -3,12 +3,12 @@ import { useHistory, withRouter } from "react-router-dom";
 import { BookStore } from "../../store/book";
 import { observer } from "mobx-react";
 import { AuthStore } from "../../store/auth";
+import HTMLFlipBook from "react-pageflip";
 
 const Read = observer(() => {
   const history = useHistory();
-  const [page, setPage] = useState(0);
   const [show, setShow] = useState(true);
-  const [words, setWords] = useState("");
+  const [content, setContent] = useState([]);
 
   const bookmark = () => {
     BookStore.createBookMark(
@@ -18,10 +18,33 @@ const Read = observer(() => {
     setShow(false);
   };
 
+  const [img, setImg] = useState(null);
+
+  const fetchImg = async () => {
+    const data = BookStore.state.book.book
+      ? await BookStore.getBookImg(BookStore.state.book.book_id)
+      : await BookStore.getStoryImg(BookStore.state.book.story_id);
+    setImg(data);
+  };
+
+  const splitText = () => {
+    if (BookStore.state.book.book) {
+      var text = "";
+      BookStore.state.book.booksrc.map((x) => (text += x.content));
+      setContent(text.match(/.{1,2000}/g));
+      console.log("here");
+    }
+
+    !BookStore.state.book.book &&
+      setContent(BookStore.state.book.content.match(/.{1,200}/g));
+  };
+
   useEffect(() => {
     if (!AuthStore.auth.isAuthenticated) {
       history.push("/");
     }
+    fetchImg();
+    splitText();
   }, [AuthStore.auth.isAuthenticated]);
 
   return (
@@ -50,7 +73,46 @@ const Read = observer(() => {
               Add
             </button>
           )}
-        <div
+
+        <HTMLFlipBook width={400} height={700} showCover={true}>
+          <div id="1" ref="1" className="demoPage">
+            <h1 className="cover-title">{BookStore.state.book.title}</h1>
+            <img
+              style={{ objectFit: "cover" }}
+              className="passport"
+              src={
+                img
+                  ? `data:image/png;base64,${img}`
+                  : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+              }
+            />
+          </div>
+          {content.map((x, i) => (
+            <div className="demoPage">
+              <p
+                key={i}
+                className="main"
+                dangerouslySetInnerHTML={{
+                  __html: x,
+                }}></p>
+            </div>
+          ))}
+
+          {/* {content.length % 2 === 1 && (
+            <div className="demoPage">
+              <p className="main"></p>
+            </div>
+          )} */}
+
+          <div className="demoPage">
+            <img
+              style={{ objectFit: "contain", background: "#1A1A1A" }}
+              src="https://play-lh.googleusercontent.com/OuZqDwJcoCna3sbEjlV58dwBxk2bFYdgwRqe3xOphhAm5RymSSfud3qNSy4pSaRYB9M"
+            />
+          </div>
+        </HTMLFlipBook>
+
+        {/* <div
           className="book"
           style={{
             // backgroundImage: `url(${
@@ -102,11 +164,23 @@ const Read = observer(() => {
                   src={process.env.PUBLIC_URL + "/images/fold.png"}
                 />
               </button>
-            )} */}
-        </div>
+            )} 
+        </div> */}
       </div>
     </div>
   );
 });
 
 export default withRouter(Read);
+
+const Page = React.forwardRef((props, ref) => {
+  return (
+    <div className="demoPage" ref={ref}>
+      {" "}
+      /* ref required */
+      <h1>Page Header</h1>
+      <p>{props.children}</p>
+      <p>Page number: {props.number}</p>
+    </div>
+  );
+});

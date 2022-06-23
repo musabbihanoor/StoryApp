@@ -208,7 +208,7 @@ const Book = ({ x }) => {
         <Link
           to="/cover"
           onClick={() => {
-            BookStore.setBook({ ...x, picture: img });
+            BookStore.setBook({ ...x, picture: img, book: true });
             BookStore.markRead(x.book_id, AuthStore.auth.user._id);
           }}>
           <img
@@ -244,7 +244,7 @@ const Story = ({ x }) => {
         <Link
           to="/cover"
           onClick={() => {
-            BookStore.setBook({ ...x, picture: img });
+            BookStore.setBook({ ...x, picture: img, book: false });
             BookStore.markRead(x.book_id, AuthStore.auth.user._id);
           }}>
           <img
