@@ -29,7 +29,10 @@ const WriteStory = ({ close }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    // console.log(draftToHtml(convertToRaw(content.getCurrentContent())));
+    if (content.getCurrentContent().getPlainText("\u0001") === "") {
+      return;
+    }
+
     var formdata = new FormData();
     formdata.append("title", title);
     formdata.append("author", author);
@@ -46,7 +49,6 @@ const WriteStory = ({ close }) => {
   };
 
   const onProofRead = () => {
-    console.log(content);
     localStorage.setItem("title", title);
     localStorage.setItem("author", AuthStore.auth.user.name);
     localStorage.setItem(

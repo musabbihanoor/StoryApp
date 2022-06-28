@@ -29,7 +29,10 @@ const WriteBook = ({ close }) => {
 
   const addChapter = async (e) => {
     e.preventDefault();
-    console.log("3");
+    if (content.getCurrentContent().getPlainText("\u0001") === "") {
+      return;
+    }
+
     await BookStore.addChapter({
       title: title,
       content: draftToHtml(convertToRaw(content.getCurrentContent())),
@@ -38,12 +41,14 @@ const WriteBook = ({ close }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (content.getCurrentContent().getPlainText("\u0001") === "") {
+      return;
+    }
+
     close(true);
     if (add) {
-      console.log("1");
       addChapter(e);
     } else {
-      console.log("2");
       var formdata = new FormData();
       formdata.append("title", title);
       formdata.append("author", author);
