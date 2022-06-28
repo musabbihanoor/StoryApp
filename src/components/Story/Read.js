@@ -70,7 +70,7 @@ const Read = observer(() => {
                 fontFamily: "Poppins",
               }}
               className="btn btn-gray">
-              Add
+              <i className="fa fa-plus"></i> Add to Bookmarks
             </button>
           )}
 
