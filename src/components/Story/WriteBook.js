@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BookStore } from "../../store/book";
 import { AuthStore } from "../../store/auth";
@@ -11,6 +11,8 @@ import { convertToRaw } from "draft-js";
 const WriteBook = ({ close }) => {
   const [showDetails, setShowDetails] = useState(true);
   const [add, setAdd] = useState(false);
+  const [count, setCount] = useState(0);
+  const [raw, setRaw] = useState("");
   const [formData, setFormData] = useState({
     title: "",
     author: AuthStore.auth.user._id,
@@ -66,6 +68,11 @@ const WriteBook = ({ close }) => {
       draftToHtml(convertToRaw(content.getCurrentContent())),
     );
   };
+
+  useEffect(() => {
+    setCount(raw.split(" ").length);
+    console.log(raw);
+  }, [raw]);
 
   return (
     <div className="absolute">
@@ -149,7 +156,22 @@ const WriteBook = ({ close }) => {
           ) : (
             <>
               <label>story</label>
-              <div className="story">
+              <div
+                className="story"
+                onKeyPress={(e) => {
+                  if (
+                    count > 10 &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Enter"
+                  ) {
+                    e.preventDefault();
+                    e.target.blur();
+                  }
+                  if (e.key === "Enter") {
+                    setRaw("");
+                    setCount(0);
+                  }
+                }}>
                 <button
                   type="button"
                   className="add-chapter"
@@ -179,13 +201,41 @@ const WriteBook = ({ close }) => {
                 {/* <textarea name="content" value={content} onChange={onChange} /> */}
 
                 <Editor
-                  onEditorStateChange={(e) =>
+                  onEditorStateChange={(e) => {
                     setFormData({
                       ...formData,
                       content: e,
-                    })
-                  }
+                    });
+                    var data = e
+                      .getCurrentContent()
+                      .getPlainText("\u0001")
+                      .split("");
+                    setRaw(data[data.length - 1]);
+                  }}
                 />
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}>
+                  <p
+                    style={{
+                      fontSize: 16,
+                      color: count > 10 ? "red" : "black",
+                    }}>
+                    Pages:{" "}
+                    {
+                      content
+                        .getCurrentContent()
+                        .getPlainText("\u0001")
+                        .split("").length
+                    }
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 16,
+                      color: count > 10 ? "red" : "black",
+                    }}>
+                    Words: {count - 1}/200
+                  </p>
+                </div>
 
                 <div className="d-flex justify-content-center">
                   <Link

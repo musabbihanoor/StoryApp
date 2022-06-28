@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BookStore } from "../../store/book";
 import { AuthStore } from "../../store/auth";
@@ -10,6 +10,8 @@ import { convertToRaw } from "draft-js";
 
 const WriteStory = ({ close }) => {
   const [showDetails, setShowDetails] = useState(true);
+  const [count, setCount] = useState(0);
+  const [raw, setRaw] = useState("");
 
   const [formData, setFormData] = useState({
     title: "",
@@ -27,7 +29,7 @@ const WriteStory = ({ close }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    // console.log(draftToHtml(convertToRaw(content.getCurrentContent())));
     var formdata = new FormData();
     formdata.append("title", title);
     formdata.append("author", author);
@@ -53,6 +55,11 @@ const WriteStory = ({ close }) => {
     );
   };
 
+  useEffect(() => {
+    setCount(raw.split(" ").length);
+    console.log(raw);
+  }, [raw]);
+
   return (
     <div className="absolute">
       <div className="absolute-content write-story">
@@ -63,7 +70,6 @@ const WriteStory = ({ close }) => {
         <form onSubmit={(e) => onSubmit(e)}>
           {showDetails ? (
             <>
-              {" "}
               <div className="d-flex justify-content-between">
                 <span>
                   <label>title</label>
@@ -128,25 +134,45 @@ const WriteStory = ({ close }) => {
             </>
           ) : (
             <>
-              {" "}
               <label>story</label>
-              <div className="story">
+              <div
+                className="story"
+                onKeyPress={(e) => {
+                  if (
+                    count > 10 &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Enter"
+                  ) {
+                    e.preventDefault();
+                    e.target.blur();
+                  }
+                  if (e.key === "Enter") {
+                    setRaw("");
+                    setCount(0);
+                  }
+                }}>
                 <Editor
-                  onEditorStateChange={(e) =>
+                  editorState={content}
+                  onEditorStateChange={(e) => {
                     setFormData({
                       ...formData,
                       content: e,
-                    })
-                  }
-                  toolbar={{
-                    inline: { inDropdown: true },
-                    list: { inDropdown: true },
-                    textAlign: { inDropdown: true },
-                    link: { inDropdown: true },
-                    history: { inDropdown: true },
+                    });
+                    var data = e
+                      .getCurrentContent()
+                      .getPlainText("\u0001")
+                      .split("");
+                    setRaw(data[data.length - 1]);
                   }}
                 />
-
+                <p
+                  style={{
+                    textAlign: "end",
+                    fontSize: 16,
+                    color: count > 10 ? "red" : "black",
+                  }}>
+                  {count - 1}/200
+                </p>
                 <div className="d-flex justify-content-center">
                   <Link
                     target="_blank"
