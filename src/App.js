@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Landing from "./components/Landing";
 import MainScreen from "./components/MainScreen";
@@ -13,9 +13,18 @@ import { observer } from "mobx-react";
 
 import "./App.css";
 import { AuthStore } from "./store/auth";
+import setAuthToken from "./components/utils/setAuthToken";
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 const App = observer(() => {
   const [authOption, setAuthOption] = useState("");
+
+  useEffect(() => {
+    AuthStore.loadUser();
+  }, []);
 
   return (
     <Fragment>

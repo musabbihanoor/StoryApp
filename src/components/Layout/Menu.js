@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory, withRouter } from "react-router-dom";
 import { AuthStore } from "../../store/auth";
 
 const Menu = () => {
   const [option, setOption] = useState("");
+  const history = useHistory();
 
+  useEffect(() => {
+    if (!AuthStore.auth.isAuthenticated) {
+      history.push("/");
+    }
+  }, [AuthStore.auth.isAuthenticated]);
   return (
     <div className="menu">
       <div className="bg">
@@ -45,4 +51,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default withRouter(Menu);

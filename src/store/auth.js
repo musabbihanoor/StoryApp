@@ -1,6 +1,7 @@
 import axios from "axios";
 import { makeObservable, observable, action } from "mobx";
 import { BASE_URL } from "./url";
+import setAuthToken from "../components/utils/setAuthToken";
 
 class Auth {
   auth = {
@@ -24,8 +25,34 @@ class Auth {
       editUser: action,
       uploadImage: action,
       getUserImage: action,
+      loadUser: action,
     });
   }
+
+  loadUser = async () => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    } else {
+      return;
+    }
+    try {
+      const res = await axios.get(`${BASE_URL}/user/getCurrentUser`);
+      this.auth = {
+        ...this.auth,
+        isAuthenticated: true,
+        user: res.data.data.data,
+        err: { ...this.auth.err, login: null, signup: null },
+      };
+    } catch (err) {
+      localStorage.removeItem("token");
+      this.auth = {
+        ...this.auth,
+        isAuthenticated: false,
+        user: null,
+        err: { ...this.auth.err, signup: err.response.data, login: null },
+      };
+    }
+  };
 
   register = async (formData) => {
     const config = {
@@ -37,20 +64,23 @@ class Auth {
     axios
       .post(`${BASE_URL}/user/signup/`, formData, config)
       .then((res) => {
-        this.auth = {
-          ...this.auth,
-          isAuthenticated: true,
-          user: res.data.data,
-          err: { ...this.auth.err, login: null, signup: null },
-        };
+        localStorage.setItem("token", res.data.data.token);
+        this.loadUser();
+        // this.auth = {
+        //   ...this.auth,
+        //   isAuthenticated: true,
+        //   user: res.data.data,
+        //   err: { ...this.auth.err, login: null, signup: null },
+        // };
       })
       .catch((err) => {
-        this.auth = {
-          ...this.auth,
-          isAuthenticated: false,
-          user: null,
-          err: { ...this.auth.err, signup: err.response.data, login: null },
-        };
+        localStorage.removeItem("token");
+        // this.auth = {
+        //   ...this.auth,
+        //   isAuthenticated: false,
+        //   user: null,
+        //   err: { ...this.auth.err, signup: err.response.data, login: null },
+        // };
       });
   };
 
@@ -64,20 +94,23 @@ class Auth {
     axios
       .post(`${BASE_URL}/user/login/`, formData, config)
       .then((res) => {
-        this.auth = {
-          ...this.auth,
-          isAuthenticated: true,
-          user: res.data.data,
-          err: { ...this.auth.err, login: null, signup: null },
-        };
+        localStorage.setItem("token", res.data.data.token);
+        this.loadUser();
+        // this.auth = {
+        //   ...this.auth,
+        //   isAuthenticated: true,
+        //   user: res.data.data,
+        //   err: { ...this.auth.err, login: null, signup: null },
+        // };
       })
       .catch((err) => {
-        this.auth = {
-          ...this.auth,
-          isAuthenticated: false,
-          user: null,
-          err: { ...this.auth.err, login: err.response.data, signup: null },
-        };
+        localStorage.removeItem("token");
+        // this.auth = {
+        //   ...this.auth,
+        //   isAuthenticated: false,
+        //   user: null,
+        //   err: { ...this.auth.err, login: err.response.data, signup: null },
+        // };
       });
   };
 
@@ -115,6 +148,7 @@ class Auth {
   };
 
   logout = () => {
+    localStorage.removeItem("token");
     this.auth = {
       ...this.auth,
       isAuthenticated: false,
