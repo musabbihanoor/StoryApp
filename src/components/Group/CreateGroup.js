@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { GroupStore } from "../../store/group";
+import { AuthStore } from "../../store/auth";
 
 const CreateGroup = ({ close, user }) => {
   const [title, setTitle] = useState("");
@@ -16,6 +17,7 @@ const CreateGroup = ({ close, user }) => {
     formdata.append("picture", imgsrc);
     formdata.append("description", description);
     formdata.append("imgsrc", "...");
+    formdata.append("admin", localStorage.id);
 
     GroupStore.createGroup(formdata, user);
     close(false);

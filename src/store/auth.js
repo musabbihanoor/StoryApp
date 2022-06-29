@@ -45,6 +45,7 @@ class Auth {
       };
     } catch (err) {
       localStorage.removeItem("token");
+      localStorage.removeItem("id");
       this.auth = {
         ...this.auth,
         isAuthenticated: false,
@@ -65,6 +66,7 @@ class Auth {
       .post(`${BASE_URL}/user/signup/`, formData, config)
       .then((res) => {
         localStorage.setItem("token", res.data.data.token);
+        localStorage.setItem("id", res.data.data._id);
         this.loadUser();
         // this.auth = {
         //   ...this.auth,
@@ -75,6 +77,7 @@ class Auth {
       })
       .catch((err) => {
         localStorage.removeItem("token");
+        localStorage.removeItem("id");
         // this.auth = {
         //   ...this.auth,
         //   isAuthenticated: false,
@@ -95,6 +98,7 @@ class Auth {
       .post(`${BASE_URL}/user/login/`, formData, config)
       .then((res) => {
         localStorage.setItem("token", res.data.data.token);
+        localStorage.setItem("id", res.data.data._id);
         this.loadUser();
         // this.auth = {
         //   ...this.auth,
@@ -105,6 +109,7 @@ class Auth {
       })
       .catch((err) => {
         localStorage.removeItem("token");
+        localStorage.removeItem("id");
         // this.auth = {
         //   ...this.auth,
         //   isAuthenticated: false,
@@ -149,6 +154,7 @@ class Auth {
 
   logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("id");
     this.auth = {
       ...this.auth,
       isAuthenticated: false,
@@ -157,11 +163,10 @@ class Auth {
     };
   };
 
-  getAllUsers = () => {
-    axios
-      .get(`${BASE_URL}/user/allusers`)
-      .then((res) => (this.auth.users = res.data.data))
-      .catch((err) => (this.auth.err = err.response));
+  getAllUsers = async () => {
+    const res = await axios.get(`${BASE_URL}/user/allusers`);
+    this.auth.users = res.data.data;
+    return res.data.data;
   };
 
   setRole = (role) => {

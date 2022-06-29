@@ -13,6 +13,9 @@ const Group = observer(({ history }) => {
   const [invite, setInvite] = useState(false);
   const [joined, setJoined] = useState(false);
   const [img, setImg] = useState(null);
+  const [admin, setAdmin] = useState({});
+  // const [title, setTitle] = useState(GroupStore.state.group.title);
+  // const [updateTitle, setUpdateTitle] = useState(false);
 
   const fetchImage = async () => {
     const data = await GroupStore.getImage(GroupStore.state.group.title);
@@ -27,6 +30,24 @@ const Group = observer(({ history }) => {
     setJoined(true);
   };
 
+  // const updateGroupTitle = () => {
+  //   GroupStore.updateGroup({
+  //     ...GroupStore.state.group,
+  //     title: title,
+  //   });
+  //   setTitle("");
+  //   setUpdateTitle(false);
+  // };
+
+  const fetchAdmin = () => {
+    AuthStore.getAllUsers().then((res) => {
+      console.log(res);
+      console.log(GroupStore.state.group.admin);
+      setAdmin(res.filter((x) => x._id === GroupStore.state.group.admin));
+      // .map((x) => setAdmin(x));
+    });
+  };
+
   useEffect(() => {
     if (!AuthStore.auth.isAuthenticated) {
       history.push("/");
@@ -37,11 +58,8 @@ const Group = observer(({ history }) => {
     );
 
     data && setJoined(true);
-
-    console.log(data);
-    console.log(AuthStore.auth.user.email);
-    GroupStore.state.group.members.map((x) => console.log(x.email));
     fetchImage();
+    fetchAdmin();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [AuthStore.auth.isAuthenticated, GroupStore.state.group]);
@@ -62,6 +80,25 @@ const Group = observer(({ history }) => {
         <div className="info">
           <div className="d-flex justify-content-between">
             <h1>{GroupStore.state.group.title}</h1>
+            {/* {updateTitle ? (
+              <div>
+                <input
+                  className="mb-2"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+                <button onClick={() => updateGroupTitle()}>
+                  <i className="fa fa-check"></i>
+                </button>
+              </div>
+            ) : (
+              <h1>
+                {GroupStore.state.group.title}
+                <button onClick={() => setUpdateTitle(true)}>
+                  <i className="fa fa-edit"></i>
+                </button>
+              </h1>
+            )} */}
             {!joined ? (
               <button
                 className="btn-purple btn btn-primary"
@@ -125,6 +162,7 @@ const Group = observer(({ history }) => {
         )}
         {selected === 2 && (
           <Discussion
+            admin={admin}
             func={GroupStore.createMessage}
             messages={GroupStore.state.group.forum}
             title={GroupStore.state.group.title}
@@ -137,7 +175,9 @@ const Group = observer(({ history }) => {
             }
           />
         )}
-        {selected === 3 && <Members members={GroupStore.state.group.members} />}
+        {selected === 3 && (
+          <Members admin={admin} members={GroupStore.state.group.members} />
+        )}
         {invite && (
           <Invite close={setInvite} title={GroupStore.state.group.title} />
         )}
