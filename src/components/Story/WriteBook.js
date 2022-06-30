@@ -37,6 +37,8 @@ const WriteBook = ({ close }) => {
       title: title,
       content: draftToHtml(convertToRaw(content.getCurrentContent())),
     });
+
+    setFormData({ ...formData, content: EditorState.createEmpty() });
   };
 
   const onSubmit = async (e) => {
@@ -63,6 +65,7 @@ const WriteBook = ({ close }) => {
       await BookStore.createBook(formdata);
       setAdd(true);
     }
+    setFormData({ ...formData, content: EditorState.createEmpty() });
   };
 
   const onProofRead = () => {
@@ -206,6 +209,7 @@ const WriteBook = ({ close }) => {
                 {/* <textarea name="content" value={content} onChange={onChange} /> */}
 
                 <Editor
+                  editorState={content}
                   onEditorStateChange={(e) => {
                     setFormData({
                       ...formData,

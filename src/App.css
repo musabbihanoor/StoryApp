@@ -859,8 +859,11 @@ button.btn-gray:hover {
 }
 
 .cover img {
-  width: 100%;
+  width: 400px;
+  height: 700px;
+  object-fit: cover;
   border-radius: 10px;
+  margin-left: 100px;
 }
 
 .read {
