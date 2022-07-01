@@ -65,9 +65,9 @@ const Profile = observer(() => {
 
     BookStore.getBooks();
     GroupStore.getGroups();
-    BookStore.getUserBook(AuthStore.auth.user._id);
-    BookStore.getUserStory(AuthStore.auth.user._id);
-    BookStore.getRead(AuthStore.auth.user._id);
+    BookStore.getUserBook(localStorage.id);
+    BookStore.getUserStory(localStorage.id);
+    BookStore.getRead(localStorage.id);
     fetchImg();
   }, [AuthStore.auth.isAuthenticated]);
 
@@ -266,7 +266,9 @@ const Book = ({ x, i }) => {
   }, []);
 
   return (
-    <Link to="/cover" onClick={() => BookStore.setBook(x)}>
+    <Link
+      to="/cover"
+      onClick={() => BookStore.setBook({ ...x, picture: img, book: true })}>
       <img
         key={i}
         alt="cover"
@@ -294,7 +296,9 @@ const Story = ({ x, i }) => {
   }, []);
 
   return (
-    <Link to="/cover" onClick={() => BookStore.setBook(x)}>
+    <Link
+      to="/cover"
+      onClick={() => BookStore.setBook({ ...x, picture: img, book: false })}>
       <img
         key={i}
         alt="cover"

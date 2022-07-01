@@ -41,7 +41,6 @@ const Group = observer(({ history }) => {
 
   const fetchAdmin = () => {
     AuthStore.getAllUsers().then((res) => {
-      console.log(res);
       console.log(GroupStore.state.group.admin);
       setAdmin(res.filter((x) => x._id === GroupStore.state.group.admin));
       // .map((x) => setAdmin(x));

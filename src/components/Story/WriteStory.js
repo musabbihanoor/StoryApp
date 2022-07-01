@@ -15,7 +15,7 @@ const WriteStory = ({ close }) => {
 
   const [formData, setFormData] = useState({
     title: "",
-    author: AuthStore.auth.user._id,
+    author: localStorage.id,
     genre: "",
     content: EditorState.createEmpty(),
     type: "story",
@@ -69,6 +69,9 @@ const WriteStory = ({ close }) => {
           <i className="fa fa-times"></i>
         </button>
         <h1>Write a story</h1>
+        <p style={{ color: "gray", textAlign: "center" }}>
+          Enter = New Page <br /> Shift + Enter = New Line
+        </p>
         <form onSubmit={(e) => onSubmit(e)}>
           {showDetails ? (
             <>
@@ -167,14 +170,38 @@ const WriteStory = ({ close }) => {
                     setRaw(data[data.length - 1]);
                   }}
                 />
-                <p
+                {/* <p
                   style={{
                     textAlign: "end",
                     fontSize: 16,
                     color: count > 10 ? "red" : "black",
                   }}>
                   {count - 1}/200
-                </p>
+                </p> */}
+
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}>
+                  <p
+                    style={{
+                      fontSize: 16,
+                      color: count > 10 ? "red" : "black",
+                    }}>
+                    Pages:{" "}
+                    {
+                      content
+                        .getCurrentContent()
+                        .getPlainText("\u0001")
+                        .split("").length
+                    }
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 16,
+                      color: count > 10 ? "red" : "black",
+                    }}>
+                    Words: {count - 1}/200
+                  </p>
+                </div>
                 <div className="d-flex justify-content-center">
                   <Link
                     target="_blank"
@@ -190,11 +217,16 @@ const WriteStory = ({ close }) => {
                   </button>
                 </div>
               </div>{" "}
-              <button
-                className="btn btn-success mt-3"
-                onClick={() => setShowDetails(true)}>
-                Go Back
-              </button>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <button
+                  className="btn btn-success mt-3"
+                  onClick={() => setShowDetails(true)}>
+                  Go Back
+                </button>
+                <p style={{ color: "gray" }}>
+                  *Please change page after word limit has been reached
+                </p>
+              </div>
             </>
           )}
         </form>

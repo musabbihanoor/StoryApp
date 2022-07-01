@@ -8,10 +8,7 @@ const ProofRead = () => {
   const [show, setShow] = useState(true);
 
   const bookmark = () => {
-    BookStore.createBookMark(
-      AuthStore.auth.user._id,
-      BookStore.state.book.book_id,
-    );
+    BookStore.createBookMark(localStorage.id, BookStore.state.book.book_id);
     setShow(false);
   };
 

@@ -854,6 +854,14 @@ button.btn-gray:hover {
   text-shadow: -1px 1px 20px rgba(0, 0, 0, 0.7);
 }
 
+.cover h4 {
+  font-size: 2rem;
+  width: 40%;
+  color: #fff;
+  text-shadow: -1px 1px 20px rgba(0, 0, 0, 0.7);
+  font-style: italic;
+}
+
 .cover a {
   width: 50%;
 }

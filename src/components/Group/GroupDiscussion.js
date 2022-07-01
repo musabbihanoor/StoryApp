@@ -56,7 +56,7 @@ const GroupDiscussion = observer(({ messages, member, func, title, admin }) => {
             <p>Group Admin</p>
           </span>
         </div>
-        <h1>5 best books you need to read</h1>
+        <h1>Drop your messages</h1>
         <span className="d-flex">
           <img
             alt="icon"
@@ -64,12 +64,6 @@ const GroupDiscussion = observer(({ messages, member, func, title, admin }) => {
             style={{ height: 15, width: 15, borderRadius: 0 }}
           />
           <p className="me-2">{messages.length} comments</p>
-          <img
-            alt="icon"
-            src={process.env.PUBLIC_URL + "/images/share.png"}
-            style={{ height: 15, width: 15, borderRadius: 0 }}
-          />
-          <p className="me-2">250 share</p>
         </span>
         {member && (
           <form className="d-flex">

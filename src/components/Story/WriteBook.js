@@ -15,7 +15,7 @@ const WriteBook = ({ close }) => {
   const [raw, setRaw] = useState("");
   const [formData, setFormData] = useState({
     title: "",
-    author: AuthStore.auth.user._id,
+    author: localStorage.id,
     genre: "",
     content: EditorState.createEmpty(),
     type: "book",
@@ -70,7 +70,7 @@ const WriteBook = ({ close }) => {
 
   const onProofRead = () => {
     localStorage.setItem("title", title);
-    localStorage.setItem("author", AuthStore.auth.user._id);
+    localStorage.setItem("author", localStorage._id);
     localStorage.setItem(
       "content",
       draftToHtml(convertToRaw(content.getCurrentContent())),
@@ -94,6 +94,9 @@ const WriteBook = ({ close }) => {
           <i className="fa fa-times"></i>
         </button>
         <h1>Write a book</h1>
+        <p style={{ color: "gray", textAlign: "center" }}>
+          Enter = New Page <br /> Shift + Enter = New Line
+        </p>
         <form onSubmit={(e) => (add ? addChapter(e) : onSubmit(e))}>
           {showDetails ? (
             <>
@@ -261,12 +264,17 @@ const WriteBook = ({ close }) => {
                   </button>
                 </div>
               </div>
-              <button
-                type="button"
-                className="btn btn-success mt-3"
-                onClick={() => setShowDetails(true)}>
-                Go Back
-              </button>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <button
+                  type="button"
+                  className="btn btn-success mt-3"
+                  onClick={() => setShowDetails(true)}>
+                  Go Back
+                </button>
+                <p style={{ color: "gray" }}>
+                  *Please change page after word limit has been reached
+                </p>
+              </div>
             </>
           )}
         </form>

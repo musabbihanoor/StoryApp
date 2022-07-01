@@ -23,7 +23,7 @@ const MainScreen = observer(({ history }) => {
     BookStore.getStories();
     BookStore.getGenres();
     BookStore.getOldBooks();
-    BookStore.getBookmarkBooks(AuthStore.auth.user._id);
+    BookStore.getBookmarkBooks(localStorage.id);
     genre !== "" && BookStore.getGenreBooks(genre);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [genre, AuthStore.auth.isAuthenticated]);
@@ -111,7 +111,7 @@ const MainScreen = observer(({ history }) => {
                   target="_blank"
                   onClick={() => {
                     BookStore.setBook(x);
-                    BookStore.markRead(x.book_id, AuthStore.auth.user._id);
+                    BookStore.markRead(x.book_id, localStorage.id);
                   }}>
                   <img
                     alt="book"
@@ -209,7 +209,7 @@ const Book = ({ x }) => {
           to="/cover"
           onClick={() => {
             BookStore.setBook({ ...x, picture: img, book: true });
-            BookStore.markRead(x.book_id, AuthStore.auth.user._id);
+            BookStore.markRead(x.book_id, localStorage.id);
           }}>
           <img
             alt="book"
@@ -245,7 +245,7 @@ const Story = ({ x }) => {
           to="/cover"
           onClick={() => {
             BookStore.setBook({ ...x, picture: img, book: false });
-            BookStore.markRead(x.book_id, AuthStore.auth.user._id);
+            BookStore.markRead(x.book_id, localStorage.id);
           }}>
           <img
             alt="book"

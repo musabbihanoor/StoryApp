@@ -11,10 +11,7 @@ const Read = observer(() => {
   const [content, setContent] = useState([]);
 
   const bookmark = () => {
-    BookStore.createBookMark(
-      AuthStore.auth.user._id,
-      BookStore.state.book.book_id,
-    );
+    BookStore.createBookMark(localStorage.id, BookStore.state.book.book_id);
     setShow(false);
   };
 
@@ -172,15 +169,3 @@ const Read = observer(() => {
 });
 
 export default withRouter(Read);
-
-const Page = React.forwardRef((props, ref) => {
-  return (
-    <div className="demoPage" ref={ref}>
-      {" "}
-      /* ref required */
-      <h1>Page Header</h1>
-      <p>{props.children}</p>
-      <p>Page number: {props.number}</p>
-    </div>
-  );
-});
