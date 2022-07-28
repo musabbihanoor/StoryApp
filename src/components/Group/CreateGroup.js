@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { GroupStore } from "../../store/group";
 import { AuthStore } from "../../store/auth";
 import { uploadImage } from "../utils/imageUpload";
-import axios from "axios";
-import { BASE_URL } from "../../store/url";
 
 const CreateGroup = ({ close, user }) => {
   const [title, setTitle] = useState("");
@@ -17,14 +15,6 @@ const CreateGroup = ({ close, user }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    var formdata = new FormData();
-    formdata.append("title", title);
-    formdata.append("type", type);
-    // formdata.append("picture", imgsrc);
-    formdata.append("description", description);
-    formdata.append("imgsrc", image);
-    formdata.append("admin", localStorage.id);
-
     const data = {
       title: title,
       type: type,
@@ -32,34 +22,6 @@ const CreateGroup = ({ close, user }) => {
       imgsrc: image,
       admin: localStorage.id,
     };
-
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
-    // try {
-    //   const res = await axios.post(
-    //     `${BASE_URL}/groups/creategroup`,
-    //     data,
-    //     config,
-    //   );
-    //   console.log(res);
-    //   // this.state.groups = [
-    //   //   ...this.state.groups,
-    //   //   {
-    //   //     ...res.data.data,
-    //   //     members: [
-    //   //       { email: user.email, name: user.name, imgsrc: user.imgsrc },
-    //   //     ],
-    //   //   },
-    //   // ];
-    //   // this.state.group = res.data.data;
-    //   // this.joinGroup({ title: res.data.data.title, email: user.email });
-    // } catch (err) {
-    //   console.log(err);
-    //   // this.state = { ...this.state, err: err };
-    // }
 
     GroupStore.createGroup(data, user);
     close(false);

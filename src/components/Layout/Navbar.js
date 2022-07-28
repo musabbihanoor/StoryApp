@@ -54,10 +54,15 @@ const Navbar = observer(() => {
               className="my-2"
               alt="user"
               src={
-                img
-                  ? `data:image/png;base64,${img}`
+                AuthStore.auth.user.imgsrc
+                  ? AuthStore.auth.user.imgsrc
                   : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
               }
+              // src={
+              //   img
+              //     ? `data:image/png;base64,${img}`
+              //     : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+              // }
             />
           </Link>
           {AuthStore.auth.isAuthenticated && (
