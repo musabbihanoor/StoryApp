@@ -7,12 +7,15 @@ import { EditorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from "draftjs-to-html";
 import { convertToRaw } from "draft-js";
+import { uploadImage } from "../utils/imageUpload";
 
 const WriteStory = ({ close }) => {
   const [showDetails, setShowDetails] = useState(true);
   const [count, setCount] = useState(0);
   const [raw, setRaw] = useState("");
-
+  const [image, setImage] = useState("");
+  const [next, setNext] = useState(false);
+  const [wait, setWait] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     author: localStorage.id,
@@ -41,7 +44,8 @@ const WriteStory = ({ close }) => {
       draftToHtml(convertToRaw(content.getCurrentContent())),
     );
     formdata.append("genre", [genre]);
-    formdata.append("picture", picture);
+    formdata.append("imgsrc", image);
+    // formdata.append("picture", picture);
     formdata.append("type", type);
 
     await BookStore.createBook(formdata);
@@ -61,6 +65,15 @@ const WriteStory = ({ close }) => {
     setCount(raw.split(" ").length);
     console.log(raw);
   }, [raw]);
+
+  const fileUpload = async (file) => {
+    setWait(true);
+    const image_url = await uploadImage(file);
+    console.log(image_url, "UPLOADED URL");
+    setImage(image_url);
+    setWait(false);
+    setNext(true);
+  };
 
   return (
     <div className="absolute">
@@ -120,22 +133,27 @@ const WriteStory = ({ close }) => {
                       <input
                         type="file"
                         onChange={(e) => {
-                          console.log(e.target.files[0]);
-                          setFormData({
-                            ...formData,
-                            picture: e.target.files[0],
-                          });
+                          fileUpload(e.target.files[0]);
+                          // setFormData({
+                          //   ...formData,
+                          //   picture: e.target.files[0],
+                          // });
                         }}
                       />
                     </label>
                   </div>
+                  {wait && (
+                    <p style={{ color: "gray", marginTop: 5 }}>Please wait!</p>
+                  )}
                 </span>
               </div>
-              <button
-                className="btn btn-success mt-3"
-                onClick={() => setShowDetails(false)}>
-                Next
-              </button>
+              {next && title !== "" && (
+                <button
+                  className="btn btn-success mt-3"
+                  onClick={() => setShowDetails(false)}>
+                  Next
+                </button>
+              )}
             </>
           ) : (
             <>

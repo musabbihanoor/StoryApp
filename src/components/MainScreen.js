@@ -191,16 +191,16 @@ const MainScreen = observer(({ history }) => {
 export default withRouter(MainScreen);
 
 const Book = ({ x }) => {
-  const [img, setImg] = useState(null);
+  // const [img, setImg] = useState(null);
 
-  const fetchImg = async () => {
-    const data = await BookStore.getBookImg(x.book_id);
-    setImg(data);
-  };
+  // const fetchImg = async () => {
+  //   const data = await BookStore.getBookImg(x.book_id);
+  //   setImg(data);
+  // };
 
-  useEffect(() => {
-    fetchImg();
-  }, []);
+  // useEffect(() => {
+  //   // fetchImg();
+  // }, []);
 
   return (
     <Fragment>
@@ -208,16 +208,21 @@ const Book = ({ x }) => {
         <Link
           to="/cover"
           onClick={() => {
-            BookStore.setBook({ ...x, picture: img, book: true });
+            BookStore.setBook({ ...x, book: true });
             BookStore.markRead(x.book_id, localStorage.id);
           }}>
           <img
             alt="book"
             src={
-              img
-                ? `data:image/png;base64,${img}`
+              x.imgsrc
+                ? x.imgsrc
                 : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
             }
+            // src={
+            //   img
+            //     ? `data:image/png;base64,${img}`
+            //     : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+            // }
           />
           <h6 className="fw-bold mt-3">{x.title}</h6>
         </Link>
@@ -227,16 +232,16 @@ const Book = ({ x }) => {
 };
 
 const Story = ({ x }) => {
-  const [img, setImg] = useState(null);
+  // const [img, setImg] = useState(null);
 
-  const fetchImg = async () => {
-    const data = await BookStore.getStoryImg(x.story_id);
-    setImg(data);
-  };
+  // const fetchImg = async () => {
+  //   const data = await BookStore.getStoryImg(x.story_id);
+  //   setImg(data);
+  // };
 
-  useEffect(() => {
-    fetchImg();
-  }, []);
+  // useEffect(() => {
+  //   // fetchImg();
+  // }, []);
 
   return (
     <Fragment>
@@ -244,16 +249,24 @@ const Story = ({ x }) => {
         <Link
           to="/cover"
           onClick={() => {
-            BookStore.setBook({ ...x, picture: img, book: false });
+            BookStore.setBook({
+              ...x,
+              book: false,
+            });
             BookStore.markRead(x.book_id, localStorage.id);
           }}>
           <img
             alt="book"
             src={
-              img
-                ? `data:image/png;base64,${img}`
+              x.imgsrc
+                ? x.imgsrc
                 : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
             }
+            // src={
+            //   img
+            //     ? `data:image/png;base64,${img}`
+            //     : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+            // }
           />
           <h6 className="fw-bold mt-3">{x.title}</h6>
         </Link>
@@ -263,16 +276,16 @@ const Story = ({ x }) => {
 };
 
 const Group = ({ x, i }) => {
-  const [img, setImg] = useState(null);
+  // const [img, setImg] = useState(null);
 
-  const fetchImage = async () => {
-    const data = await GroupStore.getImage(x.title);
-    setImg(data);
-  };
+  // const fetchImage = async () => {
+  //   const data = await GroupStore.getImage(x.title);
+  //   setImg(data);
+  // };
 
-  useEffect(() => {
-    fetchImage();
-  }, []);
+  // useEffect(() => {
+  //   // fetchImage();
+  // }, []);
 
   return (
     <Fragment>
@@ -280,10 +293,15 @@ const Group = ({ x, i }) => {
         <img
           alt="group"
           src={
-            img
-              ? `data:image/png;base64,${img}`
+            x.imgsrc
+              ? x.imgsrc
               : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
           }
+          // src={
+          //   img
+          //     ? `data:image/png;base64,${img}`
+          //     : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
+          // }
         />
         <div>
           <h5 className="fw-bold">{x.title}</h5>

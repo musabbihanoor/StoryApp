@@ -11,7 +11,7 @@ export const uploadImage = async (file) => {
 
     await uploadTask;
     const response = await getDownloadURL(uploadTask.snapshot.ref);
-    console.log(response, "UPLOADED");
+    // console.log(response, "UPLOADED");
     return response;
 
     // uploadTask.on(

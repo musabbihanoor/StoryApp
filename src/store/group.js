@@ -35,24 +35,27 @@ class Group {
       },
     };
 
-    axios
-      .post(`${BASE_URL}/groups/creategroup`, formData, config)
-      .then((res) => {
-        this.state.groups = [
-          ...this.state.groups,
-          {
-            ...res.data.data,
-            members: [
-              { email: user.email, name: user.name, imgsrc: user.imgsrc },
-            ],
-          },
-        ];
-        this.state.group = res.data.data;
-        this.joinGroup({ title: res.data.data.title, email: user.email });
-      })
-      .catch((err) => {
-        this.state = { ...this.state, err: err };
-      });
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/groups/creategroup`,
+        formData,
+        config,
+      );
+      this.state.groups = [
+        ...this.state.groups,
+        {
+          ...res.data.data,
+          members: [
+            { email: user.email, name: user.name, imgsrc: user.imgsrc },
+          ],
+        },
+      ];
+      this.state.group = res.data.data;
+      this.joinGroup({ title: res.data.data.title, email: user.email });
+      return;
+    } catch (err) {
+      this.state = { ...this.state, err: err };
+    }
   };
 
   getGroups = async () => {
