@@ -182,7 +182,7 @@ const WriteBook = ({ close }) => {
                 className="story"
                 onKeyPress={(e) => {
                   if (
-                    count > 10 &&
+                    count > 200 &&
                     e.key !== "Backspace" &&
                     e.key !== "Enter"
                   ) {
@@ -241,7 +241,7 @@ const WriteBook = ({ close }) => {
                   <p
                     style={{
                       fontSize: 16,
-                      color: count > 10 ? "red" : "black",
+                      color: count > 200 ? "red" : "black",
                     }}>
                     Pages:{" "}
                     {
@@ -254,7 +254,7 @@ const WriteBook = ({ close }) => {
                   <p
                     style={{
                       fontSize: 16,
-                      color: count > 10 ? "red" : "black",
+                      color: count > 200 ? "red" : "black",
                     }}>
                     Words: {count - 1}/200
                   </p>
