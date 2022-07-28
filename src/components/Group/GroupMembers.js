@@ -21,8 +21,8 @@ const GroupMembers = observer(({ members, admin }) => {
         <img
           alt="profile"
           src={
-            img
-              ? `data:image/png;base64,${img}`
+            admin[0]?.imgsrc
+              ? admin[0]?.imgsrc
               : "https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
           }
         />

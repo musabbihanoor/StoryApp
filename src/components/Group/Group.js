@@ -70,8 +70,8 @@ const Group = observer(({ history }) => {
           <img
             alt="group"
             src={
-              img
-                ? `data:image/png;base64,${img}`
+              GroupStore.state.group.imgsrc
+                ? GroupStore.state.group.imgsrc
                 : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
             }
           />
