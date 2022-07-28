@@ -25,7 +25,7 @@ const Profile = observer(() => {
     e.preventDefault();
     setEditDesc(false);
     AuthStore.editUser({
-      email: AuthStore.auth.user.email,
+      ...AuthStore.auth.user,
       description: description,
     });
   };
@@ -34,7 +34,7 @@ const Profile = observer(() => {
     e.preventDefault();
     setEditDob(false);
     AuthStore.editUser({
-      email: AuthStore.auth.user.email,
+      ...AuthStore.auth.user,
       dob: dob,
     });
   };
@@ -50,7 +50,7 @@ const Profile = observer(() => {
     console.log(image_url, "UPLOADED URL");
     setWait(false);
 
-    AuthStore.editUser({ email: AuthStore.auth.user.email, imgsrc: image_url });
+    AuthStore.editUser({ ...AuthStore.auth.user, imgsrc: image_url });
 
     localStorage.setItem("imgsrc", image_url);
 

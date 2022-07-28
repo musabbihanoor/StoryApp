@@ -128,6 +128,7 @@ class Auth {
     if (googleData.error) {
       alert(googleData.error);
     } else {
+      console.log(googleData);
       try {
         const res = await fetch("http://18.191.249.121:4000/auth/google/", {
           method: "POST",
@@ -139,7 +140,7 @@ class Auth {
           },
         });
         const data = await res.json();
-
+        console.log(data);
         this.auth = {
           ...this.auth,
           isAuthenticated: true,
@@ -189,12 +190,9 @@ class Auth {
     axios
       .post(`${BASE_URL}/user/editUser/`, formData, config)
       .then((res) => {
-        this.auth = {
-          ...this.auth,
-          isAuthenticated: true,
-          user: res.data.data,
-          err: { ...this.auth.err, login: null, signup: null },
-        };
+        console.log(res.data.data.token);
+        localStorage.setItem("token", res.data.data.token);
+        this.loadUser();
       })
       .catch((err) => {
         console.log(err);
