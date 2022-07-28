@@ -22,10 +22,9 @@ const WriteStory = ({ close }) => {
     genre: "",
     content: EditorState.createEmpty(),
     type: "story",
-    picture: {},
   });
 
-  const { title, content, picture, author, genre, type } = formData;
+  const { title, content, genre } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,19 +35,23 @@ const WriteStory = ({ close }) => {
       return;
     }
 
-    var formdata = new FormData();
-    formdata.append("title", title);
-    formdata.append("author", author);
-    formdata.append(
-      "content",
-      draftToHtml(convertToRaw(content.getCurrentContent())),
-    );
-    formdata.append("genre", [genre]);
-    formdata.append("imgsrc", image);
-    // formdata.append("picture", picture);
-    formdata.append("type", type);
+    // var formdata = new FormData();
+    // formdata.append("title", title);
+    // formdata.append("author", author);
+    // formdata.append(
+    //   "content",
+    //   draftToHtml(convertToRaw(content.getCurrentContent())),
+    // );
+    // formdata.append("genre", [genre]);
+    // formdata.append("imgsrc", image);
+    // // formdata.append("picture", picture);
+    // formdata.append("type", type);
 
-    await BookStore.createBook(formdata);
+    await BookStore.createBook({
+      ...formData,
+      imgsrc: image,
+      content: draftToHtml(convertToRaw(content.getCurrentContent())),
+    });
     close(false);
   };
 
@@ -114,6 +117,7 @@ const WriteStory = ({ close }) => {
                     onChange={(e) =>
                       setFormData({ ...formData, genre: e.target.value })
                     }>
+                    <option value="">Choose</option>
                     {BookStore.state.genres.map((x, i) => (
                       <option key={i} value={x.genre}>
                         {x.genre}
@@ -127,7 +131,7 @@ const WriteStory = ({ close }) => {
                       alt="file"
                       src={process.env.PUBLIC_URL + "/images/file.png"}
                     />
-                    <p>{picture.name ? picture.name : "Select"}</p>
+                    <p>{image ? "Uploaded" : "Select"}</p>
                     <label>
                       Upload
                       <input
@@ -147,7 +151,7 @@ const WriteStory = ({ close }) => {
                   )}
                 </span>
               </div>
-              {next && title !== "" && (
+              {next && genre !== "" && title !== "" && (
                 <button
                   className="btn btn-success mt-3"
                   onClick={() => setShowDetails(false)}>

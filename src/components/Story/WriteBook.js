@@ -23,10 +23,9 @@ const WriteBook = ({ close }) => {
     genre: "",
     content: EditorState.createEmpty(),
     type: "book",
-    picture: {},
   });
 
-  const { title, author, content, picture, type, genre } = formData;
+  const { title, content, genre } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,19 +54,11 @@ const WriteBook = ({ close }) => {
     if (add) {
       addChapter(e);
     } else {
-      var formdata = new FormData();
-      formdata.append("title", title);
-      formdata.append("author", author);
-      formdata.append("genre", [genre]);
-      formdata.append("picture", {});
-      formdata.append("type", type);
-      formdata.append("imgsrc", image);
-      formdata.append(
-        "content",
-        draftToHtml(convertToRaw(content.getCurrentContent())),
-      );
-
-      await BookStore.createBook(formdata);
+      await BookStore.createBook({
+        ...formData,
+        imgsrc: image,
+        content: draftToHtml(convertToRaw(content.getCurrentContent())),
+      });
       setAdd(true);
     }
     setFormData({ ...formData, content: EditorState.createEmpty() });
@@ -141,8 +132,9 @@ const WriteBook = ({ close }) => {
                     onChange={(e) =>
                       setFormData({ ...formData, genre: e.target.value })
                     }>
+                    <option value="">Choose</option>
                     {BookStore.state.genres.map((x, i) => (
-                      <option selected={i === 0} key={i} value={x.genre}>
+                      <option key={i} value={x.genre}>
                         {x.genre}
                       </option>
                     ))}
@@ -154,7 +146,7 @@ const WriteBook = ({ close }) => {
                       alt="file"
                       src={process.env.PUBLIC_URL + "/images/file.png"}
                     />
-                    <p>{picture.name ? picture.name : "Select"}</p>
+                    <p>{image ? "Uploaded" : "Select"}</p>
                     <label>
                       Upload
                       <input
@@ -174,7 +166,7 @@ const WriteBook = ({ close }) => {
                   )}
                 </span>
               </div>
-              {next && title !== "" && (
+              {next && genre !== "" && title !== "" && (
                 <button
                   type="button"
                   className="btn btn-success mt-3"
