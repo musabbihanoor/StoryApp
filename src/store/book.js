@@ -159,7 +159,10 @@ class Book {
   markRead = async (book_id, user_id) => {
     axios
       .get(`${BASE_URL}/custombook/read/${user_id}/${book_id}`)
-      .then((res) => (this.state.read = res.data.data.read))
+      .then((res) => {
+        console.log(res);
+        if (res.data.data.read) this.state.read = res.data.data.read;
+      })
       .catch((err) => console.log(err));
   };
 
