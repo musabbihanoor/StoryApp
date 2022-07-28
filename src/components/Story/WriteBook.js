@@ -57,11 +57,12 @@ const WriteBook = ({ close }) => {
       formdata.append("title", title);
       formdata.append("author", author);
       formdata.append("genre", [genre]);
-      formdata.append("picture", picture);
+      // formdata.append("picture", picture);
       formdata.append("type", type);
+      formdata.append("imgsrc", image);
       formdata.append(
         "content",
-        draftToHtml(convertToRaw(content.getCurrentContent()))
+        draftToHtml(convertToRaw(content.getCurrentContent())),
       );
 
       await BookStore.createBook(formdata);
@@ -75,18 +76,17 @@ const WriteBook = ({ close }) => {
     localStorage.setItem("author", localStorage._id);
     localStorage.setItem(
       "content",
-      draftToHtml(convertToRaw(content.getCurrentContent()))
+      draftToHtml(convertToRaw(content.getCurrentContent())),
     );
   };
 
   useEffect(() => {
     setCount(raw.split(" ").length);
-    console.log(raw);
   }, [raw]);
 
-  const fileUpload = (file) => {
-    const image_url = uploadImage(file);
-    console.log(image_url, "UPLOADED");
+  const fileUpload = async (file) => {
+    uploadImage(file).then((image_url) => console.log(image_url, "UPLOADED"));
+    // setImage(image_url);
   };
 
   return (
@@ -97,8 +97,7 @@ const WriteBook = ({ close }) => {
           onClick={() => {
             setAdd(false);
             close(false);
-          }}
-        >
+          }}>
           <i className="fa fa-times"></i>
         </button>
         <h1>Write a book</h1>
@@ -135,8 +134,7 @@ const WriteBook = ({ close }) => {
                   <select
                     onChange={(e) =>
                       setFormData({ ...formData, genre: e.target.value })
-                    }
-                  >
+                    }>
                     {BookStore.state.genres.map((x, i) => (
                       <option key={i} value={x.genre}>
                         {x.genre}
@@ -170,8 +168,7 @@ const WriteBook = ({ close }) => {
               <button
                 type="button"
                 className="btn btn-success mt-3"
-                onClick={() => setShowDetails(false)}
-              >
+                onClick={() => setShowDetails(false)}>
                 Next
               </button>
             </>
@@ -193,8 +190,7 @@ const WriteBook = ({ close }) => {
                     setRaw("");
                     setCount(0);
                   }
-                }}
-              >
+                }}>
                 <button
                   type="button"
                   className="add-chapter"
@@ -215,8 +211,7 @@ const WriteBook = ({ close }) => {
                       ...formData,
                       content: EditorState.createEmpty(),
                     });
-                  }}
-                >
+                  }}>
                   <img
                     alt="add"
                     src={process.env.PUBLIC_URL + "/images/addchapter.png"}
@@ -239,14 +234,12 @@ const WriteBook = ({ close }) => {
                   }}
                 />
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
+                  style={{ display: "flex", justifyContent: "space-between" }}>
                   <p
                     style={{
                       fontSize: 16,
                       color: count > 10 ? "red" : "black",
-                    }}
-                  >
+                    }}>
                     Pages:{" "}
                     {
                       content
@@ -259,8 +252,7 @@ const WriteBook = ({ close }) => {
                     style={{
                       fontSize: 16,
                       color: count > 10 ? "red" : "black",
-                    }}
-                  >
+                    }}>
                     Words: {count - 1}/200
                   </p>
                 </div>
@@ -270,14 +262,12 @@ const WriteBook = ({ close }) => {
                     target="_blank"
                     className="btn btn-primary btn-green m-1"
                     to="/story/proofread"
-                    onClick={(e) => onProofRead(e)}
-                  >
+                    onClick={(e) => onProofRead(e)}>
                     Proof Read
                   </Link>
                   <button
                     type="submit"
-                    className="btn btn-primary btn-purple m-1"
-                  >
+                    className="btn btn-primary btn-purple m-1">
                     Published
                   </button>
                 </div>
@@ -286,8 +276,7 @@ const WriteBook = ({ close }) => {
                 <button
                   type="button"
                   className="btn btn-success mt-3"
-                  onClick={() => setShowDetails(true)}
-                >
+                  onClick={() => setShowDetails(true)}>
                   Go Back
                 </button>
                 <p style={{ color: "gray" }}>
