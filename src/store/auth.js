@@ -46,6 +46,7 @@ class Auth {
     } catch (err) {
       localStorage.removeItem("token");
       localStorage.removeItem("id");
+      localStorage.removeItem("imgsrc");
       this.auth = {
         ...this.auth,
         isAuthenticated: false,
@@ -67,6 +68,7 @@ class Auth {
       .then((res) => {
         localStorage.setItem("token", res.data.data.token);
         localStorage.setItem("id", res.data.data._id);
+        localStorage.setItem("imgsrc", res.data.data.imgsrc);
         this.loadUser();
         // this.auth = {
         //   ...this.auth,
@@ -78,12 +80,13 @@ class Auth {
       .catch((err) => {
         localStorage.removeItem("token");
         localStorage.removeItem("id");
-        // this.auth = {
-        //   ...this.auth,
-        //   isAuthenticated: false,
-        //   user: null,
-        //   err: { ...this.auth.err, signup: err.response.data, login: null },
-        // };
+        localStorage.removeItem("imgsrc");
+        this.auth = {
+          ...this.auth,
+          isAuthenticated: false,
+          user: null,
+          err: { ...this.auth.err, signup: err.response.data, login: null },
+        };
       });
   };
 
@@ -99,6 +102,7 @@ class Auth {
       .then((res) => {
         localStorage.setItem("token", res.data.data.token);
         localStorage.setItem("id", res.data.data._id);
+        localStorage.setItem("imgsrc", res.data.data.imgsrc);
         this.loadUser();
         // this.auth = {
         //   ...this.auth,
@@ -110,12 +114,13 @@ class Auth {
       .catch((err) => {
         localStorage.removeItem("token");
         localStorage.removeItem("id");
-        // this.auth = {
-        //   ...this.auth,
-        //   isAuthenticated: false,
-        //   user: null,
-        //   err: { ...this.auth.err, login: err.response.data, signup: null },
-        // };
+        localStorage.removeItem("imgsrc");
+        this.auth = {
+          ...this.auth,
+          isAuthenticated: false,
+          user: null,
+          err: { ...this.auth.err, login: err.response.data, signup: null },
+        };
       });
   };
 
@@ -155,6 +160,7 @@ class Auth {
   logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("id");
+    localStorage.removeItem("imgsrc");
     this.auth = {
       ...this.auth,
       isAuthenticated: false,

@@ -54,8 +54,8 @@ const Navbar = observer(() => {
               className="my-2"
               alt="user"
               src={
-                AuthStore.auth.user.imgsrc
-                  ? AuthStore.auth.user.imgsrc
+                localStorage.imgsrc !== " "
+                  ? localStorage.imgsrc
                   : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
               }
               // src={

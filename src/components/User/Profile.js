@@ -52,6 +52,8 @@ const Profile = observer(() => {
 
     AuthStore.editUser({ email: AuthStore.auth.user.email, imgsrc: image_url });
 
+    localStorage.setItem("imgsrc", image_url);
+
     var binaryData = [];
     binaryData.push(e.target.files[0]);
     setTempImg(
@@ -105,8 +107,8 @@ const Profile = observer(() => {
                 src={
                   tempImg
                     ? tempImg
-                    : AuthStore.auth.user.imgsrc
-                    ? AuthStore.auth.user.imgsrc
+                    : localStorage.imgsrc !== " "
+                    ? localStorage.imgsrc
                     : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
                 }
               />

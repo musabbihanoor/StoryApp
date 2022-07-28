@@ -9,6 +9,7 @@ const Signup = ({ setAuth }) => {
     password: "",
     dob: null,
     description: "",
+    imgsrc: " ",
   });
 
   const { name, email, password, dob, description } = formData;
