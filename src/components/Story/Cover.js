@@ -41,8 +41,8 @@ const Cover = observer(() => {
           <img
             alt="cover"
             src={
-              BookStore.state.book.picture
-                ? `data:image/png;base64,${BookStore.state.book.picture}`
+              BookStore.state.book.imgsrc
+                ? BookStore.state.book.imgsrc
                 : "http://www.vvc.cl/wp-content/uploads/2016/09/ef3-placeholder-image.jpg"
             }
           />
