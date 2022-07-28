@@ -85,8 +85,8 @@ const WriteBook = ({ close }) => {
   }, [raw]);
 
   const fileUpload = async (file) => {
-    uploadImage(file).then((image_url) => console.log(image_url, "UPLOADED"));
-    // setImage(image_url);
+    const image_url = await uploadImage(file);
+    console.log(image_url, "UPLOADED URL");
   };
 
   return (

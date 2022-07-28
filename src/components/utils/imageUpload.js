@@ -9,25 +9,30 @@ export const uploadImage = async (file) => {
     const uploadTask = uploadBytesResumable(storageRef, file);
     let image_url = "";
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const percent = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
-        );
+    await uploadTask;
+    const response = await getDownloadURL(uploadTask.snapshot.ref);
+    console.log(response, "UPLOADED");
+    return response;
 
-        // update progress
-        // console.log("PROGRESS", percent);
-      },
-      (err) => console.log(err),
-      () => {
-        // download url
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          // console.log(url, "POSTED");
-          image_url = url;
-        });
-      },
-    );
-    return image_url;
+    // uploadTask.on(
+    //   "state_changed",
+    //   (snapshot) => {
+    //     const percent = Math.round(
+    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    //     );
+
+    //     // update progress
+    //     console.log("PROGRESS", percent);
+    //   },
+    //   (err) => console.log(err),
+    //   () => {
+    //     // download url
+    //     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+    //       console.log(url, "POSTED");
+    //       image_url = url;
+    //     });
+    //   }
+    // );
+    // return image_url;
   }
 };
